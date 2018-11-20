@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Activator: com.katalon.platform.PlatformActivator
+Bnd-LastModified: 1542684817800
+Build-Jdk: 1.8.0_191
+Built-By: duyanhluong
+Bundle-ManifestVersion: 2
+Bundle-Name: Katalon Platform
+Bundle-SymbolicName: com.katalon.platform;singleton:=true
+Bundle-Version: 1.0.0
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.katalon.platform.api;version="1.0.0",com.katalon.pla
+ tform.api.extension;version="1.0.0",com.katalon.platform.api.extension.
+ event;version="1.0.0",com.katalon.platform.api.extension.event.impl;ver
+ sion="1.0.0",com.katalon.platform.api.extension.execution;version="1.0.
+ 0",com.katalon.platform.api.extension.execution.impl;version="1.0.0",co
+ m.katalon.platform.api.extension.ui;version="1.0.0",com.katalon.platfor
+ m.api.extension.ui.toolbar;version="1.0.0",com.katalon.platform.api.ext
+ ension.ui.toolbar.impl;version="1.0.0",com.katalon.platform.api.service
+ ;version="1.0.0",com.katalon.platform.internal;version="1.0.0"
+Import-Package: com.katalon.platform.api,com.katalon.platform.api.extens
+ ion,com.katalon.platform.api.extension.event,com.katalon.platform.api.e
+ xtension.execution,com.katalon.platform.api.extension.ui.toolbar,com.ka
+ talon.platform.api.service,com.katalon.platform.internal,org.eclipse.co
+ re.commands,org.eclipse.core.runtime;version="[3.5,4)",org.eclipse.e4.c
+ ore.commands,org.eclipse.e4.core.services.events,org.eclipse.e4.ui.mode
+ l.application,org.eclipse.e4.ui.model.application.commands,org.eclipse.
+ e4.ui.model.application.ui,org.eclipse.e4.ui.model.application.ui.menu,
+ org.eclipse.e4.ui.workbench.modeling,org.osgi.framework;version="[1.9,2
+ )",org.osgi.service.event;version="[1.3,2)"
+Tool: Bnd-4.1.0.201810181252

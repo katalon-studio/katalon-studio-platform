@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.katalon</groupId>
+	<artifactId>com.katalon.platform</artifactId>
+	<version>1.0.0</version>
+	<packaging>bundle</packaging>
+
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.core.runtime</artifactId>
+			<version>3.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.e4.core.contexts</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.e4.core.services</artifactId>
+			<version>2.0.100</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.e4.ui.workbench</artifactId>
+			<version>1.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.e4.core.commands</artifactId>
+			<version>0.11.100</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.core.commands</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.e4.ui.model.workbench</artifactId>
+			<version>1.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.osgi.services</artifactId>
+			<version>3.5.100</version>
+		</dependency>
+	</dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>${basedir}</directory>
+				<includes>
+					<include>schema/</include>
+					<include>plugin.xml</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Import-Package>*</Import-Package>
+						<Export-Package>com.katalon.platform.api*</Export-Package>
+						<Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
+						<Bundle-Name>Katalon Platform</Bundle-Name>
+						<Activator>com.katalon.platform.PlatformActivator</Activator>
+						<_failok>true</_failok>
+						<_nouses>true</_nouses>
+						<_noee>true</_noee>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project> 

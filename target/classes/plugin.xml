@@ -1,0 +1,20 @@
+<plugin>
+   <extension-point id="extensions" name="Katalon Platform Extensions" schema="schema/extensions.exsd"/>
+   <extension-point id="extensions_point" name="Katalon Platform Extensions Point" schema="schema/extensions_point.exsd"/>
+   <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            extensionPointId="com.katalon.platform.api.extension.ui.toolbar"
+            interfaceClassName="com.katalon.platform.openapi.ui.toolbar.ToolItemDescription"
+            serviceClass="com.katalon.platform.api.extension.ui.toolbar.impl.AddToolItemExtensionListener">
+      </point>
+   </extension>
+   <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            extensionPointId="com.katalon.platform.api.extension.event"
+            interfaceClassName="com.katalon.platform.api.event.EventListenerInitializer"
+            serviceClass="com.katalon.platform.api.extension.event.impl.EventListenerService">
+      </point>
+   </extension>
+</plugin>
