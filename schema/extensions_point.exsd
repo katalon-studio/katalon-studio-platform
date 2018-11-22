@@ -49,14 +49,14 @@
 
    <element name="point">
       <complexType>
-         <attribute name="extensionPointId" type="string" use="required">
+         <attribute name="id" type="string" use="required">
             <annotation>
                <documentation>
                   
                </documentation>
             </annotation>
          </attribute>
-         <attribute name="interfaceClassName" type="string" use="required">
+         <attribute name="interfaceClass" type="string" use="required">
             <annotation>
                <documentation>
                   

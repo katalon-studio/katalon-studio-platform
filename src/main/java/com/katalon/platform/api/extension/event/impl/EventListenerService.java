@@ -8,7 +8,7 @@ import org.eclipse.e4.core.services.events.IEventBroker;
 import com.katalon.platform.api.extension.Extension;
 import com.katalon.platform.api.extension.ExtensionListener;
 import com.katalon.platform.api.extension.event.EventListenerInitializer;
-import com.katalon.platform.internal.ApplicationServiceImpl;
+import com.katalon.platform.internal.EclipseContextSerive;
 
 public class EventListenerService implements ExtensionListener {
 
@@ -23,7 +23,7 @@ public class EventListenerService implements ExtensionListener {
 
             eventListenerInitializer.registerListener(delegate);
 
-            IEventBroker eventBroker = ApplicationServiceImpl.get(IEventBroker.class);
+            IEventBroker eventBroker = EclipseContextSerive.getPlatformService(IEventBroker.class);
             eventBroker.subscribe("KATALON_EXECUTION/*", delegate.getEventHandler());
 
             eventListenerLookup.put(extension.extensionId(), delegate);
@@ -34,7 +34,7 @@ public class EventListenerService implements ExtensionListener {
     public void deregister(Extension extension) {
         String extensionId = extension.extensionId();
         if (eventListenerLookup.containsKey(extensionId)) {
-            IEventBroker eventBroker = ApplicationServiceImpl.get(IEventBroker.class);
+            IEventBroker eventBroker = EclipseContextSerive.getWorkbenchService(IEventBroker.class);
             eventBroker.unsubscribe(eventListenerLookup.get(extensionId));
         }
     }

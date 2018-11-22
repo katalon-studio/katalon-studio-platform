@@ -35,7 +35,7 @@ public class TestSuiteStatusSummary {
                 case "PASSED":
                     summary.totalPasses++;
                     break;
-                case "FAILURE":
+                case "FAILED":
                     summary.totalFailures++;
                     break;
                 case "ERROR":

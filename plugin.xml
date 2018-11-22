@@ -4,16 +4,16 @@
    <extension
          point="com.katalon.platform.extensions_point">
       <point
-            extensionPointId="com.katalon.platform.api.extension.ui.toolbar"
-            interfaceClassName="com.katalon.platform.openapi.ui.toolbar.ToolItemDescription"
+            id="com.katalon.platform.api.extension.ui.toolbar"
+            interfaceClass="com.katalon.platform.openapi.ui.toolbar.ToolItemDescription"
             serviceClass="com.katalon.platform.api.extension.ui.toolbar.impl.AddToolItemExtensionListener">
       </point>
    </extension>
    <extension
          point="com.katalon.platform.extensions_point">
       <point
-            extensionPointId="com.katalon.platform.api.extension.event"
-            interfaceClassName="com.katalon.platform.api.event.EventListenerInitializer"
+            id="com.katalon.platform.api.extension.event"
+            interfaceClass="com.katalon.platform.api.event.EventListenerInitializer"
             serviceClass="com.katalon.platform.api.extension.event.impl.EventListenerService">
       </point>
    </extension>
