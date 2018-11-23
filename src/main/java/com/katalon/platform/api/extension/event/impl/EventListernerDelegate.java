@@ -14,7 +14,7 @@ import com.katalon.platform.api.extension.event.EventListener;
 
 @SuppressWarnings("rawtypes")
 public class EventListernerDelegate implements EventListener, EventHandler {
-    private static final Map<Class, List<Consumer>> consumerLookup = new HashMap<>();
+    private final Map<Class, List<Consumer>> consumerLookup = new HashMap<>();
 
     private final EventHandler eventHandler = new EventHandler() {
 
@@ -29,7 +29,6 @@ public class EventListernerDelegate implements EventListener, EventHandler {
     };
 
     public EventListernerDelegate(String pluginId) {
-        
     }
 
     @SuppressWarnings("unchecked")

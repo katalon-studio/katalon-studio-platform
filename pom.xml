@@ -67,6 +67,7 @@
 				<includes>
 					<include>schema/</include>
 					<include>plugin.xml</include>
+					<include>META-INF/</include>
 				</includes>
 			</resource>
 		</resources>
@@ -77,11 +78,11 @@
 				<extensions>true</extensions>
 				<configuration>
 					<instructions>
-						<Import-Package>*</Import-Package>
+						<Import-Package></Import-Package>
 						<Export-Package>com.katalon.platform.api*</Export-Package>
 						<Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
 						<Bundle-Name>Katalon Platform</Bundle-Name>
-						<Activator>com.katalon.platform.PlatformActivator</Activator>
+						<Bundle-Activator>com.katalon.platform.internal.PlatformActivator</Bundle-Activator>
 						<_failok>true</_failok>
 						<_nouses>true</_nouses>
 						<_noee>true</_noee>

@@ -34,8 +34,10 @@ public class EventListenerService implements ExtensionListener {
     public void deregister(Extension extension) {
         String extensionId = extension.extensionId();
         if (eventListenerLookup.containsKey(extensionId)) {
-            IEventBroker eventBroker = EclipseContextSerive.getWorkbenchService(IEventBroker.class);
-            eventBroker.unsubscribe(eventListenerLookup.get(extensionId));
+            IEventBroker eventBroker = EclipseContextSerive.getPlatformService(IEventBroker.class);
+            eventBroker.unsubscribe(eventListenerLookup.get(extensionId).getEventHandler());
+
+            eventListenerLookup.remove(extensionId);
         }
     }
 }
