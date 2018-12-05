@@ -38,7 +38,7 @@ import com.katalon.platform.internal.EclipseContextService;
 @SuppressWarnings("restriction")
 public class AddToolItemWithMenuExtensionListenter implements ExtensionListener {
 
-	private Map<String, String> toolItemWithMenyRegistries = new HashMap<>();
+	private Map<String, String> toolItemWithMenuRegistries = new HashMap<>();
 
 	@Override
 	public void register(Extension extension) {
@@ -85,7 +85,7 @@ public class AddToolItemWithMenuExtensionListenter implements ExtensionListener 
             toolItem.setCommand(MCommandsFactory.INSTANCE.createCommand());
 			toolItem.setIconURI(toolItemWithMenuDescription.iconUrl());
 			toolItem.setElementId(toolItemWithMenuDescription.toolItemId());
-			toolItem.setEnabled(true);
+			toolItem.setEnabled(toolItemWithMenuDescription.isItemEnabled());
 			
 			// Create and set MMenu, otherwise toolItem won't be a DROP_DOWN but a POP_UP
 			MMenu mMenu = MMenuFactory.INSTANCE.createMenu();
@@ -96,15 +96,13 @@ public class AddToolItemWithMenuExtensionListenter implements ExtensionListener 
             
 			uiSync.syncExec(() -> {
 				toolbar.getChildren().add(toolItem);
+	            ToolItem widgetToolItem = (ToolItem) toolItem.getWidget();
+	            Rectangle rect = widgetToolItem.getBounds();
+	            Point pt = widgetToolItem.getParent().toDisplay(new Point(rect.x, rect.y));
+	            menu.setLocation(pt.x, pt.y + rect.height);
+	            menu.setVisible(true);
+				toolItemWithMenuRegistries.put(extension.extensionId(), toolItemWithMenuDescription.toolItemId());
 			});
-			
-			// Wait until toolItem is rendered to set bound and location of the menu
-            ToolItem widgetToolItem = (ToolItem) toolItem.getWidget();
-            Rectangle rect = widgetToolItem.getBounds();
-            Point pt = widgetToolItem.getParent().toDisplay(new Point(rect.x, rect.y));
-            menu.setLocation(pt.x, pt.y + rect.height);
-            menu.setVisible(true);
-			toolItemWithMenyRegistries.put(extension.extensionId(), toolItemWithMenuDescription.toolItemId());
 		}
 	}
 
@@ -114,8 +112,8 @@ public class AddToolItemWithMenuExtensionListenter implements ExtensionListener 
 		ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
 		MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
 		String extensionId = extension.extensionId();
-		if (toolItemWithMenyRegistries.containsKey(extensionId)) {
-			String id = toolItemWithMenyRegistries.get(extensionId);
+		if (toolItemWithMenuRegistries.containsKey(extensionId)) {
+			String id = toolItemWithMenuRegistries.get(extensionId);
 			MUIElement element = modelService.find(id, application);
 			if (element != null) {
 				Command command = commandService.getCommand(id);
@@ -129,7 +127,7 @@ public class AddToolItemWithMenuExtensionListenter implements ExtensionListener 
 					parent.getChildren().remove(element);
 				});
 			}
-			toolItemWithMenyRegistries.remove(extensionId);
+			toolItemWithMenuRegistries.remove(extensionId);
 		}
 	}
 }
