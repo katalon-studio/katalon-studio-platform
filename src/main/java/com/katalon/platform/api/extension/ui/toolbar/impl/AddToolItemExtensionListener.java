@@ -77,6 +77,7 @@ public class AddToolItemExtensionListener implements ExtensionListener {
             toolItem.setCommand(MCommandsFactory.INSTANCE.createCommand());
             toolItem.setIconURI(toolItemDescription.iconUrl());
             toolItem.setElementId(toolItemDescription.toolItemId());
+
             UISynchronize uiSync = EclipseContextService.getWorkbenchService(UISynchronize.class);
             uiSync.syncExec(() -> {
                 toolbar.getChildren().add(toolItem);

@@ -74,6 +74,7 @@ public class ExtensionManagerImpl implements ExtensionManager {
         plugin.extensionsPoint().stream().forEach(extensionPoint -> {
             ExtensionListener serviceClass = extensionPoint.serviceClass();
             if (serviceClass != null) {
+                serviceClass.onPostConstruct();
                 getExtensions(extensionPoint.pluginId()).stream().forEach(e -> {
                     serviceClass.register(e);
                 });
@@ -85,6 +86,7 @@ public class ExtensionManagerImpl implements ExtensionManager {
         plugin.extensionsPoint().stream().forEach(extensionPoint -> {
             ExtensionListener serviceClass = extensionPoint.serviceClass();
             if (serviceClass != null) {
+                serviceClass.onPreDestroy();
                 getExtensions(extensionPoint.pluginId()).stream().forEach(e -> {
                     serviceClass.deregister(e);
                 });
