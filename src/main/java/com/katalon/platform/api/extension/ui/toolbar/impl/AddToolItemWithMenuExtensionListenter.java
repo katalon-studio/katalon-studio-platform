@@ -3,12 +3,21 @@ package com.katalon.platform.api.extension.ui.toolbar.impl;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.Category;
 import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.IParameter;
+import org.eclipse.core.commands.Parameterization;
+import org.eclipse.core.commands.ParameterizedCommand;
 import org.eclipse.e4.core.commands.ECommandService;
 import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.MApplication;
+import org.eclipse.e4.ui.model.application.commands.MCommandsFactory;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
+import org.eclipse.e4.ui.model.application.ui.menu.MHandledToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenu;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenuFactory;
 import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
@@ -37,12 +46,31 @@ public class AddToolItemWithMenuExtensionListenter implements ExtensionListener 
 			ToolItemWithMenuDescription toolItemWithMenuDescription = (ToolItemWithMenuDescription) extension
 					.implementationClass();
 			EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
+            ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
 			MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
 			MUIElement groupElement = modelService.find("com.kms.katalon.composer.toolbar", application);
 			
 			if (!(groupElement instanceof MElementContainer)) {
 				return;
 			}
+
+            Category category = commandService.defineCategory("empty", "", "");
+            Command command = commandService.defineCommand(toolItemWithMenuDescription.toolItemId(), "", "", category,
+                    new IParameter[0]);
+            command.setHandler(new AbstractHandler() {
+                @Override
+                public boolean isEnabled() {
+                    return toolItemWithMenuDescription.isItemEnabled();
+                }
+
+                @Override
+                public Object execute(ExecutionEvent event) throws ExecutionException {
+                	// Do nothing
+                    return null;
+                }
+            });
+
+            ParameterizedCommand parameterizedCommand = new ParameterizedCommand(command, new Parameterization[0]);
 
 			MElementContainer<?> container = (MElementContainer<?>) groupElement;
 
@@ -51,10 +79,13 @@ public class AddToolItemWithMenuExtensionListenter implements ExtensionListener 
 			}
 			
 			MToolBar toolbar = (MToolBar) container;
-			MToolItem toolItem = MMenuFactory.INSTANCE.createHandledToolItem();
+			MHandledToolItem toolItem = MMenuFactory.INSTANCE.createHandledToolItem();
 			toolItem.setLabel(toolItemWithMenuDescription.name());
+            toolItem.setWbCommand(parameterizedCommand);
+            toolItem.setCommand(MCommandsFactory.INSTANCE.createCommand());
 			toolItem.setIconURI(toolItemWithMenuDescription.iconUrl());
 			toolItem.setElementId(toolItemWithMenuDescription.toolItemId());
+			toolItem.setEnabled(true);
 			
 			// Create and set MMenu, otherwise toolItem won't be a DROP_DOWN but a POP_UP
 			MMenu mMenu = MMenuFactory.INSTANCE.createMenu();
