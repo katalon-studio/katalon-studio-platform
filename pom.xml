@@ -59,6 +59,11 @@
 			<artifactId>org.eclipse.osgi.services</artifactId>
 			<version>3.5.100</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.swt</artifactId>
+			<version>3.105.3</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<resources>
