@@ -1,7 +1,6 @@
 package com.katalon.platform.api.extension.ui.toolbar.impl;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -17,7 +16,6 @@ import org.eclipse.e4.ui.di.UISynchronize;
 import org.eclipse.e4.ui.model.application.MApplication;
 import org.eclipse.e4.ui.model.application.commands.MCommandsFactory;
 import org.eclipse.e4.ui.model.application.ui.MElementContainer;
-import org.eclipse.e4.ui.model.application.ui.MExpression;
 import org.eclipse.e4.ui.model.application.ui.MUIElement;
 import org.eclipse.e4.ui.model.application.ui.menu.MHandledToolItem;
 import org.eclipse.e4.ui.model.application.ui.menu.MMenuFactory;
@@ -27,7 +25,7 @@ import org.eclipse.e4.ui.workbench.modeling.EModelService;
 import com.katalon.platform.api.extension.Extension;
 import com.katalon.platform.api.extension.ExtensionListener;
 import com.katalon.platform.api.extension.ui.toolbar.ToolItemDescription;
-import com.katalon.platform.internal.EclipseContextSerive;
+import com.katalon.platform.internal.EclipseContextService;
 
 @SuppressWarnings("restriction")
 public class AddToolItemExtensionListener implements ExtensionListener {
@@ -38,9 +36,9 @@ public class AddToolItemExtensionListener implements ExtensionListener {
     public void register(Extension extension) {
         if (extension.implementationClass() instanceof ToolItemDescription) {
             ToolItemDescription toolItemDescription = (ToolItemDescription) extension.implementationClass();
-            EModelService modelService = EclipseContextSerive.getWorkbenchService(EModelService.class);
-            ECommandService commandService = EclipseContextSerive.getWorkbenchService(ECommandService.class);
-            MApplication application = EclipseContextSerive.getWorkbenchService(MApplication.class);
+            EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
+            ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
+            MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
 
             MUIElement groupElement = modelService.find("com.kms.katalon.composer.toolbar", application);
 
@@ -79,8 +77,7 @@ public class AddToolItemExtensionListener implements ExtensionListener {
             toolItem.setCommand(MCommandsFactory.INSTANCE.createCommand());
             toolItem.setIconURI(toolItemDescription.iconUrl());
             toolItem.setElementId(toolItemDescription.toolItemId());
-
-            UISynchronize uiSync = EclipseContextSerive.getWorkbenchService(UISynchronize.class);
+            UISynchronize uiSync = EclipseContextService.getWorkbenchService(UISynchronize.class);
             uiSync.syncExec(() -> {
                 toolbar.getChildren().add(toolItem);
             });
@@ -91,9 +88,9 @@ public class AddToolItemExtensionListener implements ExtensionListener {
 
     @Override
     public void deregister(Extension extension) {
-        EModelService modelService = EclipseContextSerive.getWorkbenchService(EModelService.class);
-        ECommandService commandService = EclipseContextSerive.getWorkbenchService(ECommandService.class);
-        MApplication application = EclipseContextSerive.getWorkbenchService(MApplication.class);
+        EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
+        ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
+        MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
         String extensionId = extension.extensionId();
         if (toolItemRegistries.containsKey(extensionId)) {
             String id = toolItemRegistries.get(extensionId);
@@ -102,7 +99,7 @@ public class AddToolItemExtensionListener implements ExtensionListener {
                 Command command = commandService.getCommand(id);
                 command.setHandler(null);
 
-                UISynchronize uiSync = EclipseContextSerive.getWorkbenchService(UISynchronize.class);
+                UISynchronize uiSync = EclipseContextService.getWorkbenchService(UISynchronize.class);
                 uiSync.syncExec(() -> {
                     MElementContainer<MUIElement> parent = element.getParent();
                     element.setToBeRendered(false);
