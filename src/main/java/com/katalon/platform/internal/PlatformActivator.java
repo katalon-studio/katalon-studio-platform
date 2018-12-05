@@ -28,7 +28,7 @@ public class PlatformActivator extends org.eclipse.core.runtime.Plugin {
 
         // Look up IEclipseContext
         IEclipseContext eclipseContext = EclipseContextFactory.getServiceContext(context);
-        EclipseContextSerive.lookupPlatformContext(eclipseContext);
+        EclipseContextService.lookupPlatformContext(eclipseContext);
 
         IEventBroker eventBroker = eclipseContext.get(IEventBroker.class);
         eventBroker.subscribe("KATALON_PLUGIN/*", new PluginEventHandler());
@@ -46,7 +46,7 @@ public class PlatformActivator extends org.eclipse.core.runtime.Plugin {
                         // Look up IEclipseContext
                         IEclipseContext workbenchContext = context
                                 .getService(context.getServiceReference(IEclipseContext.class));
-                        EclipseContextSerive.lookupWorkbenchContext(workbenchContext);
+                        EclipseContextService.lookupWorkbenchContext(workbenchContext);
                     }
                 }
             }

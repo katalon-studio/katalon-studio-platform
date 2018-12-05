@@ -17,4 +17,12 @@
             serviceClass="com.katalon.platform.api.extension.event.impl.EventListenerService">
       </point>
    </extension>
+   <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            id="com.katalon.platform.api.extension.filter.entityFilterAdapter"
+            interfaceClass="com.katalon.platform.api.extension.filter.EntityFilterAdapter"
+            serviceClass="com.katalon.platform.api.extension.filter.impl.EntityFilterAdapterListener">
+      </point>
+   </extension>
 </plugin>

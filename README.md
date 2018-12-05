@@ -55,6 +55,9 @@ allows user plugins can interact with Katalon Studio.
 
 com.katalon.platform.internal.*: Internal packages that allows katalon-studio-platform can connect with Katalon Studio. Should NOT be called from user plugins.
 
+## How katalon-studio-platform connects with KS
+katalon-studio-platform functions are called from KS via InternalAction system that manages by InternalActionManager.
+
 ## Build
 Requirements:
 - JDK 1.8

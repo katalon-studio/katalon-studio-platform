@@ -2,7 +2,7 @@ package com.katalon.platform.internal;
 
 import org.eclipse.e4.core.contexts.IEclipseContext;
 
-public class EclipseContextSerive {
+public class EclipseContextService {
     private static IEclipseContext platformContext;
 
     private static IEclipseContext workbenchContext;
