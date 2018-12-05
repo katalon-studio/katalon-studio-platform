@@ -10,6 +10,14 @@
       </point>
    </extension>
    <extension
+   		point="com.katalon.platform.extensions_point">
+	  <point
+            id="com.katalon.platform.api.extension.ui.toolbar.newDropdownToolItem"
+            interfaceClass="com.katalon.platform.openapi.ui.toolbar.ToolItemWithMenuDescription"
+            serviceClass="com.katalon.platform.api.extension.ui.toolbar.impl.AddToolItemWithMenuExtensionListenter">
+      </point>	
+   	</extension>
+   <extension
          point="com.katalon.platform.extensions_point">
       <point
             id="com.katalon.platform.api.extension.event"
