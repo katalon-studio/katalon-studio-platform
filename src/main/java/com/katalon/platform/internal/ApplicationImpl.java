@@ -4,6 +4,7 @@ import com.katalon.platform.api.Application;
 import com.katalon.platform.api.service.ExtensionManager;
 import com.katalon.platform.api.service.InternalActionManager;
 import com.katalon.platform.api.service.PluginManager;
+import com.katalon.platform.api.service.ProjectManager;
 import com.katalon.platform.internal.extension.ExtensionManagerImpl;
 
 public class ApplicationImpl implements Application {
@@ -13,6 +14,8 @@ public class ApplicationImpl implements Application {
     private final ExtensionManager extensionManager = new ExtensionManagerImpl();
     
     private final InternalActionManager actionManager = new InternalActionManagerImpl();
+    
+    private final ProjectManager projectManager = new ProjectManagerImpl();
 
     @Override
     public PluginManager getPluginManager() {
@@ -28,4 +31,9 @@ public class ApplicationImpl implements Application {
     public InternalActionManager getActionService() {
         return actionManager;
     }
+
+	@Override
+	public ProjectManager getProjectManager() {
+		return projectManager;
+	}
 }

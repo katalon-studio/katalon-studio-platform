@@ -9,9 +9,11 @@ import org.osgi.service.event.EventHandler;
 
 import com.katalon.platform.api.Application;
 import com.katalon.platform.api.Plugin;
+import com.katalon.platform.api.model.Entity;
 import com.katalon.platform.api.service.ApplicationManager;
 import com.katalon.platform.api.service.EventConstants;
 import com.katalon.platform.internal.PluginManagerImpl;
+import com.katalon.platform.internal.ProjectManagerImpl;
 import com.katalon.platform.internal.extension.ExtensionManagerImpl;
 import com.katalon.platform.internal.util.PluginManifestParsingUtil;
 
@@ -38,7 +40,17 @@ public class PluginEventHandler implements EventHandler {
                 }
                 break;
             }
+            case "KATALON_PLUGIN/CURRENT_PROJECT_CHANGED": {
+            	Object object = event.getProperty(EventConstants.EVENT_DATA_PROPERTY_NAME);	
+                updateCurrentProject((Entity) object);
+                break;
+            }
         }
+    }
+    
+    public void updateCurrentProject(Entity project){
+    	ProjectManagerImpl projectManager = (ProjectManagerImpl) ApplicationManager.getInstance().getProjectManager();
+    	projectManager.setCurrentProject(project);
     }
     
     public Bundle installPlugin(BundleContext bundleContext, String location)
