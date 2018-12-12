@@ -65,8 +65,8 @@ public class AddToolItemWithMenuExtensionListenter implements ExtensionListener 
 
                 @Override
                 public Object execute(ExecutionEvent event) throws ExecutionException {
-                	// Do nothing
-                    return null;
+                	toolItemWithMenuDescription.defaultEventHandler();
+                	return null;
                 }
             });
 

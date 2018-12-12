@@ -77,7 +77,13 @@
 			<version>3.105.3</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-text</artifactId>
+			<version>1.4</version>
+		</dependency>
 	</dependencies>
+
 
 	<dependencyManagement>
 		<dependencies>

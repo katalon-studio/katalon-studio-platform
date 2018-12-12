@@ -16,6 +16,10 @@ public interface ToolItemWithMenuDescription {
     String iconUrl();
 
     Menu getMenu(Control parent);
+    
+    default void defaultEventHandler(){
+    	
+    }
 
     default boolean isItemEnabled() {
         return true;
