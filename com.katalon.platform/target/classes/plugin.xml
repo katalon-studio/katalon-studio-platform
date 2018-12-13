@@ -1,0 +1,36 @@
+<plugin>
+   <extension-point id="extensions" name="Katalon Platform Extensions" schema="schema/extensions.exsd"/>
+   <extension-point id="extensions_point" name="Katalon Platform Extensions Point" schema="schema/extensions_point.exsd"/>
+   <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            id="com.katalon.platform.api.extension.ui.toolbar"
+            interfaceClass="com.katalon.platform.openapi.ui.toolbar.ToolItemDescription"
+            serviceClass="com.katalon.platform.api.extension.ui.toolbar.impl.AddToolItemExtensionListener">
+      </point>
+   </extension>
+   <extension
+   		point="com.katalon.platform.extensions_point">
+	  <point
+            id="com.katalon.platform.api.extension.ui.toolbar.newDropdownToolItem"
+            interfaceClass="com.katalon.platform.openapi.ui.toolbar.ToolItemWithMenuDescription"
+            serviceClass="com.katalon.platform.api.extension.ui.toolbar.impl.AddToolItemWithMenuExtensionListenter">
+      </point>	
+   	</extension>
+   <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            id="com.katalon.platform.api.extension.event"
+            interfaceClass="com.katalon.platform.api.event.EventListenerInitializer"
+            serviceClass="com.katalon.platform.api.extension.event.impl.EventListenerService">
+      </point>
+   </extension>
+   <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            id="com.katalon.platform.api.extension.filter.entityFilterAdapter"
+            interfaceClass="com.katalon.platform.api.extension.filter.EntityFilterAdapter"
+            serviceClass="com.katalon.platform.api.extension.filter.impl.EntityFilterAdapterListener">
+      </point>
+   </extension>
+</plugin>

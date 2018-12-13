@@ -4,85 +4,152 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.katalon</groupId>
-	<artifactId>com.katalon.platform</artifactId>
+	<artifactId>com.katalon.platform.parent</artifactId>
 	<version>1.0.0</version>
-	<packaging>bundle</packaging>
+	<packaging>pom</packaging>
 
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
+		
+		<maven-bundle-plugin.version>4.1.0</maven-bundle-plugin.version>
+
+		<org.eclipse.core.runtime.version>3.12.0</org.eclipse.core.runtime.version>
+		<org.eclipse.e4.core.contexts.version>1.5.1</org.eclipse.e4.core.contexts.version>
+		<org.eclipse.e4.core.services.version>2.0.100</org.eclipse.e4.core.services.version>
+		<org.eclipse.e4.ui.workbench.version>1.5.1</org.eclipse.e4.ui.workbench.version>
+		<org.eclipse.e4.ui.di.version>1.1.100</org.eclipse.e4.ui.di.version>
+		<org.eclipse.e4.core.commands.version>0.11.100</org.eclipse.e4.core.commands.version>
+		<org.eclipse.core.commands.version>3.8.1</org.eclipse.core.commands.version>
+		<org.eclipse.e4.ui.model.workbench.version>1.2.0</org.eclipse.e4.ui.model.workbench.version>
+		<org.eclipse.osgi.services.version>3.5.100</org.eclipse.osgi.services.version>
+		<org.eclipse.swt.version>3.105.3</org.eclipse.swt.version>
+
+		<commons-text.version>1.6</commons-text.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
 			<artifactId>org.eclipse.core.runtime</artifactId>
-			<version>3.12.0</version>
+			<version>${org.eclipse.core.runtime.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
 			<artifactId>org.eclipse.e4.core.contexts</artifactId>
-			<version>1.5.1</version>
+			<version>${org.eclipse.e4.core.contexts.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
 			<artifactId>org.eclipse.e4.core.services</artifactId>
-			<version>2.0.100</version>
+			<version>${org.eclipse.e4.core.services.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
 			<artifactId>org.eclipse.e4.ui.workbench</artifactId>
-			<version>1.5.1</version>
+			<version>${org.eclipse.e4.ui.workbench.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
 			<artifactId>org.eclipse.e4.ui.di</artifactId>
-			<version>1.1.100</version>
+			<version>${org.eclipse.e4.ui.di.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
 			<artifactId>org.eclipse.e4.core.commands</artifactId>
-			<version>0.11.100</version>
+			<version>${org.eclipse.e4.core.commands.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
 			<artifactId>org.eclipse.core.commands</artifactId>
-			<version>3.8.1</version>
+			<version>${org.eclipse.core.commands.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
 			<artifactId>org.eclipse.e4.ui.model.workbench</artifactId>
-			<version>1.2.0</version>
+			<version>${org.eclipse.e4.ui.model.workbench.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
 			<artifactId>org.eclipse.osgi.services</artifactId>
-			<version>3.5.100</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.platform</groupId>
-			<artifactId>org.eclipse.swt</artifactId>
-			<version>3.105.3</version>
+			<version>${org.eclipse.osgi.services.version}</version>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
 			<artifactId>org.eclipse.swt.cocoa.macosx.x86_64</artifactId>
-			<version>3.105.3</version>
+			<version>${org.eclipse.swt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>
+			<version>${org.eclipse.swt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.swt.gtk.linux.x86_64</artifactId>
+			<version>${org.eclipse.swt.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.service.event</artifactId>
+			<version>1.4.0</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.eclipse.platform</groupId>
-			<artifactId>org.eclipse.swt.win32.win32.x86_64</artifactId>
-			<version>3.105.3</version>
+			<artifactId>org.eclipse.equinox.preferences</artifactId>
+			<version>3.6.1</version>
 			<scope>provided</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.e4.core.di.annotations</artifactId>
+			<version>1.5.0</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.eclipse.platform</groupId>
+			<artifactId>org.eclipse.jface</artifactId>
+			<version>3.12.2</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.eclipse.platform</groupId>
+					<artifactId>org.eclipse.swt.gtk.linux.aarch64</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.platform</groupId>
+					<artifactId>org.eclipse.swt.gtk.linux.arm</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-text</artifactId>
-			<version>1.4</version>
+			<version>${commons-text.version}</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
+
+	<modules>
+		<module>com.katalon.platform</module>
+	</modules>
 
 
 	<dependencyManagement>
@@ -90,40 +157,8 @@
 			<dependency>
 				<groupId>org.eclipse.platform</groupId>
 				<artifactId>org.eclipse.swt</artifactId>
-				<version>3.105.3</version>
+				<version>${org.eclipse.swt.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
-	<build>
-		<resources>
-			<resource>
-				<directory>${basedir}</directory>
-				<includes>
-					<include>schema/</include>
-					<include>plugin.xml</include>
-					<include>META-INF/</include>
-				</includes>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Import-Package></Import-Package>
-						<Export-Package>com.katalon.platform.api*</Export-Package>
-						<Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
-						<Bundle-Name>Katalon Platform</Bundle-Name>
-						<Bundle-Activator>com.katalon.platform.internal.PlatformActivator</Bundle-Activator>
-						<_failok>true</_failok>
-						<_nouses>true</_nouses>
-						<_noee>true</_noee>
-					</instructions>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
 </project> 

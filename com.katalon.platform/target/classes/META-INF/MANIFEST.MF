@@ -1,0 +1,28 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1544687337968
+Build-Jdk: 1.8.0_191
+Built-By: duyanhluong
+Bundle-Activator: com.katalon.platform.internal.PlatformActivator
+Bundle-ClassPath: .
+Bundle-ManifestVersion: 2
+Bundle-Name: Katalon Platform
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-SymbolicName: com.katalon.platform;singleton:=true
+Bundle-Vendor: Katalon
+Bundle-Version: 1.0.0
+Created-By: Apache Maven Bundle Plugin
+Export-Package: com.katalon.platform.api;version="1.0.0",com.katalon.pla
+ tform.api.extension;version="1.0.0",com.katalon.platform.api.extension.
+ event;version="1.0.0",com.katalon.platform.api.extension.event.impl;ver
+ sion="1.0.0",com.katalon.platform.api.extension.execution;version="1.0.
+ 0",com.katalon.platform.api.extension.execution.impl;version="1.0.0",co
+ m.katalon.platform.api.extension.preference;version="1.0.0",com.katalon
+ .platform.api.extension.ui;version="1.0.0",com.katalon.platform.api.ext
+ ension.ui.toolbar;version="1.0.0",com.katalon.platform.api.extension.ui
+ .toolbar.impl;version="1.0.0",com.katalon.platform.api.model;version="1
+ .0.0",com.katalon.platform.api.service;version="1.0.0"
+Require-Bundle: org.eclipse.core.runtime,org.eclipse.e4.core.contexts,or
+ g.eclipse.e4.ui.workbench,org.eclipse.e4.core.commands,org.eclipse.e4.u
+ i.model.workbench,org.eclipse.core.commands,org.eclipse.osgi.services,o
+ rg.eclipse.e4.core.services,org.eclipse.e4.ui.di,org.eclipse.swt
+Tool: Bnd-4.1.0.201810181252
