@@ -20,15 +20,6 @@
 		<commons-text.version>1.6</commons-text.version>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-text</artifactId>
-			<version>${commons-text.version}</version>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
-
 	<build>
 		<resources>
 			<resource>
