@@ -63,4 +63,4 @@ Requirements:
 - JDK 1.8
 - Maven 3.3+
 
-mvn clean package
+mvn clean install
