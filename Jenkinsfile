@@ -11,6 +11,7 @@ pipeline {
                 script {
                     sh 'mvn clean package'
                 }
+                build job: 'katalon/staging-plugin'
             }
         }
     }
