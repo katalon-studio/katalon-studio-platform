@@ -8,7 +8,6 @@ import org.eclipse.e4.core.services.events.IEventBroker;
 import com.katalon.platform.api.extension.Extension;
 import com.katalon.platform.api.extension.ExtensionListener;
 import com.katalon.platform.api.extension.event.EventListenerInitializer;
-import com.katalon.platform.api.service.ApplicationManager;
 import com.katalon.platform.internal.EclipseContextService;
 
 public class EventListenerService implements ExtensionListener {
@@ -26,6 +25,7 @@ public class EventListenerService implements ExtensionListener {
 
             IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
             eventBroker.subscribe("KATALON_EXECUTION/*", delegate.getEventHandler());
+            eventBroker.subscribe("KATALON_PLUGIN/CURRENT_PROJECT_CHANGED", delegate.getEventHandler());
             
             eventListenerInitializer.onInstall(extension.pluginId());         
             
