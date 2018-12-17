@@ -1,4 +1,4 @@
-package com.katalon.platform.api.util;
+package com.katalon.platform.api.extension.preference;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -41,15 +42,12 @@ public class PropertySettingStoreUtil {
         try {
             fileInput = new FileInputStream(propertyFile);
             LinkedProperties properties = new LinkedProperties();
-            properties.load(new InputStreamReader(fileInput, "UTF-8"));
-            fileInput.close();
-            fileInput = null;
+            properties.load(new InputStreamReader(fileInput, StandardCharsets.UTF_8));
 
             properties.put(key, value);
+
             fileOutput = new FileOutputStream(propertyFile);
-            properties.store(new OutputStreamWriter(fileOutput, "UTF-8"), null);
-            fileOutput.close();
-            fileOutput = null;
+            properties.store(new OutputStreamWriter(fileOutput, StandardCharsets.UTF_8), null);
         } finally {
             if (fileInput != null) {
                 fileInput.close();
@@ -70,7 +68,7 @@ public class PropertySettingStoreUtil {
         FileInputStream fileInput = new FileInputStream(propertyFile);
         try {
             Properties properties = new LinkedProperties();
-            properties.load(new InputStreamReader(fileInput, "UTF-8"));
+            properties.load(new InputStreamReader(fileInput, StandardCharsets.UTF_8));
             return properties.getProperty(key);
         } finally {
             fileInput.close();
@@ -84,7 +82,7 @@ public class PropertySettingStoreUtil {
         FileInputStream fileInput = new FileInputStream(propertyFile);
         try {
             LinkedProperties properties = new LinkedProperties();
-            properties.load(new InputStreamReader(fileInput, "UTF-8"));
+            properties.load(new InputStreamReader(fileInput, StandardCharsets.UTF_8));
             Map<String, String> mapProperties = new LinkedHashMap<String, String>();
 
             Iterator<Object> orderedKeys = properties.orderedKeys().iterator();
@@ -168,7 +166,7 @@ public class PropertySettingStoreUtil {
         try {
             fis = new FileInputStream(settingFile);
             Properties settings = new Properties();
-            settings.load(new InputStreamReader(fis, "UTF-8"));
+            settings.load(new InputStreamReader(fis, StandardCharsets.UTF_8));
             return settings;
         } finally {
             if (fis != null) {
@@ -185,7 +183,7 @@ public class PropertySettingStoreUtil {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(settingFile);
-            settings.store(new OutputStreamWriter(fos, "UTF-8"), comment);
+            settings.store(new OutputStreamWriter(fos, StandardCharsets.UTF_8), comment);
         } finally {
             if (fos != null) {
                 fos.close();

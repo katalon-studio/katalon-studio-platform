@@ -1,4 +1,14 @@
-/bin/**
-/target/**
+#Maven
+target
 
-.vscode/**
+#Eclipse
+bin
+.project
+.classpath
+.settings/**.pref
+
+#IntellJ
+.idea
+
+#VS Code
+.vscode

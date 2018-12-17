@@ -1,8 +1,7 @@
-package com.katalon.platform.api.preference;
+package com.katalon.platform.api.extension.preference;
 
 import java.io.File;
 import java.io.IOException;
-import com.katalon.platform.api.util.PropertySettingStoreUtil;
 
 public class PluginPreferenceStore {
 	private String bundleId;
