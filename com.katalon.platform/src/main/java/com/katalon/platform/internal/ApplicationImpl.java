@@ -5,7 +5,6 @@ import com.katalon.platform.api.service.ExtensionManager;
 import com.katalon.platform.api.service.InternalActionManager;
 import com.katalon.platform.api.service.PluginManager;
 import com.katalon.platform.api.service.ProjectManager;
-import com.katalon.platform.internal.extension.ExtensionManagerImpl;
 
 public class ApplicationImpl implements Application {
     

@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import com.katalon.platform.api.Extension;
+import com.katalon.platform.api.ExtensionPoint;
 import com.katalon.platform.api.Plugin;
-import com.katalon.platform.api.extension.Extension;
-import com.katalon.platform.api.extension.ExtensionPoint;
 
 public class KatalonPluginImpl implements Plugin {
 
@@ -22,17 +22,17 @@ public class KatalonPluginImpl implements Plugin {
     }
 
     @Override
-    public String pluginId() {
+    public String getPluginId() {
         return pluginId;
     }
 
     @Override
-    public Collection<Extension> extensions() {
+    public Collection<Extension> getExtensions() {
         return Collections.unmodifiableSet(extensionList);
     }
 
     @Override
-    public Collection<ExtensionPoint> extensionsPoint() {
+    public Collection<ExtensionPoint> getExtensionsPoint() {
         return Collections.unmodifiableSet(extensionPointList);
     }
 

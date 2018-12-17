@@ -10,8 +10,8 @@ public interface Application {
     public PluginManager getPluginManager();
 
     public ExtensionManager getExtensionManager();
-    
+
     public InternalActionManager getActionService();
-    
-    public ProjectManager getProjectManager();    
+
+    public ProjectManager getProjectManager();
 }
