@@ -32,7 +32,7 @@ public class KatalonPluginImpl implements Plugin {
     }
 
     @Override
-    public Collection<ExtensionPoint> getExtensionsPoint() {
+    public Collection<ExtensionPoint> getExtensionPoints() {
         return Collections.unmodifiableSet(extensionPointList);
     }
 

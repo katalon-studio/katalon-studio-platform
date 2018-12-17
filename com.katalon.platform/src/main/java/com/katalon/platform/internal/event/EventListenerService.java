@@ -6,8 +6,8 @@ import java.util.Map;
 import org.eclipse.e4.core.services.events.IEventBroker;
 
 import com.katalon.platform.api.Extension;
-import com.katalon.platform.api.ExtensionListener;
 import com.katalon.platform.api.extension.EventListenerInitializer;
+import com.katalon.platform.api.lifecycle.ExtensionListener;
 import com.katalon.platform.internal.EclipseContextService;
 
 public class EventListenerService implements ExtensionListener {

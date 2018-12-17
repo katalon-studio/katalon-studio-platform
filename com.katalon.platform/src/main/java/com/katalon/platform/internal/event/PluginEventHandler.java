@@ -8,7 +8,6 @@ import org.osgi.service.event.Event;
 import org.osgi.service.event.EventHandler;
 
 import com.katalon.platform.api.Application;
-import com.katalon.platform.api.EventConstants;
 import com.katalon.platform.api.Plugin;
 import com.katalon.platform.api.model.Entity;
 import com.katalon.platform.api.service.ApplicationManager;
@@ -91,7 +90,7 @@ public class PluginEventHandler implements EventHandler {
 
         // De-register all extensions that is contributing to this plugin.
         extensionManager.deregisterExtensionsPoint(userPlugin);
-        userPlugin.getExtensionsPoint().stream().forEach(p -> extensionManager.removeExtensionPoint(p.getExtensionPointId()));
+        userPlugin.getExtensionPoints().stream().forEach(p -> extensionManager.removeExtensionPoint(p.getExtensionPointId()));
 
         // De-register all extensions of this plugin from other plugins.
         extensionManager.deregisterExtensions(userPlugin);

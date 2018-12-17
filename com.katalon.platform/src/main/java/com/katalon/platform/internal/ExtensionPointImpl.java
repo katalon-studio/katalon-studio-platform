@@ -1,7 +1,7 @@
 package com.katalon.platform.internal;
 
-import com.katalon.platform.api.ExtensionListener;
 import com.katalon.platform.api.ExtensionPoint;
+import com.katalon.platform.api.lifecycle.ExtensionListener;
 
 public class ExtensionPointImpl implements ExtensionPoint {
 

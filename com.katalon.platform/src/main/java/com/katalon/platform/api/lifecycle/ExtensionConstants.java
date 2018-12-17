@@ -1,4 +1,4 @@
-package com.katalon.platform.api;
+package com.katalon.platform.api.lifecycle;
 
 public interface ExtensionConstants {
     String EXTENSION_ID = "com.katalon.platform.extensions";

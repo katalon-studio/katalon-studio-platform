@@ -7,10 +7,10 @@ import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.osgi.framework.Bundle;
 
 import com.katalon.platform.api.Extension;
-import com.katalon.platform.api.ExtensionConstants;
-import com.katalon.platform.api.ExtensionListener;
 import com.katalon.platform.api.ExtensionPoint;
 import com.katalon.platform.api.Plugin;
+import com.katalon.platform.api.lifecycle.ExtensionConstants;
+import com.katalon.platform.api.lifecycle.ExtensionListener;
 import com.katalon.platform.api.service.ApplicationManager;
 import com.katalon.platform.internal.ExtensionImpl;
 import com.katalon.platform.internal.ExtensionManagerImpl;

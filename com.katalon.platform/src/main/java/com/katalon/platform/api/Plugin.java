@@ -7,5 +7,5 @@ public interface Plugin {
 
     Collection<Extension> getExtensions();
 
-    Collection<ExtensionPoint> getExtensionsPoint();
+    Collection<ExtensionPoint> getExtensionPoints();
 }

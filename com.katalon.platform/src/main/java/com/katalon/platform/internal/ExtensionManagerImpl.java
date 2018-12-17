@@ -8,9 +8,9 @@ import java.util.Map;
 import java.util.Set;
 
 import com.katalon.platform.api.Extension;
-import com.katalon.platform.api.ExtensionListener;
 import com.katalon.platform.api.ExtensionPoint;
 import com.katalon.platform.api.Plugin;
+import com.katalon.platform.api.lifecycle.ExtensionListener;
 import com.katalon.platform.api.service.ExtensionManager;
 
 public class ExtensionManagerImpl implements ExtensionManager {
@@ -71,7 +71,7 @@ public class ExtensionManagerImpl implements ExtensionManager {
     }
 
     public void registerExtensionsPoint(Plugin plugin) {
-        plugin.getExtensionsPoint().stream().forEach(extensionPoint -> {
+        plugin.getExtensionPoints().stream().forEach(extensionPoint -> {
             ExtensionListener serviceClass = extensionPoint.getServiceClass();
             if (serviceClass != null) {
                 serviceClass.onPostConstruct();
@@ -83,7 +83,7 @@ public class ExtensionManagerImpl implements ExtensionManager {
     }
 
     public void deregisterExtensionsPoint(Plugin plugin) {
-        plugin.getExtensionsPoint().stream().forEach(extensionPoint -> {
+        plugin.getExtensionPoints().stream().forEach(extensionPoint -> {
             ExtensionListener serviceClass = extensionPoint.getServiceClass();
             if (serviceClass != null) {
                 serviceClass.onPreDestroy();

@@ -1,4 +1,6 @@
-package com.katalon.platform.api;
+package com.katalon.platform.api.lifecycle;
+
+import com.katalon.platform.api.Extension;
 
 public interface ExtensionListener {
     

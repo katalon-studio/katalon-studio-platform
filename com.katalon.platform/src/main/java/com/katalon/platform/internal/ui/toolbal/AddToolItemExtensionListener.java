@@ -23,8 +23,8 @@ import org.eclipse.e4.ui.model.application.ui.menu.MToolBar;
 import org.eclipse.e4.ui.workbench.modeling.EModelService;
 
 import com.katalon.platform.api.Extension;
-import com.katalon.platform.api.ExtensionListener;
 import com.katalon.platform.api.extension.ToolItemDescription;
+import com.katalon.platform.api.lifecycle.ExtensionListener;
 import com.katalon.platform.internal.EclipseContextService;
 
 public class AddToolItemExtensionListener implements ExtensionListener {

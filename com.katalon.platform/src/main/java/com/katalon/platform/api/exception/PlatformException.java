@@ -1,4 +1,4 @@
-package com.katalon.platform.api;
+package com.katalon.platform.api.exception;
 
 public class PlatformException extends Exception {
 
