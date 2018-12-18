@@ -6,16 +6,16 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.InvalidRegistryObjectException;
 import org.osgi.framework.Bundle;
 
+import com.katalon.platform.api.Extension;
+import com.katalon.platform.api.ExtensionPoint;
 import com.katalon.platform.api.Plugin;
-import com.katalon.platform.api.extension.Extension;
-import com.katalon.platform.api.extension.ExtensionConstants;
-import com.katalon.platform.api.extension.ExtensionListener;
-import com.katalon.platform.api.extension.ExtensionPoint;
+import com.katalon.platform.api.lifecycle.ExtensionConstants;
+import com.katalon.platform.api.lifecycle.ExtensionListener;
 import com.katalon.platform.api.service.ApplicationManager;
+import com.katalon.platform.internal.ExtensionImpl;
+import com.katalon.platform.internal.ExtensionManagerImpl;
+import com.katalon.platform.internal.ExtensionPointImpl;
 import com.katalon.platform.internal.KatalonPluginImpl;
-import com.katalon.platform.internal.extension.ExtensionImpl;
-import com.katalon.platform.internal.extension.ExtensionManagerImpl;
-import com.katalon.platform.internal.extension.ExtensionPointImpl;
 
 public class PluginManifestParsingUtil {
 

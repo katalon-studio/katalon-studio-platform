@@ -11,10 +11,9 @@ import com.katalon.platform.api.Application;
 import com.katalon.platform.api.Plugin;
 import com.katalon.platform.api.model.ProjectEntity;
 import com.katalon.platform.api.service.ApplicationManager;
-import com.katalon.platform.api.service.EventConstants;
+import com.katalon.platform.internal.ExtensionManagerImpl;
 import com.katalon.platform.internal.PluginManagerImpl;
 import com.katalon.platform.internal.ProjectManagerImpl;
-import com.katalon.platform.internal.extension.ExtensionManagerImpl;
 import com.katalon.platform.internal.util.PluginManifestParsingUtil;
 
 public class PluginEventHandler implements EventHandler {
@@ -91,11 +90,11 @@ public class PluginEventHandler implements EventHandler {
 
         // De-register all extensions that is contributing to this plugin.
         extensionManager.deregisterExtensionsPoint(userPlugin);
-        userPlugin.extensionsPoint().stream().forEach(p -> extensionManager.removeExtensionPoint(p.extensionPointId()));
+        userPlugin.getExtensionPoints().stream().forEach(p -> extensionManager.removeExtensionPoint(p.getExtensionPointId()));
 
         // De-register all extensions of this plugin from other plugins.
         extensionManager.deregisterExtensions(userPlugin);
-        userPlugin.extensions().forEach(e -> extensionManager.removeExtension(e));
+        userPlugin.getExtensions().forEach(e -> extensionManager.removeExtension(e));
 
         PluginManagerImpl pluginManager = (PluginManagerImpl) application.getPluginManager();
         pluginManager.removePlugin(userPlugin);

@@ -2,13 +2,10 @@ package com.katalon.platform.api;
 
 import java.util.Collection;
 
-import com.katalon.platform.api.extension.Extension;
-import com.katalon.platform.api.extension.ExtensionPoint;
-
 public interface Plugin {
-    String pluginId();
+    String getPluginId();
 
-    Collection<Extension> extensions();
+    Collection<Extension> getExtensions();
 
-    Collection<ExtensionPoint> extensionsPoint();
+    Collection<ExtensionPoint> getExtensionPoints();
 }

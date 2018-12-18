@@ -18,13 +18,13 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.swt
 Bundle-ClassPath: .
 Export-Package: com.katalon.platform.api,
+ com.katalon.platform.api.event,
+ com.katalon.platform.api.execution,
  com.katalon.platform.api.extension,
- com.katalon.platform.api.extension.event,
- com.katalon.platform.api.extension.event.impl,
- com.katalon.platform.api.extension.execution,
- com.katalon.platform.api.extension.execution.impl,
  com.katalon.platform.api.extension.ui,
  com.katalon.platform.api.extension.ui.toolbar,
- com.katalon.platform.api.extension.ui.toolbar.impl,
  com.katalon.platform.api.model,
- com.katalon.platform.api.service
+ com.katalon.platform.api.service,
+ com.katalon.platform.internal.api.extension.event,
+ com.katalon.platform.internal.execution,
+ com.katalon.platform.internal.ui.toolbal

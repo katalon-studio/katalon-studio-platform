@@ -16,11 +16,11 @@ public class PluginManagerImpl implements PluginManager {
     }
 
     public void addPlugin(Plugin plugin) {
-        pluginIndice.put(plugin.pluginId(), plugin);
+        pluginIndice.put(plugin.getPluginId(), plugin);
     }
 
     public void removePlugin(Plugin plugin) {
-        String pluginId = plugin.pluginId();
+        String pluginId = plugin.getPluginId();
         if (pluginIndice.containsKey(pluginId)) {
             pluginIndice.remove(pluginId);
         }

@@ -13,7 +13,6 @@ import org.osgi.framework.ServiceListener;
 
 import com.katalon.platform.api.service.ApplicationManager;
 import com.katalon.platform.internal.event.PluginEventHandler;
-import com.katalon.platform.internal.extension.ExtensionManagerImpl;
 import com.katalon.platform.internal.util.PluginManifestParsingUtil;
 
 public class PlatformActivator extends org.eclipse.core.runtime.Plugin {
