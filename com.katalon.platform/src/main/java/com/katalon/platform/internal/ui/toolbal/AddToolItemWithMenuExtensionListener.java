@@ -101,16 +101,11 @@ public class AddToolItemWithMenuExtensionListener implements ExtensionListener {
 	            ToolItem widgetToolItem = (ToolItem) toolItem.getWidget();
 	            Rectangle rect = widgetToolItem.getBounds();
 	            Point pt = widgetToolItem.getParent().toDisplay(new Point(rect.x, rect.y));
-<<<<<<< HEAD:com.katalon.platform/src/main/java/com/katalon/platform/api/extension/ui/toolbar/impl/AddToolItemWithMenuExtensionListenter.java
 	            if(menu != null){
 		            menu.setLocation(pt.x, pt.y + rect.height);
 		            menu.setVisible(true);
 	            }
-=======
-	            menu.setLocation(pt.x, pt.y + rect.height);
-	            menu.setVisible(true);
-				toolItemWithMenuRegistries.put(extension.getExtensionId(), toolItemWithMenuDescription.toolItemId());
->>>>>>> master:com.katalon.platform/src/main/java/com/katalon/platform/internal/ui/toolbal/AddToolItemWithMenuExtensionListener.java
+				
 			});
 
 			toolItemWithMenuRegistries.put(extension.extensionId(), toolItemWithMenuDescription.toolItemId());
