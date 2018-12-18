@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
 
     environment {
         MAVEN_OPTS = '-Duser.home=/tmp/docker-cache-maven'
