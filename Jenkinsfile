@@ -6,7 +6,7 @@ pipeline {
     }
     
     stages {
-        stage ('Prepare') {
+        stage('Prepare') {
             steps {
                     sh 'mkdir -p $HOME/docker-cache-maven && chmod 777 $HOME/docker-cache-maven'
                     sh 'export PATH=/usr/local/bin:$PATH'
