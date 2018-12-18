@@ -26,7 +26,6 @@ public class EventListenerService implements ExtensionListener {
             IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
             eventBroker.subscribe("KATALON_EXECUTION/*", delegate.getEventHandler());
             eventBroker.subscribe("KATALON_PLUGIN/CURRENT_PROJECT_CHANGED", delegate.getEventHandler());
-            
             eventListenerInitializer.onInstall(extension.pluginId());         
             
             eventListenerLookup.put(extension.extensionId(), delegate);
