@@ -6,13 +6,6 @@ import com.katalon.platform.api.exception.ResourceException;
 /**
  * PluginPreference is a key-value store for a plugin to manage settings value.
  * 
- * @see {@link #setInt(String, int)}
- * @see {@link #setBoolean(String, boolean)}
- * @see {@link #setString(String, String)}
- * @see {@link #getInt(String, int)}
- * @see {@link #getBoolean(String, boolean)}
- * @see {@link #getString(String, String)}
- * 
  * @since 1.0
  */
 public interface PluginPreference {
