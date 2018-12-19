@@ -7,9 +7,9 @@ import com.katalon.platform.api.service.ProjectManager;
 
 public interface Application {
 
-    public PluginManager getPluginManager();
+    PluginManager getPluginManager();
 
-    public ExtensionManager getExtensionManager();
+    ExtensionManager getExtensionManager();
 
     public ProjectManager getProjectManager();
 

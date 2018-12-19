@@ -5,7 +5,7 @@ target
 bin
 .project
 .classpath
-.settings/**.pref
+.settings
 
 #IntellJ
 .idea
