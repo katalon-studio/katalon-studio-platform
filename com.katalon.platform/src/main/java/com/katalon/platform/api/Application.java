@@ -2,6 +2,7 @@ package com.katalon.platform.api;
 
 import com.katalon.platform.api.service.ExtensionManager;
 import com.katalon.platform.api.service.PluginManager;
+import com.katalon.platform.api.service.PreferenceManager;
 import com.katalon.platform.api.service.ProjectManager;
 
 public interface Application {
@@ -10,5 +11,7 @@ public interface Application {
 
     ExtensionManager getExtensionManager();
 
-    ProjectManager getProjectManager();
+    public ProjectManager getProjectManager();
+
+    public PreferenceManager getPreferenceManager();
 }

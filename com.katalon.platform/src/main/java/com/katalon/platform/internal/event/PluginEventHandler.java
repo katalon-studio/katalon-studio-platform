@@ -1,6 +1,7 @@
 package com.katalon.platform.internal.event;
 
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.e4.core.services.events.IEventBroker;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.BundleException;
@@ -11,6 +12,7 @@ import com.katalon.platform.api.Application;
 import com.katalon.platform.api.Plugin;
 import com.katalon.platform.api.model.ProjectEntity;
 import com.katalon.platform.api.service.ApplicationManager;
+import com.katalon.platform.internal.EclipseContextService;
 import com.katalon.platform.internal.ExtensionManagerImpl;
 import com.katalon.platform.internal.PluginManagerImpl;
 import com.katalon.platform.internal.ProjectManagerImpl;
@@ -71,6 +73,9 @@ public class PluginEventHandler implements EventHandler {
 
         // Register all extensions of other plugins to this plugin
         extensionManager.registerExtensionsPoint(userPlugin);
+        
+        IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
+        eventBroker.send("KATALON_PLUGIN/AFTER_ACTIVATION", userPlugin);
 
         return bundle;
     }
@@ -86,6 +91,10 @@ public class PluginEventHandler implements EventHandler {
 
         Application application = ApplicationManager.getInstance();
         Plugin userPlugin = application.getPluginManager().getPlugin(bundleName);
+        
+        IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
+        eventBroker.send("KATALON_PLUGIN/BEFORE_DEACTIVATION", userPlugin);
+
         ExtensionManagerImpl extensionManager = (ExtensionManagerImpl) application.getExtensionManager();
 
         // De-register all extensions that is contributing to this plugin.
@@ -102,5 +111,4 @@ public class PluginEventHandler implements EventHandler {
         bundle.stop();
         bundle.uninstall();
     }
-
 }

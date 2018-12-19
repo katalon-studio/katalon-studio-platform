@@ -1,6 +1,6 @@
 # Katalon Studio Platform
 
-Katalon Studio Platform is an open source platform for developing plugins to provide extra functions for Katalon Studio.
+This open source platform is for developing Katalon Studio plugins.
 
 ## Basic Concepts
 
