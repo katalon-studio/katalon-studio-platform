@@ -108,7 +108,7 @@ public class AddToolItemWithMenuExtensionListener implements ExtensionListener {
 				
 			});
 
-			toolItemWithMenuRegistries.put(extension.extensionId(), toolItemWithMenuDescription.toolItemId());
+			toolItemWithMenuRegistries.put(extension.getExtensionId(), toolItemWithMenuDescription.toolItemId());
 		}
 	}
 
