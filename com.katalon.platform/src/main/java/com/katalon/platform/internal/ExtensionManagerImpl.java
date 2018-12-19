@@ -97,9 +97,11 @@ public class ExtensionManagerImpl implements ExtensionManager {
     public void deregisterExtensions(Plugin plugin) {
         plugin.getExtensions().stream().forEach(e -> {
             ExtensionPoint extensionPoint = getExtensionPoint(e.getExtensionPointId());
-            ExtensionListener serviceClass = extensionPoint.getServiceClass();
-            if (serviceClass != null) {
-                serviceClass.deregister(e);
+            if (extensionPoint != null) {
+                ExtensionListener serviceClass = extensionPoint.getServiceClass();
+                if (serviceClass != null) {
+                    serviceClass.deregister(e);
+                }
             }
         });
     }

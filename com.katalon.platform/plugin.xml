@@ -13,7 +13,7 @@
    		point="com.katalon.platform.extensions_point">
 	  <point
             id="com.katalon.platform.api.extension.newDropdownToolItem"
-            interfaceClass="com.katalon.platform.api.extension.ToolItemDescription.ToolItemWithMenuDescription"
+            interfaceClass="com.katalon.platform.api.extension.ToolItemWithMenuDescription"
             serviceClass="com.katalon.platform.internal.ui.toolbar.AddToolItemWithMenuExtensionListener">
       </point>	
    	</extension>
@@ -25,4 +25,12 @@
             serviceClass="com.katalon.platform.internal.event.EventListenerService">
       </point>
    </extension>
+   <extension
+   		point="com.katalon.platform.extensions_point">
+	  <point
+            id="com.katalon.platform.api.extension.pluginActivationListener"
+            interfaceClass="com.katalon.platform.api.extension.PluginActivationListener"
+            serviceClass="com.katalon.platform.internal.lifecycle.PluginActivationListenerService">
+      </point>	
+   	</extension>
 </plugin>
