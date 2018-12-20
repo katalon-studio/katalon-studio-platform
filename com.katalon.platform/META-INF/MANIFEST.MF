@@ -24,8 +24,11 @@ Export-Package: com.katalon.platform.api,
  com.katalon.platform.api.extension,
  com.katalon.platform.api.extension.ui,
  com.katalon.platform.api.extension.ui.toolbar,
+ com.katalon.platform.api.lifecycle,
  com.katalon.platform.api.model,
+ com.katalon.platform.api.preference,
  com.katalon.platform.api.service,
+ com.katalon.platform.api.util,
  com.katalon.platform.internal.api.extension.event,
  com.katalon.platform.internal.execution,
- com.katalon.platform.internal.ui.toolbal
+ com.katalon.platform.internal.ui.toolbar

@@ -7,8 +7,6 @@ import com.katalon.platform.api.preference.PluginPreference;
 /**
  * Provides services to get {@link PluginPreference} of a loaded plugin. </br>
  * By default, <code>PreferenceManager</code> is provided from the current {@link Application}
- * @see {@link Application#getPreferenceManager()}
- * @see {@link #getPluginPreference(String, String)}
  * 
  * @since 1.0
  */

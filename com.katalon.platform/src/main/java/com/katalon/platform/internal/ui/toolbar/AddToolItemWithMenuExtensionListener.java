@@ -1,4 +1,4 @@
-package com.katalon.platform.internal.ui.toolbal;
+package com.katalon.platform.internal.ui.toolbar;
 
 import java.util.HashMap;
 import java.util.Map;
