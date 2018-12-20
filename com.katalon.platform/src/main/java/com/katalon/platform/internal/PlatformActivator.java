@@ -23,8 +23,6 @@ public class PlatformActivator extends org.eclipse.core.runtime.Plugin {
 
         ApplicationManager.setApplication(new ApplicationImpl());
 
-        boostrapPlatform(context);
-
         // Look up IEclipseContext
         IEclipseContext eclipseContext = EclipseContextFactory.getServiceContext(context);
         EclipseContextService.lookupPlatformContext(eclipseContext);
@@ -50,6 +48,8 @@ public class PlatformActivator extends org.eclipse.core.runtime.Plugin {
                 }
             }
         });
+
+        boostrapPlatform(context);
     }
 
     private void boostrapPlatform(BundleContext bundleContext) throws BundleException {
