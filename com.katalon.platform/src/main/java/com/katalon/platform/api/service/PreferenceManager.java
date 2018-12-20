@@ -17,7 +17,7 @@ public interface PreferenceManager {
      * @return an instance of PluginPreference that provides ability to get, and update settings value of a plugin.
      * @throws ResourceException if <code>projectId</code>, or <code>pluginId</code> is not found or invalid.
      * 
-     * @see {@link ProjectManager#getCurrentProject()}
+     * @see ProjectManager#getCurrentProject() 
      * 
      * @since 1.0
      */
