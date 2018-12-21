@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.katalon.platform.api.exception.ResourceException;
-import com.katalon.platform.api.model.ProjectEntity;
+import com.katalon.platform.api.model.Entity;
 import com.katalon.platform.api.preference.PluginPreference;
 import com.katalon.platform.api.service.ApplicationManager;
 import com.katalon.platform.api.service.PreferenceManager;
@@ -15,11 +15,11 @@ public class PreferenceManagerImpl implements PreferenceManager {
 
     @Override
     public PluginPreference getPluginPreference(String projectId, String pluginId) throws ResourceException {
-    	ProjectEntity projectEntity = ApplicationManager.getInstance().getProjectManager().getCurrentProject();
+        Entity projectEntity = ApplicationManager.getInstance().getProjectManager().getCurrentProject();
         if (!projectId.equals(ApplicationManager.getInstance().getProjectManager().getCurrentProject().getId())) {
             throw new ResourceException(String.format("Project %s not found", projectId));
         }
-        
+
         if (ApplicationManager.getInstance().getPluginManager().getPlugin(pluginId) == null) {
             throw new ResourceException(String.format("Plugin %s not found", pluginId));
         }
