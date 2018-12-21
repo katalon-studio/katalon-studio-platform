@@ -77,8 +77,8 @@ public class PluginPreferenceImpl implements PluginPreference {
 
     @Override
     public String getString(String key, String defaultValue) throws InvalidDataTypeFormatException {
-        if (properties.contains(key)) {
-            Object value = properties.get(key);
+        if (properties.containsKey(key)) {
+            Object value = PropertySettingStoreUtil.getValue(properties.get(key).toString());
             if (value instanceof String) {
                 return (String) value;
             }
@@ -89,8 +89,8 @@ public class PluginPreferenceImpl implements PluginPreference {
 
     @Override
     public int getInt(String key, int defaultValue) throws InvalidDataTypeFormatException {
-        if (properties.contains(key)) {
-            Object value = PropertySettingStoreUtil.getValue(properties.getProperty(key));
+        if (properties.containsKey(key)) {
+            Object value = PropertySettingStoreUtil.getValue(properties.get(key).toString());
             if (value instanceof Integer) {
                 return (Integer) value;
             }
@@ -101,8 +101,8 @@ public class PluginPreferenceImpl implements PluginPreference {
 
     @Override
     public boolean getBoolean(String key, boolean defaultValue) throws InvalidDataTypeFormatException {
-        if (properties.contains(key)) {
-            Object value = properties.get(key);
+        if (properties.containsKey(key)) {
+            Object value = PropertySettingStoreUtil.getValue(properties.get(key).toString());
             if (value instanceof Boolean) {
                 return (Boolean) value;
             }
