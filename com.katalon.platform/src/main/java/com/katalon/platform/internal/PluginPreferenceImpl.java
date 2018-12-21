@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 import com.katalon.platform.api.exception.InvalidDataTypeFormatException;
 import com.katalon.platform.api.exception.ResourceException;
+import com.katalon.platform.api.model.ProjectEntity;
 import com.katalon.platform.api.preference.PluginPreference;
 import com.katalon.platform.internal.util.LinkedProperties;
 import com.katalon.platform.internal.util.PropertySettingStoreUtil;
@@ -23,9 +24,10 @@ public class PluginPreferenceImpl implements PluginPreference {
 
     private String projectDir;
 
-    public PluginPreferenceImpl(String projectId, String pluginId) throws ResourceException {
-        this.projectId = projectId;
+    public PluginPreferenceImpl(ProjectEntity projectEntity, String pluginId) throws ResourceException {
+        this.projectId = projectEntity.getId();
         this.pluginId = pluginId;
+        this.projectDir = projectEntity.getFolderLocation();
         try {
             this.properties = loadProperties(getPropertyFile());
         } catch (IOException e) {
