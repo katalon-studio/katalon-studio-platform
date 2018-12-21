@@ -1,6 +1,6 @@
 package com.katalon.platform.api.model;
 
-public interface ProjectEntity {
+public interface ProjectEntity extends Entity {
 
 	public String getFileLocation();
 
