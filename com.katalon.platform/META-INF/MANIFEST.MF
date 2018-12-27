@@ -15,9 +15,12 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.osgi.services,
  org.eclipse.e4.core.services,
  org.eclipse.e4.ui.di,
- org.eclipse.swt
+ org.eclipse.swt,
+ org.eclipse.jface
 Bundle-ClassPath: .
 Export-Package: com.katalon.platform.api,
+ com.katalon.platform.api.controller,
+ com.katalon.platform.api.dialogs,
  com.katalon.platform.api.event,
  com.katalon.platform.api.exception,
  com.katalon.platform.api.execution,
@@ -25,10 +28,8 @@ Export-Package: com.katalon.platform.api,
  com.katalon.platform.api.extension.ui,
  com.katalon.platform.api.extension.ui.toolbar,
  com.katalon.platform.api.lifecycle,
+ com.katalon.platform.api.logging.model,
  com.katalon.platform.api.model,
  com.katalon.platform.api.preference,
  com.katalon.platform.api.service,
- com.katalon.platform.api.util,
- com.katalon.platform.internal.api.extension.event,
- com.katalon.platform.internal.execution,
- com.katalon.platform.internal.ui.toolbar
+ com.katalon.platform.api.util

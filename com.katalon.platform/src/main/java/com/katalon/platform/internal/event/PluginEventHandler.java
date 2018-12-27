@@ -12,6 +12,9 @@ import com.katalon.platform.api.Application;
 import com.katalon.platform.api.Plugin;
 import com.katalon.platform.api.model.Entity;
 import com.katalon.platform.api.service.ApplicationManager;
+import com.katalon.platform.api.service.ControllerManager;
+import com.katalon.platform.api.service.UIServiceManager;
+import com.katalon.platform.internal.ApplicationImpl;
 import com.katalon.platform.internal.EclipseContextService;
 import com.katalon.platform.internal.ExtensionManagerImpl;
 import com.katalon.platform.internal.PluginManagerImpl;
@@ -46,16 +49,31 @@ public class PluginEventHandler implements EventHandler {
                 updateCurrentProject((Entity) object);
                 break;
             }
+            case "KATALON_PLATFORM/CONTROLLER_MANAGER_ADDED": {
+                Object object = event.getProperty(EventConstants.EVENT_DATA_PROPERTY_NAME);
+                if (object instanceof ControllerManager) {
+                    ApplicationImpl application = (ApplicationImpl) ApplicationManager.getInstance();
+                    application.setControllerManager((ControllerManager) object);
+                }
+                break;
+            }
+            case "KATALON_PLATFORM/UISERVICE_MANAGER_ADDED": {
+                Object object = event.getProperty(EventConstants.EVENT_DATA_PROPERTY_NAME);
+                if (object instanceof UIServiceManager) {
+                    ApplicationImpl application = (ApplicationImpl) ApplicationManager.getInstance();
+                    application.setUiServiceManager((UIServiceManager) object);
+                }
+                break;
+            }
         }
     }
-    
+  
     public void updateCurrentProject(Entity project){
     	ProjectManagerImpl projectManager = (ProjectManagerImpl) ApplicationManager.getInstance().getProjectManager();
     	projectManager.setCurrentProject(project);
     }
-    
-    public Bundle installPlugin(BundleContext bundleContext, String location)
-            throws BundleException {
+
+    public Bundle installPlugin(BundleContext bundleContext, String location) throws BundleException {
         Bundle bundle = bundleContext.installBundle(location);
         bundle.start();
 
@@ -73,15 +91,14 @@ public class PluginEventHandler implements EventHandler {
 
         // Register all extensions of other plugins to this plugin
         extensionManager.registerExtensionsPoint(userPlugin);
-        
+
         IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
         eventBroker.send("KATALON_PLUGIN/AFTER_ACTIVATION", userPlugin);
 
         return bundle;
     }
 
-    public void uninstallPlugin(BundleContext context, String location)
-            throws BundleException {
+    public void uninstallPlugin(BundleContext context, String location) throws BundleException {
         Bundle bundle = context.getBundle(location);
         if (bundle == null) {
             return;
@@ -91,7 +108,7 @@ public class PluginEventHandler implements EventHandler {
 
         Application application = ApplicationManager.getInstance();
         Plugin userPlugin = application.getPluginManager().getPlugin(bundleName);
-        
+
         IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
         eventBroker.send("KATALON_PLUGIN/BEFORE_DEACTIVATION", userPlugin);
 
@@ -99,7 +116,9 @@ public class PluginEventHandler implements EventHandler {
 
         // De-register all extensions that is contributing to this plugin.
         extensionManager.deregisterExtensionsPoint(userPlugin);
-        userPlugin.getExtensionPoints().stream().forEach(p -> extensionManager.removeExtensionPoint(p.getExtensionPointId()));
+        userPlugin.getExtensionPoints()
+                .stream()
+                .forEach(p -> extensionManager.removeExtensionPoint(p.getExtensionPointId()));
 
         // De-register all extensions of this plugin from other plugins.
         extensionManager.deregisterExtensions(userPlugin);
