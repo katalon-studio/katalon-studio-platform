@@ -1,7 +1,8 @@
 package com.katalon.platform.api.service;
 
-import com.katalon.platform.api.model.Entity;
+
+import com.katalon.platform.api.model.ProjectEntity;
 
 public interface ProjectManager {
-	Entity getCurrentProject();
+	ProjectEntity getCurrentProject();
 }

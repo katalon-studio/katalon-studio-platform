@@ -1,16 +1,17 @@
 package com.katalon.platform.internal;
 
-import com.katalon.platform.api.model.Entity;
+
+import com.katalon.platform.api.model.ProjectEntity;
 import com.katalon.platform.api.service.ProjectManager;
 
 public class ProjectManagerImpl implements ProjectManager {
-	private Entity currentProject;
+	private ProjectEntity currentProject;
 	@Override
-	public Entity getCurrentProject() {
+	public ProjectEntity getCurrentProject() {
 		return currentProject;
 	}
 	
-	public void setCurrentProject(Entity project){
+	public void setCurrentProject(ProjectEntity project){
 		currentProject = project;
 	}
 

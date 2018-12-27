@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 import com.katalon.platform.api.exception.InvalidDataTypeFormatException;
 import com.katalon.platform.api.exception.ResourceException;
+import com.katalon.platform.api.model.Entity;
 import com.katalon.platform.api.preference.PluginPreference;
 import com.katalon.platform.internal.util.LinkedProperties;
 import com.katalon.platform.internal.util.PropertySettingStoreUtil;
@@ -23,9 +24,10 @@ public class PluginPreferenceImpl implements PluginPreference {
 
     private String projectDir;
 
-    public PluginPreferenceImpl(String projectId, String pluginId) throws ResourceException {
-        this.projectId = projectId;
+    public PluginPreferenceImpl(Entity projectEntity, String pluginId) throws ResourceException {
+        this.projectId = projectEntity.getId();
         this.pluginId = pluginId;
+        this.projectDir = projectEntity.getFolderLocation();
         try {
             this.properties = loadProperties(getPropertyFile());
         } catch (IOException e) {
@@ -75,8 +77,8 @@ public class PluginPreferenceImpl implements PluginPreference {
 
     @Override
     public String getString(String key, String defaultValue) throws InvalidDataTypeFormatException {
-        if (properties.contains(key)) {
-            Object value = properties.get(key);
+        if (properties.containsKey(key)) {
+            Object value = PropertySettingStoreUtil.getValue(properties.get(key).toString());
             if (value instanceof String) {
                 return (String) value;
             }
@@ -87,8 +89,8 @@ public class PluginPreferenceImpl implements PluginPreference {
 
     @Override
     public int getInt(String key, int defaultValue) throws InvalidDataTypeFormatException {
-        if (properties.contains(key)) {
-            Object value = PropertySettingStoreUtil.getValue(properties.getProperty(key));
+        if (properties.containsKey(key)) {
+            Object value = PropertySettingStoreUtil.getValue(properties.get(key).toString());
             if (value instanceof Integer) {
                 return (Integer) value;
             }
@@ -99,8 +101,8 @@ public class PluginPreferenceImpl implements PluginPreference {
 
     @Override
     public boolean getBoolean(String key, boolean defaultValue) throws InvalidDataTypeFormatException {
-        if (properties.contains(key)) {
-            Object value = properties.get(key);
+        if (properties.containsKey(key)) {
+            Object value = PropertySettingStoreUtil.getValue(properties.get(key).toString());
             if (value instanceof Boolean) {
                 return (Boolean) value;
             }
