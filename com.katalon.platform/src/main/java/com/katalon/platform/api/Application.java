@@ -1,5 +1,6 @@
 package com.katalon.platform.api;
 
+import com.katalon.platform.api.service.ConsoleOptionManager;
 import com.katalon.platform.api.service.ExtensionManager;
 import com.katalon.platform.api.service.PluginManager;
 import com.katalon.platform.api.service.PreferenceManager;
@@ -14,4 +15,6 @@ public interface Application {
     public ProjectManager getProjectManager();
 
     public PreferenceManager getPreferenceManager();
+    
+    public ConsoleOptionManager getConsoleOptionManager();
 }
