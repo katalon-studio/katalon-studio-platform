@@ -6,7 +6,7 @@ import java.util.List;
 import com.katalon.platform.api.model.PluginConsoleOption;
 import com.katalon.platform.api.model.PluginConsoleOptionContributor;
 
-public class PluginConsoleOptionContributorImpl implements PluginConsoleOptionContributor{
+public class PluginConsoleOptionContributorImpl implements PluginConsoleOptionContributor {
 	
 	private List<PluginConsoleOption<?>> consoleOptions;
 	
@@ -14,6 +14,7 @@ public class PluginConsoleOptionContributorImpl implements PluginConsoleOptionCo
 		consoleOptions = new ArrayList<>();
 	}
 	
+	@Override
 	public void setConsoleOptionList(List<PluginConsoleOption<?>> consoleOptions){
 		this.consoleOptions = consoleOptions;
 	}
