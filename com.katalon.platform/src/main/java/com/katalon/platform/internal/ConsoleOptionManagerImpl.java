@@ -22,19 +22,19 @@ public class ConsoleOptionManagerImpl implements ConsoleOptionManager {
         }
 
         if (lookup.containsKey(projectId)) {
-            Map<String, PluginConsoleOptionContributor> preferenceLookup = lookup.get(projectId);
-            if (preferenceLookup.containsKey(pluginId)) {
-                return preferenceLookup.get(pluginId);
+            Map<String, PluginConsoleOptionContributor> consoleOptionContributorLookup = lookup.get(projectId);
+            if (consoleOptionContributorLookup.containsKey(pluginId)) {
+                return consoleOptionContributorLookup.get(pluginId);
             }
-            PluginConsoleOptionContributor pluginPreference = new PluginConsoleOptionContributorImpl();
-            preferenceLookup.put(pluginId, pluginPreference);
-            return pluginPreference;
+            PluginConsoleOptionContributor consoleOptionContributor = new PluginConsoleOptionContributorImpl();
+            consoleOptionContributorLookup.put(pluginId, consoleOptionContributor);
+            return consoleOptionContributor;
         }
-        PluginConsoleOptionContributor pluginPreference = new PluginConsoleOptionContributorImpl();
-        Map<String, PluginConsoleOptionContributor> preferenceLookup = new HashMap<>();
-        preferenceLookup.put(pluginId, pluginPreference);
-        lookup.put(projectId, preferenceLookup);
-        return pluginPreference;
+        PluginConsoleOptionContributor consoleOptionContributor = new PluginConsoleOptionContributorImpl();
+        Map<String, PluginConsoleOptionContributor> consoleOptionContributorLookup = new HashMap<>();
+        consoleOptionContributorLookup.put(pluginId, consoleOptionContributor);
+        lookup.put(projectId, consoleOptionContributorLookup);
+        return consoleOptionContributor;
     }
 	
 }

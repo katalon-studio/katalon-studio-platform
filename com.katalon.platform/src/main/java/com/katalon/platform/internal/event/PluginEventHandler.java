@@ -52,6 +52,8 @@ public class PluginEventHandler implements EventHandler {
     public void updateCurrentProject(ProjectEntity project){
     	ProjectManagerImpl projectManager = (ProjectManagerImpl) ApplicationManager.getInstance().getProjectManager();
     	projectManager.setCurrentProject(project);
+    	IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
+        eventBroker.send("KATALON_PLATFORM/PROJECT/CURRENT_PROJECT_CHANGED", project);
     }
     
     public Bundle installPlugin(BundleContext bundleContext, String location)
