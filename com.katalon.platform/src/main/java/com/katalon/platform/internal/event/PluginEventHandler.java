@@ -49,7 +49,7 @@ public class PluginEventHandler implements EventHandler {
                 updateCurrentProject((ProjectEntity) object);
                 break;
             }
-            case "KATALON_PLATFORM/CONTROLLER_MANAGER_ADDED": {
+            case "KATALON_PLUGIN/CONTROLLER_MANAGER_ADDED": {
                 Object object = event.getProperty(EventConstants.EVENT_DATA_PROPERTY_NAME);
                 if (object instanceof ControllerManager) {
                     ApplicationImpl application = (ApplicationImpl) ApplicationManager.getInstance();
@@ -57,11 +57,11 @@ public class PluginEventHandler implements EventHandler {
                 }
                 break;
             }
-            case "KATALON_PLATFORM/UISERVICE_MANAGER_ADDED": {
+            case "KATALON_PLUGIN/UISERVICE_MANAGER_ADDED": {
                 Object object = event.getProperty(EventConstants.EVENT_DATA_PROPERTY_NAME);
                 if (object instanceof UIServiceManager) {
                     ApplicationImpl application = (ApplicationImpl) ApplicationManager.getInstance();
-                    application.setUiServiceManager((UIServiceManager) object);
+                    application.setUIServiceManager((UIServiceManager) object);
                 }
                 break;
             }
@@ -108,6 +108,9 @@ public class PluginEventHandler implements EventHandler {
 
         Application application = ApplicationManager.getInstance();
         Plugin userPlugin = application.getPluginManager().getPlugin(bundleName);
+        if (userPlugin == null) {
+            return;
+        }
 
         IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
         eventBroker.send("KATALON_PLUGIN/BEFORE_DEACTIVATION", userPlugin);

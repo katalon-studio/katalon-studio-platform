@@ -28,7 +28,8 @@ public class PlatformActivator extends org.eclipse.core.runtime.Plugin {
         EclipseContextService.lookupPlatformContext(eclipseContext);
 
         IEventBroker eventBroker = eclipseContext.get(IEventBroker.class);
-        eventBroker.subscribe("KATALON_PLUGIN/*", new PluginEventHandler());
+        PluginEventHandler eventHandler = new PluginEventHandler();
+        eventBroker.subscribe("KATALON_PLUGIN/*", eventHandler);
 
         context.addServiceListener(new ServiceListener() {
 
