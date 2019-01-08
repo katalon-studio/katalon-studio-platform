@@ -5,6 +5,7 @@ import com.katalon.platform.api.service.ExtensionManager;
 import com.katalon.platform.api.service.PluginManager;
 import com.katalon.platform.api.service.PreferenceManager;
 import com.katalon.platform.api.service.ProjectManager;
+import com.katalon.platform.api.service.UIServiceManager;
 
 public interface Application {
 
@@ -17,4 +18,6 @@ public interface Application {
     PreferenceManager getPreferenceManager();
 
     ControllerManager getControllerManager();
+
+    UIServiceManager getUIServiceManager();
 }

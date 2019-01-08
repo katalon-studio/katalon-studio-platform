@@ -1,22 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Platform
+Bundle-Name: Katalon Studio Platform
 Bundle-SymbolicName: com.katalon.platform;singleton:=true
-Bundle-Version: 1.0.0
-Bundle-Vendor: Katalon
+Bundle-Version: 1.0.2
+Bundle-Vendor: Katalon LLC
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Activator: com.katalon.platform.internal.PlatformActivator
-Require-Bundle: org.eclipse.core.runtime,
- org.eclipse.e4.core.contexts,
- org.eclipse.e4.ui.workbench,
- org.eclipse.e4.core.commands,
- org.eclipse.e4.ui.model.workbench,
- org.eclipse.core.commands,
- org.eclipse.osgi.services,
- org.eclipse.e4.core.services,
- org.eclipse.e4.ui.di,
- org.eclipse.swt,
- org.eclipse.jface
+DynamicImport-Package: *
 Bundle-ClassPath: .
 Export-Package: com.katalon.platform.api,
  com.katalon.platform.api.controller,
@@ -31,5 +21,8 @@ Export-Package: com.katalon.platform.api,
  com.katalon.platform.api.logging.model,
  com.katalon.platform.api.model,
  com.katalon.platform.api.preference,
+ com.katalon.platform.api.report,
  com.katalon.platform.api.service,
- com.katalon.platform.api.util
+ com.katalon.platform.api.ui,
+ com.katalon.platform.api.util,
+ com.katalon.platform.ui.viewer

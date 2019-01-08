@@ -1,7 +1,7 @@
 package com.katalon.platform.api.service;
 
-import com.katalon.platform.api.controller.TestCaseController;
+import com.katalon.platform.api.controller.Controller;
 
 public interface ControllerManager {
-    TestCaseController getTestCaseController();
+    <T extends Controller> T getController(Class<T> clazz); 
 }

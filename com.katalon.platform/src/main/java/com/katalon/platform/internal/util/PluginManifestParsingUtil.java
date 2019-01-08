@@ -43,7 +43,7 @@ public class PluginManifestParsingUtil {
 
                     extensionManager.addExtension(extensionPointId, newExtension);
                 } catch (InvalidRegistryObjectException | CoreException ex) {
-                    ex.printStackTrace(System.err);
+                    ex.printStackTrace(System.out);
                 }
             }
 
@@ -67,7 +67,7 @@ public class PluginManifestParsingUtil {
 
                     extensionManager.addExtensionPoint(extensionPointId, newExtensionPoint);
                 } catch (InvalidRegistryObjectException | CoreException ex) {
-                    ex.printStackTrace(System.err);
+                    ex.printStackTrace(System.out);
                 }
             }
         }

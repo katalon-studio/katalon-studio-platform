@@ -47,7 +47,7 @@ public class PluginPreferenceImpl implements PluginPreference {
     }
 
     private File getPropertyFile() throws IOException {
-        return new File(projectDir, "settings/internal/" + pluginId + ".properties");
+        return new File(projectDir, "settings/external/" + pluginId + ".properties");
     }
 
     @Override

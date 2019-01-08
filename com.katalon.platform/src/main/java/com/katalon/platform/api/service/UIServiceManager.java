@@ -1,7 +1,7 @@
 package com.katalon.platform.api.service;
 
-import com.katalon.platform.api.ui.DialogHelper;
+import com.katalon.platform.api.ui.UIService;
 
 public interface UIServiceManager {
-    DialogHelper getDialogHelper();
+    <T extends UIService> T getService(Class<T> clazz); 
 }

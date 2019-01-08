@@ -17,6 +17,14 @@
             serviceClass="com.katalon.platform.internal.ui.toolbar.AddToolItemWithMenuExtensionListener">
       </point>	
    	</extension>
+   	<extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            id="com.katalon.platform.api.extension.pluginPreferencePage"
+            interfaceClass="com.katalon.platform.api.extension.PluginPreferencePage"
+            serviceClass="com.katalon.platform.internal.ui.preference.PluginPreferencePageExtensionListener">
+      </point>
+   </extension>
    <extension
          point="com.katalon.platform.extensions_point">
       <point

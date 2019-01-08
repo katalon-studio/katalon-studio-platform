@@ -51,11 +51,12 @@ public class ApplicationImpl implements Application {
         this.controllerManager = controllerManager;
     }
 
-    public UIServiceManager getUiServiceManager() {
+    @Override
+    public UIServiceManager getUIServiceManager() {
         return uiServiceManager;
     }
 
-    public void setUiServiceManager(UIServiceManager uiServiceManager) {
+    public void setUIServiceManager(UIServiceManager uiServiceManager) {
         this.uiServiceManager = uiServiceManager;
     }
 }
