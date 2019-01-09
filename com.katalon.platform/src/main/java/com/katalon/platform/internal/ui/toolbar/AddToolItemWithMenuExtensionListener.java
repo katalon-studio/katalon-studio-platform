@@ -39,7 +39,6 @@ public class AddToolItemWithMenuExtensionListener implements ExtensionListener {
 
     @Override
     public void register(Extension extension) {
-
         if (extension.getImplementationClass() instanceof ToolItemWithMenuDescription) {
             ToolItemWithMenuDescription toolItemWithMenuDescription = (ToolItemWithMenuDescription) extension
                     .getImplementationClass();
