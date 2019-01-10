@@ -1,15 +1,13 @@
 package com.katalon.platform.api.service;
 
-import java.util.List;
-
-import com.katalon.platform.api.model.PluginConsoleOption;
+import com.katalon.platform.api.extension.PluginConsoleOptionRegister;
 
 public interface ConsoleManager {
 
-	void registerConsoleOptionList(String pluginId, List<PluginConsoleOption<?>> pluginConsoleOptionList);
+	void registerConsoleOption(String pluginId, PluginConsoleOptionRegister pluginConsoleOptionRegister);
 	
-	List<PluginConsoleOption<?>> getRegisteredConsoleOptionList(String pluginId);
+	PluginConsoleOptionRegister getRegisteredConsoleOption(String pluginId);
 	
-	void deregisterConsoleOptionList(String pluginId);
+	void deregisterConsoleOption(String pluginId);
 	
 }

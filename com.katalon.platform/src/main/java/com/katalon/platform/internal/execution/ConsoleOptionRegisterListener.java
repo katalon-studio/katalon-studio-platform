@@ -13,7 +13,7 @@ public class ConsoleOptionRegisterListener implements ExtensionListener {
     		PluginConsoleOptionRegister pluginConsoleOptionRegister = (PluginConsoleOptionRegister) extension.getImplementationClass();
     		ApplicationManager.getInstance()
     			.getConsoleManager()
-    			.registerConsoleOptionList(extension.getPluginId(), pluginConsoleOptionRegister.getPluginConsoleOptionList());
+    			.registerConsoleOption(extension.getPluginId(), pluginConsoleOptionRegister);
     	}
     }
     
@@ -21,6 +21,6 @@ public class ConsoleOptionRegisterListener implements ExtensionListener {
     public void deregister(Extension extension) {
     	ApplicationManager.getInstance()
 		.getConsoleManager()
-		.deregisterConsoleOptionList(extension.getPluginId());
+		.deregisterConsoleOption(extension.getPluginId());
     }
 }

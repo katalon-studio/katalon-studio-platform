@@ -61,4 +61,5 @@
             interfaceClass="com.katalon.platform.api.extension.PluginConsoleOptionRegister"
             serviceClass="com.katalon.platform.internal.execution.ConsoleOptionRegisterListener">
       </point>
+     </extension>
 </plugin>
