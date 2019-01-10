@@ -52,4 +52,13 @@
             interfaceClass="com.katalon.platform.api.extension.TestCaseIntegrationViewDescription">
       </point>
    </extension>
+   
+   <!-- Execution extension point -->
+      <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            id="com.katalon.platform.api.extension.pluginConsoleOptionRegister"
+            interfaceClass="com.katalon.platform.api.extension.PluginConsoleOptionRegister"
+            serviceClass="com.katalon.platform.internal.execution.ConsoleOptionRegisterListener">
+      </point>
 </plugin>
