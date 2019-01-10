@@ -19,6 +19,8 @@ public class ConsoleOptionRegisterListener implements ExtensionListener {
     
     @Override
     public void deregister(Extension extension) {
-    	
+    	ApplicationManager.getInstance()
+		.getConsoleManager()
+		.deregisterConsoleOptionList(extension.getPluginId());
     }
 }

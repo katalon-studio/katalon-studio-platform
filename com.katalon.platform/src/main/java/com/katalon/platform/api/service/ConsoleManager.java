@@ -10,4 +10,6 @@ public interface ConsoleManager {
 	
 	List<PluginConsoleOption<?>> getRegisteredConsoleOptionList(String pluginId);
 	
+	void deregisterConsoleOptionList(String pluginId);
+	
 }

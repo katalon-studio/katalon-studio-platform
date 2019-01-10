@@ -30,4 +30,14 @@ public class ConsoleManagerImpl implements ConsoleManager {
 		return null;
 	}
 
+	@Override
+	public void deregisterConsoleOptionList(String pluginId) {
+		if(map.containsKey(pluginId)){
+			Map<Class<?>, Object> innerMap = map.get(pluginId);
+			if(!innerMap.isEmpty()){
+				innerMap.remove(PluginConsoleOption.class);
+			}
+		}
+	}
+
 }
