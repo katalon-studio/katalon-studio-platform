@@ -139,11 +139,11 @@ public abstract class TypeCheckedStyleCellLabelProvider<T> extends StyledCellLab
             Rectangle layoutBounds = textLayout.getBounds();
             int y = textBounds.y + Math.max(0, (textBounds.height - layoutBounds.height) / 2);
 
-            //Rectangle saveClipping = gc.getClipping();
-            //gc.setClipping(textBounds);
+            // Rectangle saveClipping = gc.getClipping();
+            // gc.setClipping(textBounds);
             textLayout.draw(gc, startX, y);
-            
-            //gc.setClipping(saveClipping);
+
+            // gc.setClipping(saveClipping);
         }
     }
 
@@ -190,18 +190,18 @@ public abstract class TypeCheckedStyleCellLabelProvider<T> extends StyledCellLab
 
         TextLayout layout = getSharedTextLayout(event.display);
 
-        int textWidthDelta = deltaOfLastMeasure = updateTextLayout(layout, cell, applyColors) + updateImageLayout(event, cell);
+        int textWidthDelta = deltaOfLastMeasure = updateTextLayout(layout, cell, applyColors)
+                + updateImageLayout(event, cell);
 
         event.width += textWidthDelta + getRightMargin() + getSpace() + getLeftMargin();
     }
-    
+
     /**
      * Children may override this
      */
     protected int updateImageLayout(Event layout, ViewerCell cell) {
         return 0;
     }
-    
 
     protected boolean isCellNotExisted(ViewerCell cell) {
         return cell == null || cell.getViewerRow() == null;
@@ -258,12 +258,15 @@ public abstract class TypeCheckedStyleCellLabelProvider<T> extends StyledCellLab
     @SuppressWarnings("unchecked")
     @Override
     public void update(ViewerCell cell) {
-        T element = (T) cell.getElement();
-        cell.setText(getText(element));
-        cell.setImage(getImage(element));
-        cell.setBackground(getBackground(cell.getBackground(), element));
-        cell.setForeground(getForeground(cell.getForeground(), element));
-        cell.setStyleRanges(getStyleRanges(cell, element));
+        if (isElementInstanceOf(cell.getElement())) {
+            T element = (T) cell.getElement();
+            cell.setText(getText(element));
+            cell.setImage(getImage(element));
+            cell.setBackground(getBackground(cell.getBackground(), element));
+            cell.setForeground(getForeground(cell.getForeground(), element));
+            cell.setStyleRanges(getStyleRanges(cell, element));
+        }
+
         super.update(cell);
     }
 
