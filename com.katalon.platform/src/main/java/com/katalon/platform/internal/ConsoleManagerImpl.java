@@ -9,21 +9,21 @@ import com.katalon.platform.api.service.ConsoleManager;
 
 public class ConsoleManagerImpl implements ConsoleManager {
 
-	private Map<String, Map<Class<?>, Object>> map = new HashMap<>();
+	private Map<String, Map<String, Object>> map = new HashMap<>();
 	
 	@Override
 	public void registerConsoleOption(String pluginId, PluginConsoleOptionRegister pluginConsoleOptionRegister) {
-		Map<Class<?>, Object> innerMap = new HashMap<>();
-		innerMap.put(PluginConsoleOptionRegister.class, pluginConsoleOptionRegister);
+		Map<String, Object> innerMap = new HashMap<>();
+		innerMap.put(PluginConsoleOptionRegister.class.getName(), pluginConsoleOptionRegister);
 		map.put(pluginId, innerMap);
 	}
 
 	@Override
 	public PluginConsoleOptionRegister getRegisteredConsoleOption(String pluginId) {
 		if(map.containsKey(pluginId)){
-			Map<Class<?>, Object> innerMap = map.get(pluginId);
-			if(!innerMap.isEmpty()){
-				return (PluginConsoleOptionRegister) innerMap.get(PluginConsoleOptionRegister.class);
+			Map<String, Object> innerMap = map.get(pluginId);
+			if(innerMap.containsKey(PluginConsoleOptionRegister.class.getName())){
+				return (PluginConsoleOptionRegister) innerMap.get(PluginConsoleOptionRegister.class.getName());
 			}
 		}
 		return null;
@@ -32,7 +32,7 @@ public class ConsoleManagerImpl implements ConsoleManager {
 	@Override
 	public void deregisterConsoleOption(String pluginId) {
 		if(map.containsKey(pluginId)){
-			Map<Class<?>, Object> innerMap = map.get(pluginId);
+			Map<String, Object> innerMap = map.get(pluginId);
 			if(!innerMap.isEmpty()){
 				innerMap.remove(PluginConsoleOption.class);
 			}
