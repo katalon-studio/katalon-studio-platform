@@ -26,4 +26,5 @@ Export-Package: com.katalon.platform.api,
  com.katalon.platform.api.ui,
  com.katalon.platform.api.ui.view,
  com.katalon.platform.api.util,
+ com.katalon.platform.internal.api,
  com.katalon.platform.ui.viewer
