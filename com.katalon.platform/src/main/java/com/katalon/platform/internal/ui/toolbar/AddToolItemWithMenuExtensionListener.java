@@ -33,24 +33,23 @@ import com.katalon.platform.api.extension.ToolItemWithMenuDescription;
 import com.katalon.platform.api.lifecycle.ExtensionListener;
 import com.katalon.platform.internal.EclipseContextService;
 
-
 public class AddToolItemWithMenuExtensionListener implements ExtensionListener {
 
-	private Map<String, String> toolItemWithMenuRegistries = new HashMap<>();
+    private Map<String, String> toolItemWithMenuRegistries = new HashMap<>();
 
-	@Override
-	public void register(Extension extension) {
-		if (extension.getImplementationClass() instanceof ToolItemWithMenuDescription) {
-			ToolItemWithMenuDescription toolItemWithMenuDescription = (ToolItemWithMenuDescription) extension
-					.getImplementationClass();
-			EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
+    @Override
+    public void register(Extension extension) {
+        if (extension.getImplementationClass() instanceof ToolItemWithMenuDescription) {
+            ToolItemWithMenuDescription toolItemWithMenuDescription = (ToolItemWithMenuDescription) extension
+                    .getImplementationClass();
+            EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
             ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
-			MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
-			MUIElement groupElement = modelService.find("com.kms.katalon.composer.toolbar", application);
-			
-			if (!(groupElement instanceof MElementContainer)) {
-				return;
-			}
+            MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
+            MUIElement groupElement = modelService.find("com.kms.katalon.composer.toolbar", application);
+
+            if (!(groupElement instanceof MElementContainer)) {
+                return;
+            }
 
             Category category = commandService.defineCategory("empty", "", "");
             Command command = commandService.defineCommand(toolItemWithMenuDescription.toolItemId(), "", "", category,
@@ -63,77 +62,77 @@ public class AddToolItemWithMenuExtensionListener implements ExtensionListener {
 
                 @Override
                 public Object execute(ExecutionEvent event) throws ExecutionException {
-                	toolItemWithMenuDescription.defaultEventHandler();
-                	return null;
+                    toolItemWithMenuDescription.defaultEventHandler();
+                    return null;
                 }
             });
 
             ParameterizedCommand parameterizedCommand = new ParameterizedCommand(command, new Parameterization[0]);
 
-			MElementContainer<?> container = (MElementContainer<?>) groupElement;
+            MElementContainer<?> container = (MElementContainer<?>) groupElement;
 
-			if (!(container instanceof MToolBar)) {
-				return;
-			}
-			
-			MToolBar toolbar = (MToolBar) container;
-			MHandledToolItem toolItem = MMenuFactory.INSTANCE.createHandledToolItem();
-			toolItem.setLabel(toolItemWithMenuDescription.name());
+            if (!(container instanceof MToolBar)) {
+                return;
+            }
+
+            MToolBar toolbar = (MToolBar) container;
+            MHandledToolItem toolItem = MMenuFactory.INSTANCE.createHandledToolItem();
+            toolItem.setLabel(toolItemWithMenuDescription.name());
             toolItem.setWbCommand(parameterizedCommand);
             toolItem.setCommand(MCommandsFactory.INSTANCE.createCommand());
-			toolItem.setIconURI(toolItemWithMenuDescription.iconUrl());
-			toolItem.setElementId(toolItemWithMenuDescription.toolItemId());
-			toolItem.setEnabled(toolItemWithMenuDescription.isItemEnabled());
-			
-			// Create and set MMenu, otherwise toolItem won't be a DROP_DOWN but a POP_UP
-			MMenu mMenu = MMenuFactory.INSTANCE.createMenu();
-			Menu menu = toolItemWithMenuDescription.getMenu((ToolBar) toolbar.getWidget());
-			// User may not return a menu on purpose
-			if(menu != null){
-				mMenu.setWidget(menu);
-				toolItem.setMenu(mMenu);
-			}
-			
-			UISynchronize uiSync = EclipseContextService.getWorkbenchService(UISynchronize.class);
-            
-			uiSync.syncExec(() -> {
-				toolbar.getChildren().add(toolItem);
-	            ToolItem widgetToolItem = (ToolItem) toolItem.getWidget();
-	            Rectangle rect = widgetToolItem.getBounds();
-	            Point pt = widgetToolItem.getParent().toDisplay(new Point(rect.x, rect.y));
-	            if(menu != null){
-		            menu.setLocation(pt.x, pt.y + rect.height);
-		            menu.setVisible(true);
-	            }
-				
-			});
+            toolItem.setIconURI(toolItemWithMenuDescription.iconUrl());
+            toolItem.setElementId(toolItemWithMenuDescription.toolItemId());
+            toolItem.setEnabled(toolItemWithMenuDescription.isItemEnabled());
 
-			toolItemWithMenuRegistries.put(extension.getExtensionId(), toolItemWithMenuDescription.toolItemId());
-		}
-	}
+            // Create and set MMenu, otherwise toolItem won't be a DROP_DOWN but a POP_UP
+            MMenu mMenu = MMenuFactory.INSTANCE.createMenu();
+            Menu menu = toolItemWithMenuDescription.getMenu((ToolBar) toolbar.getWidget());
+            // User may not return a menu on purpose
+            if (menu != null) {
+                mMenu.setWidget(menu);
+                toolItem.setMenu(mMenu);
+            }
 
-	@Override
-	public void deregister(Extension extension) {
-		EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
-		ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
-		MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
-		String extensionId = extension.getExtensionId();
-		if (toolItemWithMenuRegistries.containsKey(extensionId)) {
-			String id = toolItemWithMenuRegistries.get(extensionId);
-			MUIElement element = modelService.find(id, application);
-			if (element != null) {
-				Command command = commandService.getCommand(id);
-				command.setHandler(null);
+            UISynchronize uiSync = EclipseContextService.getWorkbenchService(UISynchronize.class);
 
-				UISynchronize uiSync = EclipseContextService.getWorkbenchService(UISynchronize.class);
-				uiSync.syncExec(() -> {
-					MElementContainer<MUIElement> parent = element.getParent();
-					element.setToBeRendered(false);
-					element.setVisible(false);
-					parent.getChildren().remove(element);
-				});
-			}
-			toolItemWithMenuRegistries.remove(extensionId);
-		}
-	}
+            uiSync.syncExec(() -> {
+                toolbar.getChildren().add(toolItem);
+                ToolItem widgetToolItem = (ToolItem) toolItem.getWidget();
+                Rectangle rect = widgetToolItem.getBounds();
+                Point pt = widgetToolItem.getParent().toDisplay(new Point(rect.x, rect.y));
+                if (menu != null) {
+                    menu.setLocation(pt.x, pt.y + rect.height);
+                    // Don't need to show menu after plugin is installed
+                    // menu.setVisible(true);
+                }
+            });
+
+            toolItemWithMenuRegistries.put(extension.getExtensionId(), toolItemWithMenuDescription.toolItemId());
+        }
+    }
+
+    @Override
+    public void deregister(Extension extension) {
+        EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
+        ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
+        MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
+        String extensionId = extension.getExtensionId();
+        if (toolItemWithMenuRegistries.containsKey(extensionId)) {
+            String id = toolItemWithMenuRegistries.get(extensionId);
+            MUIElement element = modelService.find(id, application);
+            if (element != null) {
+                Command command = commandService.getCommand(id);
+                command.setHandler(null);
+
+                UISynchronize uiSync = EclipseContextService.getWorkbenchService(UISynchronize.class);
+                uiSync.syncExec(() -> {
+                    MElementContainer<MUIElement> parent = element.getParent();
+                    element.setToBeRendered(false);
+                    element.setVisible(false);
+                    parent.getChildren().remove(element);
+                });
+            }
+            toolItemWithMenuRegistries.remove(extensionId);
+        }
+    }
 }

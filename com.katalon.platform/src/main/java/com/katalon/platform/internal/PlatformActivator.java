@@ -12,6 +12,7 @@ import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
 
 import com.katalon.platform.api.service.ApplicationManager;
+import com.katalon.platform.internal.api.PluginInstaller;
 import com.katalon.platform.internal.event.PluginEventHandler;
 import com.katalon.platform.internal.util.PluginManifestParsingUtil;
 
@@ -28,7 +29,10 @@ public class PlatformActivator extends org.eclipse.core.runtime.Plugin {
         EclipseContextService.lookupPlatformContext(eclipseContext);
 
         IEventBroker eventBroker = eclipseContext.get(IEventBroker.class);
-        eventBroker.subscribe("KATALON_PLUGIN/*", new PluginEventHandler());
+        PluginEventHandler eventHandler = new PluginEventHandler();
+        eventBroker.subscribe("KATALON_PLUGIN/*", eventHandler);
+
+        context.registerService(PluginInstaller.class, eventHandler, null);
 
         context.addServiceListener(new ServiceListener() {
 
