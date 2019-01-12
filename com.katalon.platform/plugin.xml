@@ -3,6 +3,7 @@
    <extension-point id="extensions_point" name="Katalon Platform Extensions Point" schema="schema/extensions_point.exsd"/>
 
    <!-- Platform extension points -->
+   <!-- Subcribe KS execution event -->
    <extension
          point="com.katalon.platform.extensions_point">
       <point
@@ -11,6 +12,8 @@
             serviceClass="com.katalon.platform.internal.event.EventListenerService">
       </point>
    </extension>
+
+   <!-- Subcribe plugin installation event -->
    <extension
    		point="com.katalon.platform.extensions_point">
 	  <point
@@ -19,8 +22,9 @@
             serviceClass="com.katalon.platform.internal.lifecycle.PluginActivationListenerService">
       </point>	
    	</extension>
-   	
+
    <!-- UI extension points -->
+   <!-- Add an item to main toolbar-->
    <extension
          point="com.katalon.platform.extensions_point">
       <point
@@ -29,6 +33,8 @@
             serviceClass="com.katalon.platform.internal.ui.toolbar.AddToolItemExtensionListener">
       </point>
    </extension>
+   
+   <!-- Add a dropdown item to main toolbar-->
    <extension
    		point="com.katalon.platform.extensions_point">
 	  <point
@@ -37,6 +43,8 @@
             serviceClass="com.katalon.platform.internal.ui.toolbar.AddToolItemWithMenuExtensionListener">
       </point>	
    	</extension>
+
+   	<!-- Add a setting page to Project Settings -->
    	<extension
          point="com.katalon.platform.extensions_point">
       <point
@@ -45,14 +53,15 @@
             serviceClass="com.katalon.platform.internal.ui.preference.PluginPreferencePageExtensionListener">
       </point>
    </extension>
+
+   <!-- Add a view to Integration tab of Test Case view -->
    <extension
          point="com.katalon.platform.extensions_point">
       <point
-            id="com.katalon.platform.api.extension.testCaseIntegrationView"
+            id="com.katalon.platform.api.extension.testCaseIntegrationViewDescription"
             interfaceClass="com.katalon.platform.api.extension.TestCaseIntegrationViewDescription">
       </point>
    </extension>
-   
    <!-- Execution extension point -->
       <extension
          point="com.katalon.platform.extensions_point">
@@ -62,4 +71,12 @@
             serviceClass="com.katalon.platform.internal.execution.ConsoleOptionRegisterListener">
       </point>
      </extension>
+   <!-- Add a view, column to Integration tab of Report view -->
+   <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            id="com.katalon.platform.api.extension.reportIntegrationViewDescription"
+            interfaceClass="com.katalon.platform.api.extension.ReportIntegrationViewDescription">
+      </point>
+   </extension>
 </plugin>

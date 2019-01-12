@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface TestSuiteExecutionContext extends TestExecutionContext {
 
-    String getReportLocation();
+    String getReportId();
 
     List<TestCaseExecutionContext> getTestCaseContexts();
 }

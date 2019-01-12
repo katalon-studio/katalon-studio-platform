@@ -19,31 +19,14 @@ import com.katalon.platform.internal.EclipseContextService;
 import com.katalon.platform.internal.ExtensionManagerImpl;
 import com.katalon.platform.internal.PluginManagerImpl;
 import com.katalon.platform.internal.ProjectManagerImpl;
+import com.katalon.platform.internal.api.PluginInstaller;
 import com.katalon.platform.internal.util.PluginManifestParsingUtil;
 
-public class PluginEventHandler implements EventHandler {
+public class PluginEventHandler implements EventHandler, PluginInstaller {
 
     @Override
     public void handleEvent(Event event) {
         switch (event.getTopic()) {
-            case "KATALON_PLUGIN/INSTALL": {
-                Object[] objects = (Object[]) event.getProperty(EventConstants.EVENT_DATA_PROPERTY_NAME);
-                try {
-                    installPlugin((BundleContext) objects[0], (String) objects[1]);
-                } catch (BundleException e) {
-                    e.printStackTrace(System.err);
-                }
-                break;
-            }
-            case "KATALON_PLUGIN/UNINSTALL": {
-                Object[] objects = (Object[]) event.getProperty(EventConstants.EVENT_DATA_PROPERTY_NAME);
-                try {
-                    uninstallPlugin((BundleContext) objects[0], (String) objects[1]);
-                } catch (BundleException e) {
-                    e.printStackTrace(System.err);
-                }
-                break;
-            }
             case "KATALON_PLUGIN/CURRENT_PROJECT_CHANGED": {
                 Object object = event.getProperty(EventConstants.EVENT_DATA_PROPERTY_NAME);
                 updateCurrentProject((ProjectEntity) object);
@@ -73,6 +56,7 @@ public class PluginEventHandler implements EventHandler {
         projectManager.setCurrentProject(project);
     }
 
+    @Override
     public Bundle installPlugin(BundleContext bundleContext, String location) throws BundleException {
         Bundle bundle = bundleContext.installBundle(location);
         bundle.start();
@@ -98,10 +82,10 @@ public class PluginEventHandler implements EventHandler {
         return bundle;
     }
 
-    public void uninstallPlugin(BundleContext context, String location) throws BundleException {
+    public Bundle uninstallPlugin(BundleContext context, String location) throws BundleException {
         Bundle bundle = context.getBundle(location);
         if (bundle == null) {
-            return;
+            return null;
         }
 
         String bundleName = bundle.getSymbolicName();
@@ -109,7 +93,7 @@ public class PluginEventHandler implements EventHandler {
         Application application = ApplicationManager.getInstance();
         Plugin userPlugin = application.getPluginManager().getPlugin(bundleName);
         if (userPlugin == null) {
-            return;
+            return null;
         }
 
         IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
@@ -132,5 +116,6 @@ public class PluginEventHandler implements EventHandler {
 
         bundle.stop();
         bundle.uninstall();
+        return bundle;
     }
 }
