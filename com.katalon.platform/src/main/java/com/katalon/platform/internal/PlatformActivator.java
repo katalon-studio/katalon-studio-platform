@@ -1,6 +1,8 @@
 package com.katalon.platform.internal;
 
 import com.katalon.platform.api.Plugin;
+import com.katalon.platform.api.PluginInstaller;
+
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
@@ -12,7 +14,6 @@ import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
 
 import com.katalon.platform.api.service.ApplicationManager;
-import com.katalon.platform.internal.api.PluginInstaller;
 import com.katalon.platform.internal.event.PluginEventHandler;
 import com.katalon.platform.internal.util.PluginManifestParsingUtil;
 

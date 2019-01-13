@@ -3,8 +3,8 @@ package com.katalon.platform.internal;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.katalon.platform.api.console.PluginConsoleOption;
 import com.katalon.platform.api.extension.PluginConsoleOptionRegister;
-import com.katalon.platform.api.model.PluginConsoleOption;
 import com.katalon.platform.api.service.ConsoleManager;
 
 public class ConsoleManagerImpl implements ConsoleManager {

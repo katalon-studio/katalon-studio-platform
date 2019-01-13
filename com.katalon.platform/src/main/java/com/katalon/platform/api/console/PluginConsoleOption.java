@@ -1,4 +1,4 @@
-package com.katalon.platform.api.model;
+package com.katalon.platform.api.console;
 
 public interface PluginConsoleOption<T> {
     /**

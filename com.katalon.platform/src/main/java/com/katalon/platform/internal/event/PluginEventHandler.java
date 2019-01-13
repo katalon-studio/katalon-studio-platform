@@ -10,6 +10,7 @@ import org.osgi.service.event.EventHandler;
 
 import com.katalon.platform.api.Application;
 import com.katalon.platform.api.Plugin;
+import com.katalon.platform.api.PluginInstaller;
 import com.katalon.platform.api.model.ProjectEntity;
 import com.katalon.platform.api.service.ApplicationManager;
 import com.katalon.platform.api.service.ControllerManager;
@@ -19,7 +20,6 @@ import com.katalon.platform.internal.EclipseContextService;
 import com.katalon.platform.internal.ExtensionManagerImpl;
 import com.katalon.platform.internal.PluginManagerImpl;
 import com.katalon.platform.internal.ProjectManagerImpl;
-import com.katalon.platform.internal.api.PluginInstaller;
 import com.katalon.platform.internal.util.PluginManifestParsingUtil;
 
 public class PluginEventHandler implements EventHandler, PluginInstaller {
