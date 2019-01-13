@@ -5,7 +5,7 @@ import com.katalon.platform.api.exception.ResourceException;
 import com.katalon.platform.api.preference.PluginPreference;
 
 /**
- * Provides services to get {@link PluginPreference} of a loaded plugin. </br>
+ * Provides services to get {@link PluginPreference} of a loaded plugin.
  * By default, <code>PreferenceManager</code> is provided from the current {@link Application}
  * 
  * @since 1.0
@@ -17,7 +17,7 @@ public interface PreferenceManager {
      * @return an instance of PluginPreference that provides ability to get, and update settings value of a plugin.
      * @throws ResourceException if <code>projectId</code>, or <code>pluginId</code> is not found or invalid.
      * 
-     * @see {@link ProjectManager#getCurrentProject()}
+     * @see ProjectManager#getCurrentProject()
      * 
      * @since 1.0
      */
