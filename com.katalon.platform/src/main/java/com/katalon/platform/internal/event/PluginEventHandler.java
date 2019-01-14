@@ -19,8 +19,8 @@ import com.katalon.platform.internal.EclipseContextService;
 import com.katalon.platform.internal.ExtensionManagerImpl;
 import com.katalon.platform.internal.PluginManagerImpl;
 import com.katalon.platform.internal.ProjectManagerImpl;
+import com.katalon.platform.internal.api.PluginInstaller;
 import com.katalon.platform.internal.util.PluginManifestParsingUtil;
-import com.katalon.platfprm.internal.api.PluginInstaller;
 
 public class PluginEventHandler implements EventHandler, PluginInstaller {
 

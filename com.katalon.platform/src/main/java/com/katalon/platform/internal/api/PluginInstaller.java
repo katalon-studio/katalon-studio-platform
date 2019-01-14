@@ -1,4 +1,4 @@
-package com.katalon.platfprm.internal.api;
+package com.katalon.platform.internal.api;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;

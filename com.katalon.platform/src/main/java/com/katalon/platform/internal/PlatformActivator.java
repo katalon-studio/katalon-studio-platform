@@ -13,9 +13,9 @@ import org.osgi.framework.ServiceEvent;
 import org.osgi.framework.ServiceListener;
 
 import com.katalon.platform.api.service.ApplicationManager;
+import com.katalon.platform.internal.api.PluginInstaller;
 import com.katalon.platform.internal.event.PluginEventHandler;
 import com.katalon.platform.internal.util.PluginManifestParsingUtil;
-import com.katalon.platfprm.internal.api.PluginInstaller;
 
 public class PlatformActivator extends org.eclipse.core.runtime.Plugin {
 
