@@ -1,7 +1,6 @@
 package com.katalon.platform.internal;
 
 import com.katalon.platform.api.Application;
-import com.katalon.platform.api.service.ConsoleManager;
 import com.katalon.platform.api.service.ControllerManager;
 import com.katalon.platform.api.service.ExtensionManager;
 import com.katalon.platform.api.service.PluginManager;
@@ -22,8 +21,6 @@ public class ApplicationImpl implements Application {
     private ControllerManager controllerManager;
     
     private UIServiceManager uiServiceManager;
-    
-    private ConsoleManager consoleManager = new ConsoleManagerImpl();
 
     @Override
     public PluginManager getPluginManager() {
@@ -62,9 +59,4 @@ public class ApplicationImpl implements Application {
     public void setUIServiceManager(UIServiceManager uiServiceManager) {
         this.uiServiceManager = uiServiceManager;
     }
-
-	@Override
-	public ConsoleManager getConsoleManager() {
-		return consoleManager;
-	}
 }
