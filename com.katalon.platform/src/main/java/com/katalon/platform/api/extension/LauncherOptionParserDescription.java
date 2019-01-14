@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.katalon.platform.api.console.PluginConsoleOption;
 import com.katalon.platform.api.model.TestCaseEntity;
-import com.katalon.platform.api.model.TestSuiteEntity;
 
 public interface LauncherOptionParserDescription {
 	 String EXTENSION_POINT_ID = "com.katalon.platform.api.extension.launcherOptionParserDescription";
