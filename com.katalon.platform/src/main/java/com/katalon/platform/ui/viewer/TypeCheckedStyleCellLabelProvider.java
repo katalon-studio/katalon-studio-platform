@@ -28,12 +28,15 @@ public abstract class TypeCheckedStyleCellLabelProvider<T> extends StyledCellLab
 
     /**
      * Create new instance of {@link TypeCheckedStyleCellLabelProvider} with default <code>customPaint = true</code>
+     * @param columnIndex the index of column in viewer
      */
     public TypeCheckedStyleCellLabelProvider(final int columnIndex) {
         this(columnIndex, true);
     }
 
     /**
+     *
+     * @param columnIndex the index of column in viewer
      * @param customPaint true if children want to use {@link #paint(Event, Object)}. Otherwise, uses
      * {@link StyledCellLabelProvider#paint(Event, Object)}
      */
