@@ -62,7 +62,7 @@
             interfaceClass="com.katalon.platform.api.extension.TestCaseIntegrationViewDescription">
       </point>
    </extension>
-   <!-- Add console options, customize a test suite before console execution -->
+   <!-- Add console options and test case filters to Test Suite Console Launcher  -->
       <extension
          point="com.katalon.platform.extensions_point">
       <point

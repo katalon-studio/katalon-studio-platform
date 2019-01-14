@@ -3,6 +3,7 @@ package com.katalon.platform.api.extension;
 import java.util.List;
 
 import com.katalon.platform.api.console.PluginConsoleOption;
+import com.katalon.platform.api.model.TestCaseEntity;
 import com.katalon.platform.api.model.TestSuiteEntity;
 
 public interface LauncherOptionParserDescription {
@@ -12,6 +13,8 @@ public interface LauncherOptionParserDescription {
 	 
 	 void onConsoleOptionDetected(PluginConsoleOption<?> detectedConsoleOption);
 	 
-	 void preExecution(TestSuiteEntity testSuiteEntity);
+	 default List<TestCaseEntity> onPreExecution(List<TestCaseEntity> testCases){
+		 return testCases;
+	 }
 	 
 }

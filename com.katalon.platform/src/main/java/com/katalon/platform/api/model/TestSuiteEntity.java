@@ -7,5 +7,7 @@ public interface TestSuiteEntity extends HasIntegration {
 
     String getDescription();
     
+    String getTag();
+    
     List<String> getTestCaseIds();
 }
