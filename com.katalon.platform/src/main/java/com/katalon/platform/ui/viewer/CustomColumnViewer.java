@@ -15,16 +15,16 @@ public interface CustomColumnViewer {
     /**
      * Exposes {@link ColumnViewer#getColumnViewerOwner(int columnIndex)}
      * 
-     * @param columnIndex
+     * @param columnIndex column index of viewer
+     * @return the Widget at the <code>columnIndex</code> of viewer
      */
     Widget getColumn(int columnIndex);
 
     ViewerRow getViewerRowFromWidgetItem(Widget item);
 
     TypeCheckedStyleCellLabelProvider<?> getCellLabelProvider(int columnIndex);
-    
+
     void enableTooltipSupport();
 
     ViewerCell getCell(Point point);
 }
-
