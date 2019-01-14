@@ -10,12 +10,15 @@ public interface UIServiceManager {
     /**
      * Returns a instance of UIService that is provided by KS.
      * 
+     * @param <T> the type of UIService
      * @param clazz an interface class that extends UIService
      * @see DialogActionService
      * @see TestExplorerActionService
      * @see UISynchronizeService
      * @throws PlatformRuntimeException if UIServiceManager doesn't contain the instance UIService that matches with
      * <code>clazz</code> parameter.
+     * 
+     * @return an instance of UIService that is a implementation of the <code>clazz</code>
      * @since 1.0.3
      */
     <T extends UIService> T getService(Class<T> clazz) throws PlatformRuntimeException;
