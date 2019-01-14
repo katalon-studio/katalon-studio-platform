@@ -28,12 +28,15 @@ public abstract class TypeCheckedStyleCellLabelProvider<T> extends StyledCellLab
 
     /**
      * Create new instance of {@link TypeCheckedStyleCellLabelProvider} with default <code>customPaint = true</code>
+     * @param columnIndex the index of column in viewer
      */
     public TypeCheckedStyleCellLabelProvider(final int columnIndex) {
         this(columnIndex, true);
     }
 
     /**
+     *
+     * @param columnIndex the index of column in viewer
      * @param customPaint true if children want to use {@link #paint(Event, Object)}. Otherwise, uses
      * {@link StyledCellLabelProvider#paint(Event, Object)}
      */
@@ -170,9 +173,6 @@ public abstract class TypeCheckedStyleCellLabelProvider<T> extends StyledCellLab
         return columnViewer.getCell(new Point(event.x, event.y));
     }
 
-    /**
-     * @see StyledCellLabelProvider#mesure(Event, Object)
-     */
     @Override
     protected void measure(Event event, Object element) {
         if (canNotDrawSafely(element)) {
@@ -196,9 +196,6 @@ public abstract class TypeCheckedStyleCellLabelProvider<T> extends StyledCellLab
         event.width += textWidthDelta + getRightMargin() + getSpace() + getLeftMargin();
     }
 
-    /**
-     * Children may override this
-     */
     protected int updateImageLayout(Event layout, ViewerCell cell) {
         return 0;
     }
@@ -207,16 +204,10 @@ public abstract class TypeCheckedStyleCellLabelProvider<T> extends StyledCellLab
         return cell == null || cell.getViewerRow() == null;
     }
 
-    /**
-     * @see StyledCellLabelProvider#userColors(Event)
-     */
     protected boolean useColors(Event event) {
         return (event.detail & SWT.SELECTED) == 0;
     }
 
-    /**
-     * @see StyledCellLabelProvider#updateTextLayout(TextLayout, ViewerCell, boolean)
-     */
     private int updateTextLayout(TextLayout layout, ViewerCell cell, boolean applyColors) {
         layout.setStyle(null, 0, Integer.MAX_VALUE); // clear old styles
 
@@ -243,9 +234,6 @@ public abstract class TypeCheckedStyleCellLabelProvider<T> extends StyledCellLab
         return textWidthDelta;
     }
 
-    /**
-     * @see StyledCellLabelProvider#getSharedTextLayout(Display)
-     */
     protected TextLayout getSharedTextLayout(Display display) {
         if (cachedTextLayout == null) {
             int orientation = getViewer().getControl().getStyle() & (SWT.LEFT_TO_RIGHT | SWT.RIGHT_TO_LEFT);
