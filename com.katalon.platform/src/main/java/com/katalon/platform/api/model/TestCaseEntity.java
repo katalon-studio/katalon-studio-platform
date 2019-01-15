@@ -10,4 +10,6 @@ public interface TestCaseEntity extends Entity, HasIntegration {
     String getComment();
 
     File getScriptFile();
+    
+    String getTags();
 }
