@@ -31,7 +31,7 @@ public class PlatformRuntimeException extends RuntimeException {
     
     @Override
     public String toString() {
-        return String.format("PlatformException { detailMessage : %s, rootCause %s }",
+        return String.format("PlatformRuntimeException { detailMessage : %s, rootCause %s }",
                 detailMessage != null ? detailMessage : "null",
                 rootCause != null ? rootCause.toString() : "null");
     }
