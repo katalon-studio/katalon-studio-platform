@@ -39,3 +39,6 @@ Requirements:
 - Maven 3.3+
 
 `mvn clean install`
+
+#### Test Javadoc
+`mvn javadoc:javadoc`
