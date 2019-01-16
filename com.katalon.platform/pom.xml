@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.katalon</groupId>
         <artifactId>com.katalon.platform.parent</artifactId>
-        <version>1.0.4</version>
+        <version>1.0.5</version>
     </parent>
 
     <artifactId>com.katalon.platform</artifactId>
@@ -35,6 +35,7 @@
                         <Export-Package>com.katalon.platform.api*,com.katalon.platform.ui*,com.katalon.platform.internal.api.*</Export-Package>
                         <Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
                         <Bundle-Name>Katalon Platform</Bundle-Name>
+                        <Bundle-Vendor>Katalon LLC</Bundle-Vendor>
                         <Bundle-Activator>com.katalon.platform.internal.PlatformActivator</Bundle-Activator>
                         <_failok>true</_failok>
                         <_nouses>true</_nouses>
