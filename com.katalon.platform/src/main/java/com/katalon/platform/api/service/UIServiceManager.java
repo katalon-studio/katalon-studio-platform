@@ -1,14 +1,22 @@
 package com.katalon.platform.api.service;
 
+import com.katalon.platform.api.Application;
 import com.katalon.platform.api.exception.PlatformRuntimeException;
 import com.katalon.platform.api.ui.DialogActionService;
 import com.katalon.platform.api.ui.TestExplorerActionService;
 import com.katalon.platform.api.ui.UIService;
 import com.katalon.platform.api.ui.UISynchronizeService;
 
+/**
+ * UIServiceManager is an interface that maintains list of <i>UIService</i>.
+ * <p>
+ * The unique instance of UIServiceManager can access by using {@link Application#getUIServiceManager()}
+ * 
+ * @since 1.0.4
+ */
 public interface UIServiceManager {
     /**
-     * Returns a instance of UIService that is provided by KS.
+     * Returns an instance of UIService that is provided by KS.
      * 
      * @param <T> the type of UIService
      * @param clazz an interface class that extends UIService

@@ -33,12 +33,16 @@ public class AddToolItemExtensionListener implements ExtensionListener {
 
     @Override
     public void register(Extension extension) {
+        EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
+        ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
+        MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
+
+        if (modelService == null || commandService == null || application == null) {
+            return;
+        }
+
         if (extension.getImplementationClass() instanceof ToolItemDescription) {
             ToolItemDescription toolItemDescription = (ToolItemDescription) extension.getImplementationClass();
-            EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
-            ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
-            MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
-
             MUIElement groupElement = modelService.find("com.kms.katalon.composer.toolbar", application);
 
             if (!(groupElement instanceof MElementContainer)) {
@@ -91,6 +95,10 @@ public class AddToolItemExtensionListener implements ExtensionListener {
         EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
         ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
         MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
+        if (modelService == null || commandService == null || application == null) {
+            return;
+        }
+
         String extensionId = extension.getExtensionId();
         if (toolItemRegistries.containsKey(extensionId)) {
             String id = toolItemRegistries.get(extensionId);

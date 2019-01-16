@@ -39,12 +39,17 @@ public class AddToolItemWithMenuExtensionListener implements ExtensionListener {
 
     @Override
     public void register(Extension extension) {
+        EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
+        ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
+        MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
+
+        if (modelService == null || commandService == null || application == null) {
+            return;
+        }
+
         if (extension.getImplementationClass() instanceof ToolItemWithMenuDescription) {
             ToolItemWithMenuDescription toolItemWithMenuDescription = (ToolItemWithMenuDescription) extension
                     .getImplementationClass();
-            EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
-            ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
-            MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
             MUIElement groupElement = modelService.find("com.kms.katalon.composer.toolbar", application);
 
             if (!(groupElement instanceof MElementContainer)) {
@@ -116,6 +121,11 @@ public class AddToolItemWithMenuExtensionListener implements ExtensionListener {
         EModelService modelService = EclipseContextService.getWorkbenchService(EModelService.class);
         ECommandService commandService = EclipseContextService.getWorkbenchService(ECommandService.class);
         MApplication application = EclipseContextService.getWorkbenchService(MApplication.class);
+
+        if (modelService == null || commandService == null || application == null) {
+            return;
+        }
+
         String extensionId = extension.getExtensionId();
         if (toolItemWithMenuRegistries.containsKey(extensionId)) {
             String id = toolItemWithMenuRegistries.get(extensionId);

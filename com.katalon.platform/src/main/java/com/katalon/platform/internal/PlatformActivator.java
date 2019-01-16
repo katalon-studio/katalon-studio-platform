@@ -1,6 +1,7 @@
 package com.katalon.platform.internal;
 
 import com.katalon.platform.api.Plugin;
+
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.e4.core.contexts.EclipseContextFactory;
 import org.eclipse.e4.core.contexts.IEclipseContext;
