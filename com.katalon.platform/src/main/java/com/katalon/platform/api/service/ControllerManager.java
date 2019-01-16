@@ -19,7 +19,7 @@ public interface ControllerManager {
     /**
      * Returns the Controller associated with the given class.
      * 
-     * @param T the type of Controller
+     * @param <T> the type of Controller
      * @param clazz a interface Controller class that needs to be found in the ControllerManager
      * @see TestCaseController
      * @see FolderController

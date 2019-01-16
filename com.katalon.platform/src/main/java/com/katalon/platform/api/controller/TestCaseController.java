@@ -82,15 +82,17 @@ public interface TestCaseController extends Controller {
 
     /**
      * Returns an available test case name for the given <code>name</code>
-     * <ul>
+     * <p>
      * Sample of using: We want to create a folder with name <b>New Test Case</b> under root folder <i>Test Cases</i>
-     * <li>Case 1: There is no <b>New Test Case</b> test case under <code>Test Cases</code> then the result is <b>New
-     * Test Case</b></li>
-     * <li>Case 2: <b>New Test Case</b> test case exists, but <b>New Test Case 1</b> doesn't then the result is <b>New
-     * Test Case 1</b></li>
-     * <li>Case 3: <b>New Test Case</b> and <b>New Test Case 1</b> folder exist, but <b>New Test Case 2</b> doesn't then
-     * the result is <b>New Test Case 2</b></li>
-     * </ul>
+     * <br>
+     * Case 1: There is no <b>New Test Case</b> test case under <code>Test Cases</code> then the result is <b>New
+     * Test Case</b>
+     * <br>
+     * Case 2: <b>New Test Case</b> test case exists, but <b>New Test Case 1</b> doesn't then the result is <b>New
+     * Test Case 1</b>
+     * <br>
+     * Case 3: <b>New Test Case</b> and <b>New Test Case 1</b> folder exist, but <b>New Test Case 2</b> doesn't then
+     * the result is <b>New Test Case 2</b>
      * 
      * @param project project an instance of working project. The current working project can retrieve by using
      * {@link ProjectManager#getCurrentProject()}.

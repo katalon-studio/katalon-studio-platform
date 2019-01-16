@@ -4,7 +4,7 @@ import com.katalon.platform.api.Application;
 import com.katalon.platform.api.Plugin;
 
 /**
- * PluginManager is an interface that maintains list of registered <i>Plugin</id>
+ * PluginManager is an interface that maintains list of registered <i>Plugin</i>
  * <p>
  * The unique instance of PluginManager can access by using {@link Application#getPluginManager()}
  * 

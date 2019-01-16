@@ -2,7 +2,7 @@ package com.katalon.platform.api.controller;
 
 /**
  * The root interface in the <i>Controller hierarchy</i>.
- * </p>
+ * <p>
  * Each Controller is a KS platform service to help plugins interact, manipulate KS test artifacts, such as:
  * TestCaseEntity, TestSuiteEntity, ProjectEnity, ReportEntity...
  * 

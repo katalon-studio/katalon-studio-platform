@@ -22,10 +22,9 @@ public interface Plugin {
     /**
      * Unique id of the plugin.
      * <p>
-     * Id of a plugin usually is defined in pom.xml of a plugin as Maven project. It is value of
-     * <code>{@code <Bundle-SymbolicName>}</code>.</br>
-     * Plugin id usually comes with this format:
-     * <code>artifactId.projectId</code>
+     * Id of a plugin usually is defined in pom.xml of a plugin as Maven project. It is value of {@code <Bundle-SymbolicName>}.
+     * <br>
+     * Plugin id usually comes with this format: <i>artifactId.projectId</i>.
      * 
      * @return unique id of the plugin
      * @since 1.0.4
@@ -33,7 +32,8 @@ public interface Plugin {
     String getPluginId();
 
     /**
-     * Returns a collection of registered Extension of the plugin</code>.
+     * Returns a collection of registered Extension of the plugin.
+     * <br>
      * Each extension in the returned collection is desired to contribute the feature of the associated extension point
      * provided.
      * <p>
@@ -46,7 +46,7 @@ public interface Plugin {
     Collection<Extension> getExtensions();
 
     /**
-     * Returns a collection of registered ExtensionPoint of the plugin</code>.
+     * Returns a collection of registered ExtensionPoint of the plugin.
      * <p>
      * This collection is immutable and cannot be changed by clients.
      * 
