@@ -43,18 +43,18 @@ public interface ToolItemWithMenuDescription {
     /**
      * The platform URI point to the icon with this format:
      * {@code platform://<plugin_id>/<icon_path>}.
-     * <ul>
+     * <p>
      * For example: {@code platform://com.example.my-plugin-id/icons/sample_32x24.png} then:
-     * <li>com.example.my-plugin-id is the plugin id</li>
-     * <li>icons/sample_32x24.png is the path to icon under src/resources/icons folder</li>
+     * <br><i>com.example.my-plugin-id</i> is the plugin id
+     * <br><i>icons/sample_32x24.png</i> is the path to icon under src/resources/icons folder
      * <p>
      * The icon is recommend size of 32x24. If the exact size isn't provided, this scaling can cause the icon to lose
-     * detail or look fuzzy.</br>
-     * Optional: We also recommend to put 2x, 3x, and large scale images with suffix {@link @2x, @3x, @4x} likes:
-     * {@link sample_32x24@2x.png, sample_32x24@3x.png, sample_32x24@4x.png} to display better on high resolution
+     * detail or look fuzzy.<br>
+     * Optional: We also recommend to put 2x, 3x, and large scale images with suffix {@literal @2x, @3x, @4x} likes:
+     * {@literal sample_32x24@2x.png, sample_32x24@3x.png, sample_32x24@4x.png} to display better on high resolution
      * display.
      * <p>
-     * Icons are recommended to be put in folder <code>src/resources/icons/</code>
+     * Icons are recommended to be put in folder {@code src/resources/icons/}
      * 
      * @return the platform URI point to the icon
      * @since 1.0.4

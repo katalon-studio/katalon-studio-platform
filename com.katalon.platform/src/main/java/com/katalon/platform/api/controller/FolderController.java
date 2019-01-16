@@ -49,16 +49,18 @@ public interface FolderController extends Controller {
     FolderEntity newFolder(ProjectEntity project, FolderEntity parentFolder, String name) throws ResourceException;
 
     /**
-     * Returns an available name for the given <code>name</code>
-     * <ul>
+     * Returns an available name for the given <i>name</i>
+     * <p>
      * Sample of using: We want to create a folder with name <b>New Folder</b> under root folder <i>Test Cases</i>
-     * <li>Case 1: There is no <b>New Folder</b> folder under <code>Test Cases</code> then the result is <b>New
-     * Folder</b></li>
-     * <li>Case 2: <b>New Folder</b> folder exists, but <b>New Folder 1</b> doesn't then the result is <b>New Folder
-     * 1</b></li>
-     * <li>Case 3: <b>New Folder</b> and <b>New Folder 1</b> folder exist, but <b>New Folder 2</b> doesn't then the
-     * result is <b>New Folder 2</b></li>
-     * </ul>
+     * <br>
+     * Case 1: There is no <b>New Folder</b> folder under <code>Test Cases</code> then the result is <b>New
+     * Folder</b>
+     * <br>
+     * Case 2: <b>New Folder</b> folder exists, but <b>New Folder 1</b> doesn't then the result is <b>New Folder
+     * 1</b>
+     * <br>
+     * Case 3: <b>New Folder</b> and <b>New Folder 1</b> folder exist, but <b>New Folder 2</b> doesn't then the
+     * result is <b>New Folder 2</b>
      * 
      * @param project project an instance of working project. The current working project can retrieve by using
      * {@link ProjectManager#getCurrentProject()}.
