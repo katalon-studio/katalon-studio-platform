@@ -9,6 +9,7 @@ Bundle-Activator: com.katalon.platform.internal.PlatformActivator
 DynamicImport-Package: *
 Bundle-ClassPath: .
 Export-Package: com.katalon.platform.api,
+ com.katalon.platform.api.console,
  com.katalon.platform.api.controller,
  com.katalon.platform.api.dialogs,
  com.katalon.platform.api.event,

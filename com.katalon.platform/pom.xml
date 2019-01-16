@@ -32,7 +32,7 @@
                 <configuration>
                     <instructions>
                         <Import-Package></Import-Package>
-                        <Export-Package>com.katalon.platform.api*,com.katalon.platform.ui*,com.katalon.platform.internal.api.*</Export-Package>
+                        <Export-Package>com.katalon.platform.api*,com.katalon.platform.ui*,com.katalon.platform.internal.api*</Export-Package>
                         <Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
                         <Bundle-Name>Katalon Platform</Bundle-Name>
                         <Bundle-Activator>com.katalon.platform.internal.PlatformActivator</Bundle-Activator>
