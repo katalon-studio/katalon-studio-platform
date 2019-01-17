@@ -32,6 +32,10 @@ com.katalon.platform.api.*: Contains extension points and APIs for interacting w
 
 com.katalon.platform.internal.*: Internal packages that **should not** be used directly by plugins.
 
+## Getting started
+
+[Create your first Katalon Studio plugin](/docs/tutorials/create-your-first-plugin.md)
+
 ## Build
 
 Requirements:
