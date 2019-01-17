@@ -5,7 +5,7 @@ This tutorial walks you through creating your first Katalon Studio plugin. A Kat
 A Katalon Studio contains these components:
 - The `pom.xml` describes your plugin, what it is (name, version, vendor,...).
 - The `plugin.xml` tells Katalon Studio about all extensions of your plugin.
-- The code is packaged in your plugin.
+- All packaged codes of your plugin.
 
 #### Prerequisites:
 
