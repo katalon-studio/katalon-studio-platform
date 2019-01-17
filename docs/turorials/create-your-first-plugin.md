@@ -158,7 +158,7 @@ Let build your project again `mvn clean package` and wait a minute until the **B
 
 After the build completed, there is a `${your-artifactId}.jar` under the `target` folder, we will need this to launch your plugin in the next step.
 
-![Build Plugin Successfully](/docs/tutorials/images/img_build_plugin/png)
+![Build Plugin Successfully](/docs/tutorials/images/img_build_plugin.png)
 
 ### Step 5: Launch your plugin in Katalon Studio
 
@@ -168,7 +168,7 @@ Launch your plugin by clicking on **Plugin/Install Plugin** menu and choose the 
 
 You should see the notification message `Plugin installed successfully` from Katalon Studio and a message `Hello, my plugin is: com.mycomany.my-first-katalon-plugin` was displayed in `Event Log` tab. Success!
 
-![Load Plugin Successfully](/docs/tutorials/images/img_load_plugin/png)
+![Load Plugin Successfully](/docs/tutorials/images/img_load_plugin.png)
 
 ### Next steps
 
