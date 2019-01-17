@@ -7,7 +7,7 @@ A Katalon Studio contains these components:
 - The `plugin.xml` tells Katalon Studio about all extensions of your plugin.
 - The code is packaged in your plugin.
 
-#### Prequiresites:
+#### Prerequisites:
 
 1. Java SDK 1.8
 2. Maven 3.3+
@@ -107,7 +107,7 @@ Update your `pom.xml` file with this template:
 
 After that, we need to update the plugin description in `pom.xml`
 ```
-<!-- Your plugin description here-->
+	<!-- Your plugin description here-->
 	<groupId>com.mycomany</groupId>
 	<artifactId>my-first-plugin</artifactId>
 	<version>1.0.0</version>
@@ -115,7 +115,7 @@ After that, we need to update the plugin description in `pom.xml`
 
 and public export package:
 ```
-<!-- REPLACE ME: Change your public export package here -->
+	<!-- REPLACE ME: Change your public export package here -->
     <Export-Package>com.mycompany.plugin*</Export-Package>
 ```
 
@@ -158,6 +158,8 @@ Let build your project again `mvn clean package` and wait a minute until the **B
 
 After the build completed, there is a `${your-artifactId}.jar` under the `target` folder, we will need this to launch your plugin in the next step.
 
+![Build Plugin Successfully](/docs/tutorials/img_build_plugin/png)
+
 ### Step 5: Launch your plugin in Katalon Studio
 
 Open Katalon Studio v6.0.3 (beta), then activate **Event Log** tab that's nearby `Console Log` tab. All your plugin's message will be displayed here.
@@ -166,7 +168,7 @@ Launch your plugin by clicking on **Plugin/Install Plugin** menu and choose the 
 
 You should see the notification message `Plugin installed successfully` from Katalon Studio and a message `Hello, my plugin is: com.mycomany.my-first-katalon-plugin` was displayed in `Event Log` tab. Success!
 
-![28%20PM|690x320](upload://w7sBjOI4ds2aKM0l1xp25dR49S0.png)
+![Load Plugin Successfully](/docs/tutorials/img_load_plugin/png)
 
 ### Next steps
 
