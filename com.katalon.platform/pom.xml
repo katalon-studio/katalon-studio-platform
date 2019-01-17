@@ -19,7 +19,6 @@
                 <includes>
                     <include>schema/</include>
                     <include>plugin.xml</include>
-                    <include>META-INF/</include>
                 </includes>
             </resource>
         </resources>
@@ -32,11 +31,13 @@
                 <configuration>
                     <instructions>
                         <Import-Package></Import-Package>
-                        <Export-Package>com.katalon.platform.api*,com.katalon.platform.ui*,com.katalon.platform.internal.api.*</Export-Package>
+                        <Export-Package>com.katalon.platform.api*,com.katalon.platform.ui*,com.katalon.platform.internal.api*</Export-Package>
                         <Bundle-SymbolicName>${project.artifactId};singleton:=true</Bundle-SymbolicName>
                         <Bundle-Name>Katalon Platform</Bundle-Name>
                         <Bundle-Vendor>Katalon LLC</Bundle-Vendor>
                         <Bundle-Activator>com.katalon.platform.internal.PlatformActivator</Bundle-Activator>
+                        <Import-Package></Import-Package>
+						<DynamicImport-Package>*</DynamicImport-Package>
                         <_failok>true</_failok>
                         <_nouses>true</_nouses>
                         <_noee>true</_noee>

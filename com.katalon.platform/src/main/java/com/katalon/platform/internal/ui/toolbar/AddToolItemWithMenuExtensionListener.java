@@ -91,17 +91,19 @@ public class AddToolItemWithMenuExtensionListener implements ExtensionListener {
 
             // Create and set MMenu, otherwise toolItem won't be a DROP_DOWN but a POP_UP
             MMenu mMenu = MMenuFactory.INSTANCE.createMenu();
-            Menu menu = toolItemWithMenuDescription.getMenu((ToolBar) toolbar.getWidget());
-            // User may not return a menu on purpose
-            if (menu != null) {
-                mMenu.setWidget(menu);
-                toolItem.setMenu(mMenu);
-            }
 
             UISynchronize uiSync = EclipseContextService.getWorkbenchService(UISynchronize.class);
 
             uiSync.syncExec(() -> {
+                Menu menu = toolItemWithMenuDescription.getMenu((ToolBar) toolbar.getWidget());
+                // User may not return a menu on purpose
+                if (menu != null) {
+                    mMenu.setWidget(menu);
+                    toolItem.setMenu(mMenu);
+                }
+
                 toolbar.getChildren().add(toolItem);
+
                 ToolItem widgetToolItem = (ToolItem) toolItem.getWidget();
                 Rectangle rect = widgetToolItem.getBounds();
                 Point pt = widgetToolItem.getParent().toDisplay(new Point(rect.x, rect.y));

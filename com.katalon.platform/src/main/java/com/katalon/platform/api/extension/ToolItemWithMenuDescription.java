@@ -46,7 +46,7 @@ public interface ToolItemWithMenuDescription {
      * <p>
      * For example: {@code platform://com.example.my-plugin-id/icons/sample_32x24.png} then:
      * <br><i>com.example.my-plugin-id</i> is the plugin id
-     * <br><i>icons/sample_32x24.png</i> is the path to icon under src/resources/icons folder
+     * <br><i>icons/sample_32x24.png</i> is the path to icon under src/main/resources/icons folder
      * <p>
      * The icon is recommend size of 32x24. If the exact size isn't provided, this scaling can cause the icon to lose
      * detail or look fuzzy.<br>
@@ -54,7 +54,7 @@ public interface ToolItemWithMenuDescription {
      * {@literal sample_32x24@2x.png, sample_32x24@3x.png, sample_32x24@4x.png} to display better on high resolution
      * display.
      * <p>
-     * Icons are recommended to be put in folder {@code src/resources/icons/}
+     * Icons are recommended to be put in {@code src/main/resources/icons/} folder
      * 
      * @return the platform URI point to the icon
      * @since 1.0.4
