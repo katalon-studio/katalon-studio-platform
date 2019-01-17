@@ -2,7 +2,7 @@
 
 This tutorial walks you through creating your first Katalon Studio plugin. The plugin can print a hello message in Console after it was installed successfully in Katalon Studio and hooks into Katalon Studio execution event.
 
-You can find the source code of this tutorial at: (https://github.com/katalon-studio/katalon-studio-sample-plugin)https://github.com/katalon-studio/katalon-studio-sample-plugin.
+You can find the source code of this tutorial at: (https://github.com/katalon-studio/katalon-studio-sample-plugin)https://github.com/katalon-studio/katalon-studio-sample-plugin).
 
 A Katalon Studio plugin is a Maven-based Java project, and also an [OSGI bundle](https://www.google.com/search?q=ogsi+bundle&oq=ogsi+bundle&aqs=chrome..69i57j0l5.2074j0j7&sourceid=chrome&ie=UTF-8) project. A plugin contains these components:
 - The `pom.xml` describes your plugin, what it is (name, version, vendor,...).
