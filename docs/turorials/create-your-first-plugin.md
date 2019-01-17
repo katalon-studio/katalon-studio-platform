@@ -246,5 +246,4 @@ Click on `Plugin/Install Plugin` and choose the jar file again.
 Run a test suite and wait until the execution finished.
 
 Look at the `Event Log` and see the message will display here, like this:
-
 ![Execution message](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_execution_message.png)
