@@ -1,8 +1,10 @@
 ## Create your first Katalon Studio plugin
 
-This tutorial walks you through creating your first Katalon Studio plugin. A Katalon Studio plugin is a Maven-based Java project, and also an [OSGI bundle](https://www.google.com/search?q=ogsi+bundle&oq=ogsi+bundle&aqs=chrome..69i57j0l5.2074j0j7&sourceid=chrome&ie=UTF-8) project.
+This tutorial walks you through creating your first Katalon Studio plugin. The plugin can print a hello message in Console after it was installed successfully in Katalon Studio and hooks into Katalon Studio execution event.
 
-A Katalon Studio contains these components:
+You can find the source code of this tutorial at: (https://github.com/katalon-studio/katalon-studio-sample-plugin)https://github.com/katalon-studio/katalon-studio-sample-plugin.
+
+A Katalon Studio plugin is a Maven-based Java project, and also an [OSGI bundle](https://www.google.com/search?q=ogsi+bundle&oq=ogsi+bundle&aqs=chrome..69i57j0l5.2074j0j7&sourceid=chrome&ie=UTF-8) project. A plugin contains these components:
 - The `pom.xml` describes your plugin, what it is (name, version, vendor,...).
 - The `plugin.xml` tells Katalon Studio about all extensions of your plugin.
 - All packaged codes of your plugin.
@@ -24,15 +26,16 @@ Let create your Java Maven-based project with project structure looks like this:
 └─── pom.xml
 ```
 
-Tips: We can create a Java project by:
-- Using Maven(mvn) command via [this turorial](https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html)
-- Using Eclipse IDE via [this turorial](https://www.tech-recipes.com/rx/39279/create-a-new-maven-project-in-eclipse/)
-- Using IntelliJ IDE via [this turorial](https://www.jetbrains.com/help/idea/maven-support.html)
+During this tutorial, we assume that (you can replace these declarations if you want):
+- com.mycompany.plugin is groupId
+- my-first-katalon-plugin is artifactId
+- com.mycompany.plugin is default package
+
 
 ### Step 2: Update `pom.xml`
 Update your `pom.xml` file with this template:
 
-```
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -46,7 +49,7 @@ Update your `pom.xml` file with this template:
 	</parent>
 
     <!-- REPLACE ME: Your plugin description here -->
-	<groupId>com.mycomany.plugin</groupId>
+	<groupId>com.mycompany.plugin</groupId>
 	<artifactId>my-first-katalon-plugin</artifactId>
 	<version>1.0.0</version>
 
@@ -105,41 +108,30 @@ Update your `pom.xml` file with this template:
 </project>
 ```
 
-After that, we need to update the plugin description in `pom.xml`
-```
-	<!-- Your plugin description here-->
-	<groupId>com.mycomany</groupId>
-	<artifactId>my-first-plugin</artifactId>
-	<version>1.0.0</version>
-```
+(Optional) You can change the tags under **REPLACE ME** if you want.
 
-and public export package:
+#### Step 3: 
+What a plugin can do in Katalon Studio is described [here](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/plugin.xml). You will see many `extension` tags here. Once of them is called `Extension Point` that describes a way to allow client plugins can hook into Katalon Studio system. A plugin can provide many functions of that, called `Extension` and declare them in `plugin.xml`.
+
+Let assume we need to `Subcribe plugin installation event`
+```xml
+ <extension
+   		point="com.katalon.platform.extensions_point">
+	  <point
+            id="com.katalon.platform.api.extension.pluginActivationListener"
+            interfaceClass="com.katalon.platform.api.extension.PluginActivationListener"
+            serviceClass="com.katalon.platform.internal.lifecycle.PluginActivationListenerService">
+      </point>	
+</extension>
 ```
-	<!-- REPLACE ME: Change your public export package here -->
-    <Export-Package>com.mycompany.plugin*</Export-Package>
-```
+This declaration means:
+- id: the id of the extension point
+- interfaceClass: the interface class that requires client plugins should provide the implementation to extend this feature.
+- serviceClass: a internal service class.
 
-Build your project `mvn clean package` and wait a minute until the **BUILD SUCCESS** message from command line.
-
-#### Step 3: Create your first hello extension
-
-Let create a class implements `PluginActivationListener` under `com.mycompany.plugin` package:
-```
-package com.mycompany.plugin;
-
-import com.katalon.platform.api.Plugin;
-import com.katalon.platform.api.extension.PluginActivationListener;
-
-public class MyPluginActivationListener implements PluginActivationListener {
-    @Override
-    public void afterActivation(Plugin plugin) {
-        System.out.println("Hello, my plugin is: " + plugin.getPluginId());
-    }
-}
-```
-
-Let open `plugin.xml` under `src/main/resources` and add this template:
-```
+#### Step 4:
+To extend this extension point, we need to declare in `plugin.xml` like this:
+```xml
 <plugin>
 	<extension
 	        point="com.katalon.platform.extensions">
@@ -151,16 +143,36 @@ Let open `plugin.xml` under `src/main/resources` and add this template:
 	</extension>
 </plugin>
 ```
+This declaration means:
+- id: the unique id of the your extension. You can replace by any name but it must be unique.
+- extensionPointId: the id of the extension point above. If we want to extend other extension point, you just need to replace this by other extension point id.
+- implementationClass: the class that implements the `interfaceClass` was mention at Step 3. Now, we create it.
 
-After that, we need to update the value of `implementationClass` to the class name the above. In my example: it should be `com.mycompany.plugin.MyPluginActivationListener`
+#### Step 6: Create your `implementationClass`
+Create a class file `MyPluginActivationListener` under `src/java/main` folder:
+```java
+package com.mycompany.plugin;
 
-Let build your project again `mvn clean package` and wait a minute until the **BUILD SUCCESS** message from command line.
+import com.katalon.platform.api.Plugin;
+import com.katalon.platform.api.extension.PluginActivationListener;
 
-After the build completed, there is a `${your-artifactId}.jar` under the `target` folder, we will need this to launch your plugin in the next step.
+public class MyPluginActivationListener implements PluginActivationListener {
+	// After this plugin is activated, we will print a hello message to console.
+    @Override
+    public void afterActivation(Plugin plugin) {
+        System.out.println("Hello, my plugin is: " + plugin.getPluginId());
+    }
+}
+```
+
+### Step 7: Build your plugin
+Type `mvn clean package` and wait a minute until the **BUILD SUCCESS** message from command line.
 
 ![Build Plugin Successfully](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_build_plugin.png)
 
-### Step 5: Launch your plugin in Katalon Studio
+After the build completed, there is a `my-first-katalon-plugin.jar` under the `target` folder, we will need this to launch your plugin in the next step.
+
+### Step 8: Test your plugin with Katalon Studio
 
 Open Katalon Studio v6.0.3 (beta), then activate **Event Log** tab that's nearby `Console Log` tab. All your plugin's message will be displayed here.
 
@@ -170,8 +182,69 @@ You should see the notification message `Plugin installed successfully` from Kat
 
 ![Load Plugin Successfully](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_load_plugin.png)
 
-### Next steps
+### Step 9: Create another extension
+Now we back to [`plugin.xml`](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/plugin.xml) file of Katalon Studio Platform, and find the declaration of `Subcribe KS execution event`:
+```xml
+<extension
+    	point="com.katalon.platform.extensions_point">
+    <point
+        id="com.katalon.platform.api.extension.eventListener"
+        interfaceClass="com.katalon.platform.api.event.EventListenerInitializer"
+        serviceClass="com.katalon.platform.internal.event.EventListenerService">
+    </point>
+</extension>
+```
 
-Another good sample plugin to start is [Slack Integration](https://github.com/katalon-studio/katalon-studio-slack-plugin). You can try it in KS build.
+Ok, we declare our extension in `plugin.xml` and `implementationClass`
+```xml
+<extension
+		point="com.katalon.platform.extensions">
+	<point
+		id="com.mycompany.plugin.myAnotherExtensionId"
+		extensionPointId="com.katalon.platform.api.extension.eventListener"
+		implementationClass="com.mycompany.plugin.MyExecutionEventListener">
+	</point>
+</extension>
+```
+```java
+package com.mycompany.plugin;
 
-All Katalon Studio built-in extension points are declared in this [source](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/plugin.xml). You can take a look at this.
+import org.osgi.service.event.Event;
+
+import com.katalon.platform.api.event.EventListener;
+import com.katalon.platform.api.event.ExecutionEvent;
+import com.katalon.platform.api.execution.TestSuiteExecutionContext;
+import com.katalon.platform.api.extension.EventListenerInitializer;
+public class MyExecutionEventListener implements EventListenerInitializer {
+
+    @Override
+    public void registerListener(EventListener listener) {
+        listener.on(Event.class, event -> {
+            if (ExecutionEvent.TEST_SUITE_FINISHED_EVENT.equals(event.getTopic())) {
+                ExecutionEvent eventObject = (ExecutionEvent) event.getProperty("org.eclipse.e4.data");
+
+                TestSuiteExecutionContext testSuiteContext = (TestSuiteExecutionContext) eventObject
+                        .getExecutionContext();
+
+                System.out.println("Test execution completed: " + testSuiteContext.getId());
+            }
+        });
+    }
+}
+```
+
+This `implementationClass` just prints an execution completed message to console but you can extend this class to do more business stuff here. A good sample for this is [Slack Integration Plugin](https://github.com/katalon-studio/katalon-studio-slack-plugin). You can try how it integrates with Slack.
+
+### Step 10: Reload your plugin
+Type `mvn clean package` and wait a minute until the **BUILD SUCCESS** message from command line.
+
+Click on `Plugin/Uninstall Plugin` to uninstall your first loaded plugin.
+
+Click on `Plugin/Install Plugin` and choose the jar file again.
+
+### Step 11: Test execution event
+Run a test suite and wait until the execution finished.
+
+Look at the `Event Log` and see the message will display here, like this:
+
+![Execution message](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_execution_message.png)
