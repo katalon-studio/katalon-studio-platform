@@ -158,7 +158,7 @@ Let build your project again `mvn clean package` and wait a minute until the **B
 
 After the build completed, there is a `${your-artifactId}.jar` under the `target` folder, we will need this to launch your plugin in the next step.
 
-![Build Plugin Successfully](/docs/tutorials/images/img_build_plugin.png)
+![Build Plugin Successfully](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_build_plugin.png)
 
 ### Step 5: Launch your plugin in Katalon Studio
 
@@ -168,13 +168,9 @@ Launch your plugin by clicking on **Plugin/Install Plugin** menu and choose the 
 
 You should see the notification message `Plugin installed successfully` from Katalon Studio and a message `Hello, my plugin is: com.mycomany.my-first-katalon-plugin` was displayed in `Event Log` tab. Success!
 
-![Load Plugin Successfully](/docs/tutorials/images/img_load_plugin.png)
+![Load Plugin Successfully](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_load_plugin.png)
 
 ### Next steps
-
-We will take closer about the source code of `my-first-katalon-plugin` and explain key concepts.
-
-You can find the source code of this tutorial at.
 
 Another good sample plugin to start is [Slack Integration](https://github.com/katalon-studio/katalon-studio-slack-plugin). You can try it in KS build.
 
