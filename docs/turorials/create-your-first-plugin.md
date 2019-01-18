@@ -1,6 +1,7 @@
 ## Create your first Katalon Studio plugin
-
-This tutorial walks you through creating your first Katalon Studio plugin. The plugin can print a hello message in Console after it was installed successfully in Katalon Studio and hooks into Katalon Studio execution event.
+This tutorial walks you through creating your first Katalon Studio plugin. The plugin in this tutorial does 2 things:
+- Listens to the the [plugin activation event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/PluginActivationListener.java) then prints a hello message after the plugin was installed successfully in Katalon Studio.
+- Listens to the [test execution event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/EventListenerInitializer.java) then prints a report message in Console.
 
 You can find the source code of this tutorial at: [https://github.com/katalon-studio/katalon-studio-sample-plugin](https://github.com/katalon-studio/katalon-studio-sample-plugin).
 
@@ -146,7 +147,7 @@ This declaration means:
 - extensionPointId: the id of the extension point above. If we want to extend other extension point, you just need to replace this by other extension point id.
 - implementationClass: the class that implements the `interfaceClass` was mention at Step 3. Now, we create it.
 
-#### Step 5: Create your `implementationClass`
+### Step 4: Create your `implementationClass`
 Create a class file `MyPluginActivationListener` under `src/java/main` folder:
 ```java
 package com.mycompany.plugin;
@@ -163,15 +164,14 @@ public class MyPluginActivationListener implements PluginActivationListener {
 }
 ```
 
-### Step 6: Build your plugin
+### Step 5: Build your plugin
 Type `mvn clean package` and wait a minute until the **BUILD SUCCESS** message from command line.
 
 ![Build Plugin Successfully](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_build_plugin.png)
 
 After the build completed, there is a `my-first-katalon-plugin.jar` under the `target` folder, we will need this to launch your plugin in the next step.
 
-### Step 7: Test your plugin with Katalon Studio
-
+### Step 6: Test your plugin
 Open Katalon Studio v6.0.3 (beta), then activate **Event Log** tab that's nearby `Console Log` tab. All your plugin's message will be displayed here.
 
 Launch your plugin by clicking on **Plugin/Install Plugin** menu and choose the jar was mentioned above.
@@ -180,7 +180,7 @@ You should see the notification message `Plugin installed successfully` from Kat
 
 ![Load Plugin Successfully](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_load_plugin.png)
 
-### Step 8: Create another extension
+### Step 7: Create an [execution event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/EventListenerInitializer.java) extension
 Now, we back to [`plugin.xml`](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/plugin.xml) file of Katalon Studio Platform, and find the declaration of `Subcribe KS execution event`:
 ```xml
 <extension
@@ -193,7 +193,7 @@ Now, we back to [`plugin.xml`](https://github.com/katalon-studio/katalon-studio-
 </extension>
 ```
 
-Ok, we declare our extension in `plugin.xml`
+Now, we declare our extension in `plugin.xml`
 ```xml
 <extension
 		point="com.katalon.platform.extensions">
@@ -234,15 +234,15 @@ public class MyExecutionEventListener implements EventListenerInitializer {
 
 This `implementationClass` just prints an execution completed message to console but you can extend this class to do more business stuff here. A good sample for this is [Slack Integration Plugin](https://github.com/katalon-studio/katalon-studio-slack-plugin). You can see how it integrates with Slack.
 
-### Step 9: Reload your plugin
+### Step 8: Reload your plugin
 Type `mvn clean package` and wait a minute until the **BUILD SUCCESS** message from command line.
 
 Click on `Plugin/Uninstall Plugin` to uninstall your first loaded plugin.
 
 Click on `Plugin/Install Plugin` and choose the jar file again.
 
-### Step 10: Test execution event
+### Step 9: Test execution event
 Run a test suite and wait until the execution finished.
 
-Look at the `Event Log` and the message will be displayed like this:
+Look at the `Event Log` and the message should be displayed like this:
 ![Execution message](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_execution_message.png)
