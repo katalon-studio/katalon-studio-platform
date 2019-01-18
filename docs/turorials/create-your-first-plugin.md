@@ -1,6 +1,6 @@
 ## Create your first Katalon Studio plugin
 This tutorial walks you through creating your first Katalon Studio plugin. The plugin in this tutorial does 2 things:
-- Listens to the the [plugin activation event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/PluginActivationListener.java) then prints a hello message after the plugin was installed successfully in Katalon Studio.
+- Listens to the [plugin activation event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/PluginActivationListener.java) then prints a hello message after the plugin was installed successfully in Katalon Studio.
 - Listens to the [test execution event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/EventListenerInitializer.java) then prints a report message in Console.
 
 You can find the source code of this tutorial at: [https://github.com/katalon-studio/katalon-studio-sample-plugin](https://github.com/katalon-studio/katalon-studio-sample-plugin).
