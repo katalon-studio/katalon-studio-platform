@@ -14,7 +14,7 @@ A Katalon Studio plugin is a Maven-based Java project, and also an [OSGI bundle]
 
 1. Java SDK 1.8
 2. Maven 3.3+
-3. Download Katalon Studio v6.0.3 (beta) in this link.
+3. Download Katalon Studio v6.0.3 (beta): [win32](https://s3.amazonaws.com/katalon/release-beta/6.0.3/Katalon_Studio_Windows_32.zip), [win64](https://s3.amazonaws.com/katalon/release-beta/6.0.3/Katalon_Studio_Windows_64.zip), [macOS](https://s3.amazonaws.com/katalon/release-beta/6.0.3/Katalon+Studio.dmg), and [linux64](https://s3.amazonaws.com/katalon/release-beta/6.0.3/Katalon_Studio_Linux_64.tar.gz).
 
 ### Step 1: Create a Maven-based Java project
 Let's create your Java Maven-based project with project structure looks like this:
