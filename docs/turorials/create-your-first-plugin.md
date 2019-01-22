@@ -1,12 +1,12 @@
 ## Create your first Katalon Studio plugin
-This tutorial will walk you through creating your first Katalon Studio plugin. The plugin in this tutorial does two things:
+This tutorial walks you through creating your first Katalon Studio plugin. The plugin in this tutorial does two things:
 - Listens to the [plugin activation event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/PluginActivationListener.java) then prints a hello message after the plugin was installed successfully in Katalon Studio.
 - Listens to the [test execution event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/EventListenerInitializer.java) then prints a report message in Console.
 
 You can find the source code of this tutorial [here](https://github.com/katalon-studio/katalon-studio-sample-plugin).
 
 A Katalon Studio plugin is a Maven-based Java project, and also an [OSGI bundle](http://spring.io/blog/2008/02/18/creating-osgi-bundles/) project. A plugin contains these components:
-- The `pom.xml` to describe your plugin, what it is (name, version, vendor,etc).
+- The `pom.xml` to describe your plugin - what it is (name, version, vendor), what it does. 
 - The `plugin.xml` to let Katalon Studio know about all the extensions of your plugin.
 - All packaged codes of your plugin.
 
@@ -112,7 +112,7 @@ The tags can be changed under **REPLACE ME** if needed.
 
 ### Step 3:
 Katalon Studio Platform allows client plugins to contribute to Katalon Studio core features. All of the plugins are described at [this link](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/plugin.xml). 
-There are many `extension` tags here. Each of these tags is a `Extension Point` describing specifications to allow client plugins hook into Katalon Studio platform. A plugin can contribute to many extension points by declaring it in `plugin.xml` file.
+There are many `extension` tags here. Each of these tags is an `Extension Point` describing specifications to allow client plugins hook into Katalon Studio platform. A plugin can contribute to many extension points by declaring it in the `plugin.xml` file.
 
 For example, we want to `Subscribe plugin installation event`:
 ```xml
@@ -170,7 +170,7 @@ Type `mvn clean package` and wait until the **BUILD SUCCESS** message is display
 
 ![Build Plugin Successfully](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_build_plugin.png)
 
-After the build completed, there is a `my-first-katalon-plugin.jar` under the `target` folder, we will need this to launch your plugin in the next step.
+After the build completed, there is a `my-first-katalon-plugin.jar` under the `target` folder. We need this to launch your plugin in the next step.
 
 ### Step 6: Test your plugin
 Open Katalon Studio v6.0.3 (beta) and activate **Event Log** tab that's nearby `Console Log` tab. All your plugin's message will be displayed here.
@@ -182,7 +182,7 @@ You should be able to see the notification message `Plugin installed successfull
 ![Load Plugin Successfully](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/images/img_load_plugin.png)
 
 ### Step 7: Create an [execution event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/EventListenerInitializer.java) extension
-Now, we back to [`plugin.xml`](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/plugin.xml) file of Katalon Studio Platform, and find the declaration of `Subscribe KS execution event`:
+Now, we back to the [`plugin.xml`](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/plugin.xml) file of Katalon Studio Platform, and find the declaration of `Subscribe KS execution event`:
 ```xml
 <extension
     	point="com.katalon.platform.extensions_point">
