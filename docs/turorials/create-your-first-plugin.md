@@ -111,7 +111,7 @@ Update your `pom.xml` file with the template below:
 The tags can be changed under **REPLACE ME** if needed.
 
 ### Step 3:
-Katalon Studio Platform allows client plugins to contribute to Katalon Studio core features. All of the plugins are described at [this link](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/plugin.xml). 
+Katalon Studio Platform allows client plugins to contribute to Katalon Studio core features. All of the features are described at [this link](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/plugin.xml). 
 There are many `extension` tags here. Each of these tags is a `Extension Point` describing specifications to allow client plugins hook into Katalon Studio platform. A plugin can contribute to many extension points by declaring it in `plugin.xml` file.
 
 For example, we want to `Subscribe plugin installation event`:
