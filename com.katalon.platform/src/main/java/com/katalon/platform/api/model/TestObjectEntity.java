@@ -1,0 +1,70 @@
+package com.katalon.platform.api.model;
+
+import java.util.List;
+import java.util.Map;
+
+public interface TestObjectEntity {
+	
+	String getId();
+	
+	List<TestObjectProperty> getProperties();
+
+	List<TestObjectXPath> getXPaths();
+	
+	Map<SelectorMethod, String> getSelectorCollection();
+	
+	public enum SelectorMethod {
+		BASIC,
+		XPATH,
+		CSS
+	}
+	
+	public interface TestObjectProperty {
+		String getName();
+		ConditionType getCondition();
+		String getValue();
+		boolean isActive();
+	}
+	
+	public interface TestObjectXPath {
+		String getName();
+		ConditionType getCondition();
+		String getValue();
+		boolean isActive();
+	}
+	
+	
+	public enum ConditionType {
+	    EQUALS("equals"), 
+	    NOT_EQUAL("not equal"), 
+	    CONTAINS("contains"), 
+	    NOT_CONTAIN("not contain"), 
+	    STARTS_WITH("starts with"), 
+	    ENDS_WITH("ends with"), 
+	    MATCHES_REGEX("matches regex"), 
+	    NOT_MATCH_REGEX("not match regex"),
+	    //For mobile
+	    EXPRESSION("expression");
+	    
+	    private String text;
+	    
+	    private ConditionType(final String text) {
+	        this.text = text;
+	    }
+
+	    @Override
+	    public String toString() {
+	        return text;
+	    }
+	    
+	    public static ConditionType fromValue(String value) {
+	        for (ConditionType condition : values()) {
+	            if (condition.toString().equals(value)) {
+	                return condition;
+	            }
+	        }
+	        
+	        return null;
+	    }
+	}
+}
