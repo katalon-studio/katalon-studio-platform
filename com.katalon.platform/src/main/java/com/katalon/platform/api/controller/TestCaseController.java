@@ -117,6 +117,8 @@ public interface TestCaseController extends Controller {
         String getDescription();
 
         String getComment();
+        
+        String getTag();
     }
 
     /**
@@ -129,5 +131,7 @@ public interface TestCaseController extends Controller {
         String getDescription();
 
         String getComment();
+        
+        String getTag();
     }
 }
