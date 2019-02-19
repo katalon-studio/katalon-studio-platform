@@ -10,9 +10,9 @@ import com.katalon.platform.api.service.ProjectManager;
  * FeatureFileController is a unique KS Controller to help KS plugins can manipulate Feature Files (.feature) under Include/features folder in the file
  * system.
  * 
+ * @see #getAvailableFeatureFileName(ProjectEntity, FolderEntity, String)
+ * @see #newFeatureFile(ProjectEntity, FolderEntity, String)
  * @see #getFeatureFile(ProjectEntity, String)
- * @see #newFeatureFile(ProjectEntity, String, String)
- * @see #getAvailableFeatureFileName(ProjectEntity, String)
  * 
  * @since 1.0.6
  */
