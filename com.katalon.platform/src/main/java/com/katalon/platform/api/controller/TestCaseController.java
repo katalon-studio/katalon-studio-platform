@@ -83,7 +83,7 @@ public interface TestCaseController extends Controller {
     /**
      * Returns an available test case name for the given <code>name</code>
      * <p>
-     * Sample of using: We want to create a folder with name <b>New Test Case</b> under root folder <i>Test Cases</i>
+     * Sample of using: We want to create a test case with name <b>New Test Case</b> under root folder <i>Test Cases</i>
      * <br>
      * Case 1: There is no <b>New Test Case</b> test case under <code>Test Cases</code> then the result is <b>New
      * Test Case</b>
