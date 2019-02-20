@@ -36,6 +36,8 @@ com.katalon.platform.internal.*: Internal packages that **should not** be used d
 
 [Create your first Katalon Studio plugin](/docs/turorials/create-your-first-plugin.md)
 
+[Create Katalon Studio plugin using Gradle](/docs/turorials/create-plugin-using-gradle/create-plugin-using-gradle.md)
+
 ## Build
 
 Requirements:
