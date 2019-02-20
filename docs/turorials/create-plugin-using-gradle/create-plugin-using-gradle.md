@@ -1,4 +1,4 @@
-#Create Katalon Stuido platform plugin using Gradle
+## Create Katalon Stuido platform plugin using Gradle
 This tutorial will guide you create a Katalon Studio plugin as a Java Gradle-based project. The plugin in this tutorial does this thing:
 - Listens to the [plugin activation event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/PluginActivationListener.java) then prints a hello message after the plugin was installed successfully in Katalon Studio.
 
@@ -52,10 +52,6 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    api
-}
-
 dependencies {
     implementation 'com.katalon:com.katalon.platform:1.0.6'
 }
@@ -65,20 +61,22 @@ configurations.all {
 }
 
 jar {
-    from fileTree("$buildDir/api/") {
-        exclude 'META-INF/**'
-    }
+    from fileTree("$buildDir/dependencies/")
 }
 
-task extractApi(type: Sync) {
-    dependsOn configurations.api
+task extractDependencies(type: Sync) {
+    dependsOn configurations.compile
 
-    from (configurations.api.collect { zipTree(it) })
+    from (configurations.compile.collect {
+        zipTree(it)
+    })
 
-    into "$buildDir/api/"
+    exclude 'META-INF/**'
+
+    into "$buildDir/dependencies/"
 }
 
-jar.dependsOn extractApi
+jar.dependsOn extractDependencies
 
 jar.manifest.attributes(
         '-exportcontents': 'com.diffplug.*',
@@ -105,7 +103,7 @@ There are many `extension` tags here. Each of these tags is an `Extension Point`
 For example, we want to `Subscribe plugin installation event`:
 ```xml
  <extension
-   		point="com.katalon.platform.extensions_point">
+   	point="com.katalon.platform.extensions_point">
 	  <point
             id="com.katalon.platform.api.extension.pluginActivationListener"
             interfaceClass="com.katalon.platform.api.extension.PluginActivationListener"
@@ -145,7 +143,7 @@ import com.katalon.platform.api.Plugin;
 import com.katalon.platform.api.extension.PluginActivationListener;
 
 public class MyPluginActivationListener implements PluginActivationListener {
-	// After this plugin is activated, we will print a hello message to console.
+    // After this plugin is activated, we will print a hello message to console.
     @Override
     public void afterActivation(Plugin plugin) {
         System.out.println("Hello, my plugin that's using Gralde build is: " + plugin.getPluginId());
