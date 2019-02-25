@@ -62,6 +62,7 @@
             interfaceClass="com.katalon.platform.api.extension.TestCaseIntegrationViewDescription">
       </point>
    </extension>
+
    <!-- Add console options and test case filters to Test Suite Console Launcher  -->
       <extension
          point="com.katalon.platform.extensions_point">
@@ -70,12 +71,22 @@
             interfaceClass="com.katalon.platform.api.extension.LauncherOptionParserDescription">
       </point>
      </extension>
+
    <!-- Add a view, column to Integration tab of Report view -->
    <extension
          point="com.katalon.platform.extensions_point">
       <point
             id="com.katalon.platform.api.extension.reportIntegrationViewDescription"
             interfaceClass="com.katalon.platform.api.extension.ReportIntegrationViewDescription">
+      </point>
+   </extension>
+   
+   <!-- Add a test case matching condition to the Dynamic Quering Test Suite -->
+   <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            id="com.katalon.platform.api.extension.dynamicQueryingTestSuiteDescription"
+            interfaceClass="com.katalon.platform.api.extension.DynamicQueryingTestSuiteDescription">
       </point>
    </extension>
 </plugin>
