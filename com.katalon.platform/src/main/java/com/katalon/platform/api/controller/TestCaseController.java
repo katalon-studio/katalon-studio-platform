@@ -22,7 +22,7 @@ import com.katalon.platform.api.service.ProjectManager;
 public interface TestCaseController extends Controller {
 
     /**
-     * Returns an instance of TestCaseEntity of the given <code>project</code> by the give <code>testCaseId</code>
+     * Returns an instance of TestCaseEntity of the given <code>project</code> by the given <code>testCaseId</code>
      * 
      * @param project an instance of working project. The current working project can retrieve by using
      * {@link ProjectManager#getCurrentProject()}.

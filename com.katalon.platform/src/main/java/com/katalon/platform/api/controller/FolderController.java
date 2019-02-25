@@ -86,4 +86,17 @@ public interface FolderController extends Controller {
      * @since 1.0.4
      */
     List<TestCaseEntity> getChildTestCases(ProjectEntity project, FolderEntity parentFolder) throws ResourceException;
+
+    /**
+     * List the children folders under a folder.
+     * 
+     * @param project project an instance of working project. The current working project can retrieve by using
+     * {@link ProjectManager#getCurrentProject()}.
+     * @param parentFolder parent folder that needs to check.
+     * @return list of FolderEntity. The list can be empty but not null.
+     * @throws ResourceException thrown if KS could not read or access test cases under parent folder.
+     * 
+     * @since 1.0.7
+     */
+    List<FolderEntity> getChildFolders(ProjectEntity project, FolderEntity parentFolder) throws ResourceException;
 }
