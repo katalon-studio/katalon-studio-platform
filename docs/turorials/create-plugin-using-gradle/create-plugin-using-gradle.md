@@ -1,4 +1,4 @@
-## Create Katalon Stuido platform plugin using Gradle
+## Create Katalon Studio platform plugin using Gradle
 This tutorial will guide you create a Katalon Studio plugin as a Java Gradle-based project. The plugin in this tutorial does this thing:
 - Listens to the [plugin activation event](https://github.com/katalon-studio/katalon-studio-platform/blob/master/com.katalon.platform/src/main/java/com/katalon/platform/api/extension/PluginActivationListener.java) then prints a hello message after the plugin was installed successfully in Katalon Studio.
 
@@ -17,7 +17,7 @@ As the previous tutorial, we talked about what a Katalon Sudio plarform plugin i
 
 ### Step 1: Create a Java Gradle-based project
 
-Let's create your Gradle Maven-based project with project structure looks like this:
+Let's create your Java Gradle-based project with project structure looks like this:
 ```
 ├─── src/
 │   └─── main/
@@ -32,6 +32,7 @@ Let's create your Gradle Maven-based project with project structure looks like t
 ```groovy
 plugins {
     id 'java'
+    id 'java-library'
     id "com.diffplug.gradle.osgi.bndmanifest" version "3.17.1"
 }
 
@@ -53,7 +54,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.katalon:com.katalon.platform:1.0.6'
+    api 'com.katalon:com.katalon.platform:1.0.6'
 }
 
 configurations.all {
@@ -146,7 +147,7 @@ public class MyPluginActivationListener implements PluginActivationListener {
     // After this plugin is activated, we will print a hello message to console.
     @Override
     public void afterActivation(Plugin plugin) {
-        System.out.println("Hello, my plugin that's using Gralde build is: " + plugin.getPluginId());
+        System.out.println("Hello, my plugin that's using Gradle build is: " + plugin.getPluginId());
     }
 }
 ```
@@ -159,11 +160,11 @@ Type `./gradlew build` and wait until the **BUILD SUCCESSUL** message is display
 After the build completed, there is a `my-first-katalon-plugin-1.0.0.jar` under the `build/libs` folder. We need this to launch your plugin in the next step.
 
 ### Step 6: Test your plugin
-Open Katalon Studio v6.0.4 (beta) and activate **Event Log** tab that's nearby `Console Log` tab. All your plugin's message will be displayed here.
+Open Katalon Studio v6.0.4 (beta) and activate the **Event Log** tab that's nearby the **Console Log** tab. All your plugin's message will be displayed here.
 
 Launch your plugin by clicking on **Plugin/Install Plugin** menu and choose the jar was mentioned above.
 
-You should be able to see the notification message `Plugin installed successfully` from Katalon Studio and the message `Hello, my plugin is: com.mycomany.my-first-katalon-plugin` is displayed in `Event Log` tab. Success!
+You should be able to see the notification message `Plugin installed successfully` from Katalon Studio and the message `Hello, my plugin that's using Gradle build is: com.mycomany.my-first-katalon-plugin` is displayed in `Event Log` tab. Success!
 
 ![Load Plugin Successfully](https://raw.githubusercontent.com/katalon-studio/katalon-studio-platform/dev/docs/turorials/create-plugin-using-gradle/images/img_load_plugin.png)
 
