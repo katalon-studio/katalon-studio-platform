@@ -13,10 +13,16 @@ import com.katalon.platform.api.exception.ResourceException;
 public interface Preference {
 
     void setString(String key, String value);
+    
+    void setString(String key, String value, boolean encrypted);
 
     void setInt(String key, int value);
+    
+    void setInt(String key, int value, boolean encrypted);
 
     void setBoolean(String key, boolean value);
+
+    void setBoolean(String key, boolean value, boolean encrypted);
 
     String getString(String key, String defaultValue) throws InvalidDataTypeFormatException;
 
