@@ -1,4 +1,4 @@
-package com.katalon.platform.internal;
+package com.katalon.platform.internal.preference;
 
 import java.io.File;
 import java.io.FileInputStream;

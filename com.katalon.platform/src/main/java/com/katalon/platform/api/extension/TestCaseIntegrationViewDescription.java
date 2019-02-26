@@ -3,6 +3,7 @@ package com.katalon.platform.api.extension;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 
+import com.katalon.platform.api.model.Integration;
 import com.katalon.platform.api.model.ProjectEntity;
 import com.katalon.platform.api.model.TestCaseEntity;
 
@@ -77,6 +78,30 @@ public interface TestCaseIntegrationViewDescription {
          * @since 1.0.4
          */
         Control onCreateView(Composite parent, PartActionService partActionService, TestCaseEntity testCase);
+
+        /**
+         * @return Returns the current editing integration before KS performs saving process. This method will be called
+         * if needsSaving returns true.
+         * 
+         * @since 1.0.7
+         */
+        default Integration getIntegrationBeforeSaving() {
+            return null;
+        }
+
+        /**
+         * Indicates the current integration view that needs save the integration information. This method is called
+         * after users hit <b>Save</b>, or <b>Save All</b> button.
+         * <p>
+         * If this method returns true, Katalon Studio will invoke #getIntegrationBeforeSaving() to get new integration information.
+         * 
+         * @return true if the current editing integration need to be saved. Otherwise, false.
+         * 
+         * @since 1.0.7
+         */
+        default boolean needsSaving() {
+            return false;
+        }
     }
 
     /**
@@ -94,6 +119,7 @@ public interface TestCaseIntegrationViewDescription {
 
         /**
          * Checks the test case view is able to save or not.
+         * 
          * @return true if test case view needs to save. Otherwise, false.
          * @since 1.0.4
          */
