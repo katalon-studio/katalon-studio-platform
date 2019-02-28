@@ -137,25 +137,21 @@ public class InternalPluginPreferenceImpl implements PluginPreference {
     public String getString(String key, String defaultValue, boolean shouldDecrypt)
             throws InvalidDataTypeFormatException, CryptoException {
         if (properties.containsKey(key)) {
-            Object value = getDecryptedValue(key, shouldDecrypt);
-            if (value instanceof String) {
-                return (String) value;
-            }
-            throw new InvalidDataTypeFormatException(String.format("Value of %s is not a string", key));
+            return getDecryptedValue(key, shouldDecrypt);
         }
         return defaultValue;
     }
 
-    private Object getDecryptedValue(String key, boolean shouldDecrypt) throws CryptoException {
-        String rawValue = PropertySettingStoreUtil.getRawValue(properties.get(key).toString());
+    private String getDecryptedValue(String key, boolean shouldDecrypt) throws CryptoException {
+        String decryptedValue = String.valueOf(PropertySettingStoreUtil.getValue(properties.get(key).toString()));
         if (shouldDecrypt) {
             try {
-                rawValue = CryptoUtil.decode(CryptoUtil.getDefault(rawValue));
+                decryptedValue = CryptoUtil.decode(CryptoUtil.getDefault(decryptedValue));
             } catch (GeneralSecurityException | IOException e) {
                 throw new CryptoException(e);
             }
         }
-        return PropertySettingStoreUtil.getValue(rawValue);
+        return decryptedValue;
     }
 
     @Override
@@ -171,11 +167,12 @@ public class InternalPluginPreferenceImpl implements PluginPreference {
     public int getInt(String key, int defaultValue, boolean shouldDecrypt)
             throws InvalidDataTypeFormatException, CryptoException {
         if (properties.containsKey(key)) {
-            Object value = getDecryptedValue(key, shouldDecrypt);
-            if (value instanceof Integer) {
-                return (Integer) value;
+            String value = getDecryptedValue(key, shouldDecrypt);
+            try {
+                return Integer.valueOf(value.replace("\"", ""));
+            } catch (NumberFormatException e) {
+                throw new InvalidDataTypeFormatException(String.format("Value of %s is not an integer", key));
             }
-            throw new InvalidDataTypeFormatException(String.format("Value of %s is not an integer", key));
         }
         return defaultValue;
     }
@@ -193,11 +190,8 @@ public class InternalPluginPreferenceImpl implements PluginPreference {
     public boolean getBoolean(String key, boolean defaultValue, boolean shouldDecrypt)
             throws InvalidDataTypeFormatException, CryptoException {
         if (properties.containsKey(key)) {
-            Object value = getDecryptedValue(key, shouldDecrypt);
-            if (value instanceof Boolean) {
-                return (Boolean) value;
-            }
-            throw new InvalidDataTypeFormatException(String.format("Value of %s is not a boolean", key));
+            String value = getDecryptedValue(key, shouldDecrypt);
+            return Boolean.valueOf(value.replace("\"", ""));
         }
         return defaultValue;
     }

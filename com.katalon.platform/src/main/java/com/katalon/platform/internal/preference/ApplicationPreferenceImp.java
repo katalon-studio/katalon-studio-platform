@@ -119,10 +119,6 @@ public class ApplicationPreferenceImp implements ApplicationPreference {
         String decryptedValue = "";
         try {
             decryptedValue = CryptoUtil.decode(CryptoUtil.getDefault(rawValue));
-            if (!Boolean.parseBoolean(decryptedValue)) {
-                throw new InvalidDataTypeFormatException(
-                        "Decrypted value: " + decryptedValue + " of key: " + key + " is invalid boolean");
-            }
             return Boolean.valueOf(decryptedValue);
         } catch (GeneralSecurityException | IOException e) {
             throw new CryptoException(e);
