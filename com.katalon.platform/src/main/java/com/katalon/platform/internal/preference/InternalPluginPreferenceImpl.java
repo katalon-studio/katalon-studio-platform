@@ -155,7 +155,7 @@ public class InternalPluginPreferenceImpl implements PluginPreference {
                 throw new CryptoException(e);
             }
         }
-        return PropertySettingStoreUtil.getRawValue(rawValue);
+        return PropertySettingStoreUtil.getValue(rawValue);
     }
 
     @Override
