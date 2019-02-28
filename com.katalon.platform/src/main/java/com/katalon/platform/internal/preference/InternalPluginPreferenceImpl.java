@@ -6,12 +6,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
+import java.security.GeneralSecurityException;
 
+import com.katalon.platform.api.exception.CryptoException;
 import com.katalon.platform.api.exception.InvalidDataTypeFormatException;
 import com.katalon.platform.api.exception.ResourceException;
 import com.katalon.platform.api.model.Entity;
 import com.katalon.platform.api.preference.PluginPreference;
+import com.katalon.platform.internal.util.CryptoUtil;
 import com.katalon.platform.internal.util.LinkedProperties;
 import com.katalon.platform.internal.util.PropertySettingStoreUtil;
 
@@ -62,23 +66,78 @@ public class InternalPluginPreferenceImpl implements PluginPreference {
 
     @Override
     public void setInt(String key, int value) {
-        properties.setProperty(key, PropertySettingStoreUtil.getRawValue(value));
+        try {
+            setInt(key, value, false);
+        } catch (CryptoException ignored) {}
+    }
+
+    @Override
+    public void setInt(String key, int value, boolean shouldEncrypt) throws CryptoException {
+        String rawValue = PropertySettingStoreUtil.getRawValue(value);
+        if (shouldEncrypt) {
+            try {
+                rawValue = CryptoUtil.encode(CryptoUtil.getDefault(rawValue));
+            } catch (UnsupportedEncodingException | GeneralSecurityException e) {
+                throw new CryptoException(e);
+            }
+        }
+        properties.setProperty(key, rawValue);
     }
 
     @Override
     public void setBoolean(String key, boolean value) {
-        properties.setProperty(key, PropertySettingStoreUtil.getRawValue(value));
+        try {
+            setBoolean(key, value, false);
+        } catch (CryptoException ignored) {}
+    }
+
+    @Override
+    public void setBoolean(String key, boolean value, boolean shouldEncrypt) throws CryptoException {
+        String rawValue = PropertySettingStoreUtil.getRawValue(value);
+        if (shouldEncrypt) {
+            try {
+                rawValue = CryptoUtil.encode(CryptoUtil.getDefault(rawValue));
+            } catch (UnsupportedEncodingException | GeneralSecurityException e) {
+                throw new CryptoException(e);
+            }
+        }
+        properties.setProperty(key, rawValue);
     }
 
     @Override
     public void setString(String key, String value) {
-        properties.setProperty(key, PropertySettingStoreUtil.getRawValue(value));
+        try {
+            setString(key, value, false);
+        } catch (CryptoException ignored) {}
+    }
+
+    @Override
+    public void setString(String key, String value, boolean shouldEncrypt) throws CryptoException {
+        String rawValue = PropertySettingStoreUtil.getRawValue(value);
+        if (shouldEncrypt) {
+            try {
+                rawValue = CryptoUtil.encode(CryptoUtil.getDefault(rawValue));
+            } catch (UnsupportedEncodingException | GeneralSecurityException e) {
+                throw new CryptoException(e);
+            }
+        }
+        properties.setProperty(key, rawValue);
     }
 
     @Override
     public String getString(String key, String defaultValue) throws InvalidDataTypeFormatException {
+        try {
+            return getString(key, defaultValue, false);
+        } catch (CryptoException e) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public String getString(String key, String defaultValue, boolean shouldDecrypt)
+            throws InvalidDataTypeFormatException, CryptoException {
         if (properties.containsKey(key)) {
-            Object value = PropertySettingStoreUtil.getValue(properties.get(key).toString());
+            Object value = getDecryptedValue(key, shouldDecrypt);
             if (value instanceof String) {
                 return (String) value;
             }
@@ -87,10 +146,32 @@ public class InternalPluginPreferenceImpl implements PluginPreference {
         return defaultValue;
     }
 
+    private Object getDecryptedValue(String key, boolean shouldDecrypt) throws CryptoException {
+        String rawValue = PropertySettingStoreUtil.getRawValue(properties.get(key).toString());
+        if (shouldDecrypt) {
+            try {
+                rawValue = CryptoUtil.decode(CryptoUtil.getDefault(rawValue));
+            } catch (GeneralSecurityException | IOException e) {
+                throw new CryptoException(e);
+            }
+        }
+        return PropertySettingStoreUtil.getRawValue(rawValue);
+    }
+
     @Override
     public int getInt(String key, int defaultValue) throws InvalidDataTypeFormatException {
+        try {
+            return getInt(key, defaultValue, false);
+        } catch (CryptoException ignored) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public int getInt(String key, int defaultValue, boolean shouldDecrypt)
+            throws InvalidDataTypeFormatException, CryptoException {
         if (properties.containsKey(key)) {
-            Object value = PropertySettingStoreUtil.getValue(properties.get(key).toString());
+            Object value = getDecryptedValue(key, shouldDecrypt);
             if (value instanceof Integer) {
                 return (Integer) value;
             }
@@ -101,8 +182,18 @@ public class InternalPluginPreferenceImpl implements PluginPreference {
 
     @Override
     public boolean getBoolean(String key, boolean defaultValue) throws InvalidDataTypeFormatException {
+        try {
+            return getBoolean(key, defaultValue, false);
+        } catch (CryptoException ignored) {
+            return defaultValue;
+        }
+    }
+
+    @Override
+    public boolean getBoolean(String key, boolean defaultValue, boolean shouldDecrypt)
+            throws InvalidDataTypeFormatException, CryptoException {
         if (properties.containsKey(key)) {
-            Object value = PropertySettingStoreUtil.getValue(properties.get(key).toString());
+            Object value = getDecryptedValue(key, shouldDecrypt);
             if (value instanceof Boolean) {
                 return (Boolean) value;
             }
@@ -131,5 +222,4 @@ public class InternalPluginPreferenceImpl implements PluginPreference {
             }
         }
     }
-
 }

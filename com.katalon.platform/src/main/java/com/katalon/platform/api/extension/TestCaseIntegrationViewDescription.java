@@ -102,6 +102,26 @@ public interface TestCaseIntegrationViewDescription {
         default boolean needsSaving() {
             return false;
         }
+
+        /**
+         * The success callback function after the current editing test case successfully saved. 
+         * 
+         * @param updatedTestCase the updated TestCaseEntity
+         * 
+         * @since 1.0.8
+         */
+        default void onSaveSuccess(TestCaseEntity updatedTestCase) {
+        }
+
+        /**
+         * The failure callback function after the current editing test case was unable to save. 
+         * 
+         * @param exception the root cause failure
+         * 
+         * @since 1.0.8
+         */
+        default void onSaveFailure(Exception exception) {
+        }
     }
 
     /**
