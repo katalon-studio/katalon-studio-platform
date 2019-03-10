@@ -89,4 +89,13 @@
             interfaceClass="com.katalon.platform.api.extension.DynamicQueryingTestSuiteDescription">
       </point>
    </extension>
+   
+   <!-- Add a view to Integration tab of Test Object view -->
+   <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            id="com.katalon.platform.api.extension.testObjectIntegrationViewDescription"
+            interfaceClass="com.katalon.platform.api.extension.TestObjectIntegrationViewDescription">
+      </point>
+   </extension>
 </plugin>
