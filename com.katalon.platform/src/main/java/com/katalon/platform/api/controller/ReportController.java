@@ -55,6 +55,8 @@ public interface ReportController extends Controller {
      * @param report the report entity of TestSuiteRecord
      * @return an instance of TestSuiteRecord
      * @throws ResourceException thrown if KS could not read logs the report.
+     * 
+     * @since 1.0.4
      */
     TestSuiteRecord getTestSuiteRecord(ProjectEntity project, ReportEntity report) throws ResourceException;
 }

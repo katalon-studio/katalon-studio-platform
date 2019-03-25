@@ -56,11 +56,11 @@ public interface FolderController extends Controller {
      * Case 1: There is no <b>New Folder</b> folder under <code>Test Cases</code> then the result is <b>New
      * Folder</b>
      * <br>
-     * Case 2: <b>New Folder</b> folder exists, but <b>New Folder 1</b> doesn't then the result is <b>New Folder
-     * 1</b>
+     * Case 2: <b>New Folder</b> folder exists, but <b>New Folder (1)</b> doesn't then the result is <b>New Folder
+     * (1)</b>
      * <br>
-     * Case 3: <b>New Folder</b> and <b>New Folder 1</b> folder exist, but <b>New Folder 2</b> doesn't then the
-     * result is <b>New Folder 2</b>
+     * Case 3: <b>New Folder</b> and <b>New Folder (1)</b> folder exist, but <b>New Folder (2)</b> doesn't then the
+     * result is <b>New Folder (2)</b>
      * 
      * @param project project an instance of working project. The current working project can retrieve by using
      * {@link ProjectManager#getCurrentProject()}.

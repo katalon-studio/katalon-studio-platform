@@ -62,6 +62,15 @@
             interfaceClass="com.katalon.platform.api.extension.TestCaseIntegrationViewDescription">
       </point>
    </extension>
+   
+   <!-- Add a view to Integration tab of Test Suite view -->
+   <extension
+         point="com.katalon.platform.extensions_point">
+      <point
+            id="com.katalon.platform.api.extension.testSuiteIntegrationViewDescription"
+            interfaceClass="com.katalon.platform.api.extension.TestSuiteIntegrationViewDescription">
+      </point>
+   </extension>
 
    <!-- Add console options and test case filters to Test Suite Console Launcher  -->
       <extension
