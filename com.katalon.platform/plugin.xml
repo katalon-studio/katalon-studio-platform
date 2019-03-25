@@ -89,4 +89,13 @@
             interfaceClass="com.katalon.platform.api.extension.DynamicQueryingTestSuiteDescription">
       </point>
    </extension>
+   
+   <!-- Add a view into Test Suite View -->
+   <extension
+   		point="com.katalon.platform.extensions_point">
+	<point
+		id="com.katalon.platform.api.extension.testSuiteUIViewDescription"
+		interfaceClass="com.katalon.platform.api.extension.TestSuiteUIViewDescription">
+		</point>
+	</extension>
 </plugin>
