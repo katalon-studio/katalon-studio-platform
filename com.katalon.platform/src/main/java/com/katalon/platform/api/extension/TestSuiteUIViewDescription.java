@@ -59,7 +59,7 @@ public interface TestSuiteUIViewDescription {
     }
     
     public interface TestSuiteUIView {
-    	Control onCreateVieW(Composite parent, PartActionService partActionService, 
+    	Control onCreateView(Composite parent, PartActionService partActionService, 
     			TestSuiteEntity testSuiteEntity);
     	
     	default void onSaveSuccess(TestSuiteEntity updatedTestSuite) {
