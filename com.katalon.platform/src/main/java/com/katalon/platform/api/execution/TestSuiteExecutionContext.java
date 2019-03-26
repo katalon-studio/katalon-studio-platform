@@ -6,5 +6,7 @@ public interface TestSuiteExecutionContext extends TestExecutionContext {
 
     String getReportId();
 
+    String getReportLocation();
+    
     List<TestCaseExecutionContext> getTestCaseContexts();
 }
