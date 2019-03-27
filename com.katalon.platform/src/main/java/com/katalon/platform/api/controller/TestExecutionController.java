@@ -11,7 +11,7 @@ import com.katalon.platform.api.exception.PlatformException;
  *
  * @since 1.0.10
  */
-public interface TestExecutionController {
+public interface TestExecutionController extends Controller {
 
     /**
      * Creates a UI test execution by the given <code>args</code>.
