@@ -29,114 +29,122 @@ import com.katalon.platform.api.model.TestSuiteEntity;
  * }
  * </pre>
  * 
- * The <i>implementationClass</i> is the full qualified name of the class that implements
- * TestSuiteUIViewDescription.
+ * The <i>implementationClass</i> is the full qualified name of the class that
+ * implements TestSuiteUIViewDescription.
  * 
  * @since 1.0.10
  *
  */
 public interface TestSuiteUIViewDescription {
-    /**
-     * Id of this extension point
-     * 
-     * @since 1.0.10
-     */
+	/**
+	 * Id of this extension point
+	 * 
+	 * @since 1.0.10
+	 */
 	String EXTENSION_POINT_ID = "com.katalon.platform.api.extension.testSuiteUIViewDescription";
-	
-    /**
-     * @param projectEntity the working project
-     * @return true if this view is visible. Otherwise, false.
-     * @since 1.0.10
-     */
+
+	/**
+	 * @param projectEntity
+	 *            the working project
+	 * @return true if this view is visible. Otherwise, false.
+	 * @since 1.0.10
+	 */
 	default boolean isEnabled(ProjectEntity projectEntity) {
 		return true;
 	}
-	
-    /**
-     * @return Name of this view
-     * @since 1.0.10
-     */
+
+	/**
+	 * @return Name of this view
+	 * @since 1.0.10
+	 */
 	String getName();
-	
-    /**
-     * @return clazz that implements TestSuiteUIView
-     * @since 1.10..0
-     */
-	Class<? extends TestSuiteUIView> getTestSuiteUIView();	
-	
+
+	/**
+	 * @return clazz that implements TestSuiteUIView
+	 * @since 1.10..0
+	 */
+	Class<? extends TestSuiteUIView> getTestSuiteUIView();
+
 	default boolean shouldBeRendered() {
 		return true;
 	}
 
-    /**
-     * A utility that helps the integration view can interact with Test Suite view.
-     * 
-     * @since 1.0.10
-     */
-    public interface PartActionService {
-        /**
-         * Marks the test suite view is able to save.
-         * 
-         * @since 1.0.10
-         */
-    	void markDirty();
-    	
-        /**
-         * Checks the test suite view is able to save or not.
-         * 
-         * @return true if test suite view needs to save. Otherwise, false.
-         * @since 1.0.10
-         */
-        boolean isDirty();
-    }
-    
+	/**
+	 * A utility that helps the integration view can interact with Test Suite
+	 * view.
+	 * 
+	 * @since 1.0.10
+	 */
+	public interface PartActionService {
+		/**
+		 * Marks the test suite view is able to save.
+		 * 
+		 * @since 1.0.10
+		 */
+		void markDirty();
 
-    /**
-     * Describes how the view is displayed.
-     * 
-     * @since 1.0.10
-     */
-    public interface TestSuiteUIView {
-        /**
-         * Creates the view
-         * 
-         * @param parent parent view of this view
-         * @param partActionService utility service that helps to interact with Test Suite view.
-         * @param testSuite the working test suite
-         * @return the created view
-         * @since 1.0.10
-         */
-    	Control onCreateView(Composite parent, PartActionService partActionService, 
-    			TestSuiteEntity testSuiteEntity);
-    	
-    	/**
-    	 * The callback function after the Test Suite Collection view has been rendered.
-    	 * Data initialization should occur inside this implementation
-    	 * 
-    	 * @since 1.0.10
-    	 */
-    	void onPostCreateView();
-        
-    	/**
-         * The success callback function after the current editing test suite successfully saved.
-         * 
-         * @param updatedTestSuite the updated TestSuiteEntity
-         * 
-         * @since 1.0.10
-         */
-    	default void onSaveSuccess(TestSuiteEntity updatedTestSuite) {
-    		
-    	}
-    	
-        /**
-         * The failure callback function after the current editing test suite was unable to save.
-         * 
-         * @param exception the root cause failure
-         * 
-         * @since 1.0.10
-         */
-    	default void onSaveFailure(Exception exception) {
-    		
-    	}    	
-    }
+		/**
+		 * Checks the test suite view is able to save or not.
+		 * 
+		 * @return true if test suite view needs to save. Otherwise, false.
+		 * @since 1.0.10
+		 */
+		boolean isDirty();
+	}
+
+	/**
+	 * Describes how the view is displayed.
+	 * 
+	 * @since 1.0.10
+	 */
+	public interface TestSuiteUIView {
+		/**
+		 * Creates the view
+		 * 
+		 * @param parent
+		 *            parent view of this view
+		 * @param partActionService
+		 *            utility service that helps to interact with Test Suite
+		 *            view.
+		 * @param testSuite
+		 *            the working test suite
+		 * @return the created view
+		 * @since 1.0.10
+		 */
+		Control onCreateView(Composite parent, PartActionService partActionService, TestSuiteEntity testSuiteEntity);
+
+		/**
+		 * The callback function after the Test Suite Collection view has been
+		 * rendered. Data initialization should occur inside this implementation
+		 * 
+		 * @since 1.0.10
+		 */
+		void onPostCreateView();
+
+		/**
+		 * The success callback function after the current editing test suite
+		 * successfully saved.
+		 * 
+		 * @param updatedTestSuite
+		 *            the updated TestSuiteEntity
+		 * 
+		 * @since 1.0.10
+		 */
+		default void onSaveSuccess(TestSuiteEntity updatedTestSuite) {
+
+		}
+
+		/**
+		 * The failure callback function after the current editing test suite
+		 * was unable to save.
+		 * 
+		 * @param exception
+		 *            the root cause failure
+		 * 
+		 * @since 1.0.10
+		 */
+		default void onSaveFailure(Exception exception) {
+
+		}
+	}
 }
