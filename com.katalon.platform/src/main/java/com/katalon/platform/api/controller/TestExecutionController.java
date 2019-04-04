@@ -9,7 +9,7 @@ import com.katalon.platform.api.exception.PlatformException;
  * TestExecutionController is a unique KS Controller to help KS plugins can create a test execution (test suite or test
  * suite collection) via KS commandline arguments system.
  *
- * @since 1.0.10
+ * @since 1.0.11
  */
 public interface TestExecutionController extends Controller {
 
@@ -52,7 +52,7 @@ public interface TestExecutionController extends Controller {
      * <br>
      * <code>args = ["-testSuiteCollectionPath=path_to_B"]</code>
      * @throws PlatformException if the args are invalid.
-     * @since 1.0.10
+     * @since 1.0.11
      */
     public void run(String[] args) throws PlatformException;
 
@@ -99,7 +99,7 @@ public interface TestExecutionController extends Controller {
      * 
      * @param testSuiteInstanceConfiguration contains some configurations for a test suite execution instance.
      * @throws PlatformException if the args are invalid.
-     * @since 1.0.10
+     * @since 1.0.11
      */
     public void run(String[] args, TestSuiteInstanceConfiguration testSuiteInstanceConfiguration)
             throws PlatformException;
@@ -108,13 +108,13 @@ public interface TestExecutionController extends Controller {
      * Describes some configurations of a test execution instance (test suite) such as: VM arguments, environment
      * variables,...
      * 
-     * @since 1.0.10
+     * @since 1.0.11
      */
     public interface TestSuiteInstanceConfiguration {
 
         /**
          * @return an array of VM arguments for a test execution instance.
-         * @since 1.0.10
+         * @since 1.0.11
          */
         default String[] getVmArgs() {
             return new String[0];
@@ -122,7 +122,7 @@ public interface TestExecutionController extends Controller {
 
         /**
          * @return a map of environment variables of the runtime test execution.
-         * @since 1.0.10
+         * @since 1.0.11
          */
         default Map<String, String> getAdditionEnvironmentVariables() {
             return Collections.emptyMap();
@@ -130,7 +130,7 @@ public interface TestExecutionController extends Controller {
 
         /**
          * @return a map of additional data that will use in TestSuiteExecutor.
-         * @since 1.0.10
+         * @since 1.0.11
          */
         default Map<String, String> getAdditionalData() {
             return Collections.emptyMap();

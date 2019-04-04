@@ -17,7 +17,7 @@ import com.katalon.platform.api.service.ProjectManager;
  * @see #addTestSuiteToTestSuiteCollection(ProjectEntity project, String
  *      testSuiteCollectionId, String testSuiteId)
  * 
- * @since 1.0.10
+ * @since 1.0.11
  */
 public interface TestSuiteCollectionController extends Controller {
 
@@ -33,7 +33,7 @@ public interface TestSuiteCollectionController extends Controller {
 	 * @throws ResourceException
 	 *             if KS could not read or access any of the instances
 	 * 
-	 * @since 1.0.10
+	 * @since 1.0.11
 	 * 
 	 */
 	List<TestSuiteCollectionEntity> getAllTestSuiteCollectionsInProject(ProjectEntity project) throws ResourceException;
@@ -53,7 +53,7 @@ public interface TestSuiteCollectionController extends Controller {
 	 * @throws ResourceException
 	 *             if KS could not read or access test suite.
 	 * 
-	 * @since 1.0.10
+	 * @since 1.0.11
 	 */
 	TestSuiteCollectionEntity getTestSuiteCollection(ProjectEntity project, String testSuiteCollectionId)
 			throws ResourceException;
@@ -75,7 +75,7 @@ public interface TestSuiteCollectionController extends Controller {
 	 * @throws ResourceException
 	 *             if KS cannot read or access either the test suite collection
 	 *             or the test suite
-	 * @since 1.0.10           
+	 * @since 1.0.11           
 	 */
 	TestSuiteCollectionEntity addTestSuiteToTestSuiteCollection(ProjectEntity project, String testSuiteCollectionId,
 			String testSuiteId) throws ResourceException;

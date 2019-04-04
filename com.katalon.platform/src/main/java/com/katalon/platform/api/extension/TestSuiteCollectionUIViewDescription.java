@@ -32,14 +32,14 @@ import com.katalon.platform.api.model.TestSuiteCollectionEntity;
  * The <i>implementationClass</i> is the full qualified name of the class that
  * implements TestSuiteCollectionUIViewDescription.
  * 
- * @since 1.0.10
+ * @since 1.0.11
  *
  */
 public interface TestSuiteCollectionUIViewDescription {
 	/**
 	 * Id of this extension point
 	 * 
-	 * @since 1.0.10
+	 * @since 1.0.11
 	 */
 	String EXTENSION_POINT_ID = "com.katalon.platform.api.extension.testSuiteCollectionUIViewDescription";
 
@@ -47,7 +47,7 @@ public interface TestSuiteCollectionUIViewDescription {
 	 * @param projectEntity
 	 *            the working project
 	 * @return true if this view is visible. Otherwise, false.
-	 * @since 1.0.10
+	 * @since 1.0.11
 	 */
 	default boolean isEnabled(ProjectEntity projectEntity) {
 		return true;
@@ -55,13 +55,13 @@ public interface TestSuiteCollectionUIViewDescription {
 
 	/**
 	 * @return Name of this view
-	 * @since 1.0.10
+	 * @since 1.0.11
 	 */
 	String getName();
 
 	/**
 	 * @return clazz that implements TestSuiteCollectionUIView
-	 * @since 1.0.10
+	 * @since 1.0.11
 	 */
 	Class<? extends TestSuiteCollectionUIView> getTestSuiteCollectionUIView();
 
@@ -72,13 +72,13 @@ public interface TestSuiteCollectionUIViewDescription {
 	/**
 	 * A utility that helps this view interact with Test Suite Collection view.
 	 * 
-	 * @since 1.0.10
+	 * @since 1.0.11
 	 */
 	public interface PartActionService {
 		/**
 		 * Marks the test suite collection view is able to save.
 		 * 
-		 * @since 1.0.10
+		 * @since 1.0.11
 		 */
 		void markDirty();
 
@@ -87,7 +87,7 @@ public interface TestSuiteCollectionUIViewDescription {
 		 * 
 		 * @return true if test suite collection view needs to save. Otherwise,
 		 *         false.
-		 * @since 1.0.10
+		 * @since 1.0.11
 		 */
 		boolean isDirty();
 	}
@@ -95,7 +95,7 @@ public interface TestSuiteCollectionUIViewDescription {
 	/**
 	 * Describes how the view is displayed.
 	 * 
-	 * @since 1.0.10
+	 * @since 1.0.11
 	 */
 	public interface TestSuiteCollectionUIView {
 		/**
@@ -109,7 +109,7 @@ public interface TestSuiteCollectionUIViewDescription {
 		 * @param testSuiteCollectionEntity
 		 *            the working test suite collection
 		 * @return the created view
-		 * @since 1.0.10
+		 * @since 1.0.11
 		 */
 		Control onCreateView(Composite parent, PartActionService partActionService,
 				TestSuiteCollectionEntity testSuiteCollectionEntity);
@@ -118,7 +118,7 @@ public interface TestSuiteCollectionUIViewDescription {
 		 * The callback function after the Test Suite Collection view has been
 		 * rendered. Data initialization should occur inside this implementation
 		 * 
-		 * @since 1.0.10
+		 * @since 1.0.11
 		 */
 		void onPostCreateView();
 
@@ -129,7 +129,7 @@ public interface TestSuiteCollectionUIViewDescription {
 		 * @param updatedTestSuiteCollection
 		 *            the updated TestSuiteCollectionEntity
 		 * 
-		 * @since 1.0.10
+		 * @since 1.0.11
 		 */
 		default void onSaveSuccess(TestSuiteCollectionEntity updatedTestSuiteCollection) {
 
@@ -142,7 +142,7 @@ public interface TestSuiteCollectionUIViewDescription {
 		 * @param exception
 		 *            the root cause failure
 		 * 
-		 * @since 1.0.10
+		 * @since 1.0.11
 		 */
 		default void onSaveFailure(Exception exception) {
 
