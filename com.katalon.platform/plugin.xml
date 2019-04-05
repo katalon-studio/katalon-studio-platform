@@ -108,7 +108,7 @@
 		</point>
 	</extension>
 	
-	   <!-- Add a view into Test Suite Collection View -->
+   <!-- Add a view into Test Suite Collection View -->
    <extension
    		point="com.katalon.platform.extensions_point">
 	<point

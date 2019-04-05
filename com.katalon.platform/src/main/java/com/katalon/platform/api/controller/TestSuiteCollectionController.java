@@ -70,7 +70,7 @@ public interface TestSuiteCollectionController extends Controller {
 	 *            id of TestSuiteCollectionEntity
 	 * @param testSuiteId
 	 *            id of the TestSuiteEntity
-	 * @return An instance of TestSuiteCollectionEntit which has the specified
+	 * @return An instance of TestSuiteCollectionEntity which has the specified
 	 *         Test Suite
 	 * @throws ResourceException
 	 *             if KS cannot read or access either the test suite collection
