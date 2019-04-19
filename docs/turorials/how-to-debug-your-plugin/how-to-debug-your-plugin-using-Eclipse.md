@@ -1,5 +1,6 @@
 ## Debug your plugin using Eclipse IDE
 As the previous tutorial, we have announced the how to create platform plugins for Katalon Studio.
+
 This tutorial will illustrate how to debug a platform plugin using Eclipse IDE via [Java Remote Debugging](https://help.eclipse.org/2019-03/topic/org.eclipse.jdt.doc.user/tasks/task-running_and_debugging.htm) feature.
 
 #### Prerequisites:
@@ -13,7 +14,8 @@ Start katalon via commandline using this command:
 ```sh
 <katalon_installed_folder>/katalon -vmargs -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8000
 ```
-The `<katalon_installed_folder>` is the absolute path to Katalon installed folder. If you are using macOS, the `<katalon_installed_folder>` should be `/Applications/Katalon Studio.app/Contents/MacOS`.
+The `<katalon_installed_folder>` is the absolute path to Katalon installed folder. 
+If you are using macOS, the `<katalon_installed_folder>` should be `/Applications/Katalon Studio.app/Contents/MacOS`.
 
 The `address=8000` is a local port number, JVM will allow a debugger to attach to Katalon Studio via this port. You can change to another port if needed.
 
