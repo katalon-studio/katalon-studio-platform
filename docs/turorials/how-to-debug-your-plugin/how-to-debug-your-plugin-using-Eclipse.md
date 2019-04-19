@@ -33,9 +33,11 @@ System.out.println("Hello, my plugin is: " + plugin.getPluginId());
 ### Step 4: Create a Java Remote Application Debugger
 Click on the arrow dropdown of Eclipse debug icon ![debug](https://help.eclipse.org/2019-03/topic/org.eclipse.jdt.doc.user/images/org.eclipse.debug.ui/obj16/ldebug_obj.png), choose `Debug Configuration` item.
 
-Right-click on the `Java Remote Application` and choose `New Configuration`
+![debug_configuration](images/debug_configuration)
 
-![new_remote_debugger](images/new_remote_debugger.png)
+Right-click on the `Java Remote Application` and choose `New Configuration` to add new Remote Debugger
+
+![new_configuration](images/new_configuration)
 
 ### Step 5: Configure the Java Remote Application Debugger
 `Browse` to your platform plugin project at the text field under `Project` section.
@@ -43,6 +45,8 @@ Right-click on the `Java Remote Application` and choose `New Configuration`
 Enter the port number you declared at step 1 to the `Port:` text field under `Connection Properties` section.
 
 Click `Debug` to finish setup.
+
+![new_remote_debugger](images/new_remote_debugger.png)
 
 If your setup is correct, there is a ![disconect](https://help.eclipse.org/luna/rtopic/org.eclipse.cdt.debug.application.doc/images/icon_disconnect.gif) icon will show on Eclipse toolbar.
 
@@ -52,7 +56,7 @@ In this sample, the breakpoint will hit immediately after the plugin succesfiull
 
 ![break_point_hit](images/breakpoint_hit.png)
 
-Now you can debug your platform plugin project as a normal Java project.
+Great, you now can debug your platform plugin project as a normal Java project.
 
 ### Step 7: Disconnect and stop debugging
 Press the ![disconect](https://help.eclipse.org/luna/rtopic/org.eclipse.cdt.debug.application.doc/images/icon_disconnect.gif) icon to disconnect and stop your debugging session.
