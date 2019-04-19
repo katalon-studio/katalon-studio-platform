@@ -33,11 +33,11 @@ System.out.println("Hello, my plugin is: " + plugin.getPluginId());
 ### Step 4: Create a Java Remote Application Debugger
 Click on the arrow dropdown of Eclipse debug icon ![debug](https://help.eclipse.org/2019-03/topic/org.eclipse.jdt.doc.user/images/org.eclipse.debug.ui/obj16/ldebug_obj.png), choose `Debug Configuration` item.
 
-![debug_configuration](images/debug_configuration)
+![debug_configuration](images/debug_configuration.png)
 
 Right-click on the `Java Remote Application` and choose `New Configuration` to add new Remote Debugger
 
-![new_configuration](images/new_configuration)
+![new_configuration](images/new_configuration.png)
 
 ### Step 5: Configure the Java Remote Application Debugger
 `Browse` to your platform plugin project at the text field under `Project` section.
