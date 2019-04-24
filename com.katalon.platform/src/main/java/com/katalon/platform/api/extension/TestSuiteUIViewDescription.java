@@ -106,7 +106,7 @@ public interface TestSuiteUIViewDescription {
 		 * @param partActionService
 		 *            utility service that helps to interact with Test Suite
 		 *            view.
-		 * @param testSuite
+		 * @param testSuiteEntity
 		 *            the working test suite
 		 * @return the created view
 		 * @since 1.0.11
