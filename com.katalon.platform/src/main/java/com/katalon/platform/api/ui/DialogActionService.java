@@ -3,6 +3,7 @@ package com.katalon.platform.api.ui;
 import org.eclipse.swt.widgets.Shell;
 
 import com.katalon.platform.api.exception.PlatformException;
+import com.katalon.platform.api.model.ExecutionProfileEntity;
 import com.katalon.platform.api.model.FolderEntity;
 import com.katalon.platform.api.model.TestCaseEntity;
 import com.katalon.platform.api.model.TestObjectEntity;
@@ -65,6 +66,18 @@ public interface DialogActionService extends UIService {
      */
     TestObjectEntity[] showTestObjectSelectionDialog(Shell parentShell, String dialogTitle) throws PlatformException;
 
+    /**
+     * Opens the execution profile selection and returns the list of selected profiles after users press OK button.
+     * 
+     * @param parentShell parent shell of the dialog.
+     * @param dialogTitle title of the dialog.
+     * @return an array containing selected profiles.
+     * @throws PlatformException thrown if KS could not initialize dialog and return the selected profiles
+     * 
+     * @since 1.0.13
+     */
+    ExecutionProfileEntity[] showExecutionProfileSelectionDialog(Shell parentShell, String dialogTitle) throws PlatformException;
+    
     /**
      * Opens KS preferences dialog
      * 
