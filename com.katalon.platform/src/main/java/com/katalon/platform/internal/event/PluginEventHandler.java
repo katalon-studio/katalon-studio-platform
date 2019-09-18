@@ -118,4 +118,60 @@ public class PluginEventHandler implements EventHandler, PluginInstaller {
         bundle.uninstall();
         return bundle;
     }
+
+    @Override
+    public Bundle register(Bundle bundle) throws BundleException {
+        Plugin userPlugin = PluginManifestParsingUtil.parsePlugin(Platform.getBundle(bundle.getSymbolicName()),
+                Platform.getExtensionRegistry());
+
+        PluginManagerImpl pluginManager = (PluginManagerImpl) ApplicationManager.getInstance().getPluginManager();
+        pluginManager.addPlugin(userPlugin);
+
+        ExtensionManagerImpl extensionManager = (ExtensionManagerImpl) ApplicationManager.getInstance()
+                .getExtensionManager();
+
+        // Register all extensions of this plugin to other plugins
+        extensionManager.registerExtensions(userPlugin);
+
+        // Register all extensions of other plugins to this plugin
+        extensionManager.registerExtensionsPoint(userPlugin);
+
+        IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
+        eventBroker.send("KATALON_PLUGIN/AFTER_ACTIVATION", userPlugin);
+
+        return bundle;
+    }
+
+    @Override
+    public Bundle deregister(Bundle bundle) throws BundleException {
+        String bundleName = bundle.getSymbolicName();
+
+        Application application = ApplicationManager.getInstance();
+        Plugin userPlugin = application.getPluginManager().getPlugin(bundleName);
+        if (userPlugin == null) {
+            return null;
+        }
+
+        IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
+        eventBroker.send("KATALON_PLUGIN/BEFORE_DEACTIVATION", userPlugin);
+
+        ExtensionManagerImpl extensionManager = (ExtensionManagerImpl) application.getExtensionManager();
+
+        // De-register all extensions that is contributing to this plugin.
+        extensionManager.deregisterExtensionsPoint(userPlugin);
+        userPlugin.getExtensionPoints()
+                .stream()
+                .forEach(p -> extensionManager.removeExtensionPoint(p.getExtensionPointId()));
+
+        // De-register all extensions of this plugin from other plugins.
+        extensionManager.deregisterExtensions(userPlugin);
+        userPlugin.getExtensions().forEach(e -> extensionManager.removeExtension(e));
+
+        PluginManagerImpl pluginManager = (PluginManagerImpl) application.getPluginManager();
+        pluginManager.removePlugin(userPlugin);
+
+        bundle.stop();
+        bundle.uninstall();
+        return bundle;
+    }
 }
