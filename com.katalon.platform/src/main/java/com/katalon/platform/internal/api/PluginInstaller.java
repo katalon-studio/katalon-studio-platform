@@ -12,4 +12,6 @@ public interface PluginInstaller {
     Bundle register(Bundle bundle) throws BundleException;
     
     Bundle deregister(Bundle bundle) throws BundleException;
+    
+    Bundle softDeregister(Bundle bundle);
 }

@@ -174,4 +174,35 @@ public class PluginEventHandler implements EventHandler, PluginInstaller {
         bundle.uninstall();
         return bundle;
     }
+
+    @Override
+    public Bundle softDeregister(Bundle bundle) {
+        String bundleName = bundle.getSymbolicName();
+
+        Application application = ApplicationManager.getInstance();
+        Plugin userPlugin = application.getPluginManager().getPlugin(bundleName);
+        if (userPlugin == null) {
+            return null;
+        }
+
+        IEventBroker eventBroker = EclipseContextService.getPlatformService(IEventBroker.class);
+        eventBroker.send("KATALON_PLUGIN/BEFORE_DEACTIVATION", userPlugin);
+
+        ExtensionManagerImpl extensionManager = (ExtensionManagerImpl) application.getExtensionManager();
+
+        // De-register all extensions that is contributing to this plugin.
+        extensionManager.deregisterExtensionsPoint(userPlugin);
+        userPlugin.getExtensionPoints()
+                .stream()
+                .forEach(p -> extensionManager.removeExtensionPoint(p.getExtensionPointId()));
+
+        // De-register all extensions of this plugin from other plugins.
+        extensionManager.deregisterExtensions(userPlugin);
+        userPlugin.getExtensions().forEach(e -> extensionManager.removeExtension(e));
+
+        PluginManagerImpl pluginManager = (PluginManagerImpl) application.getPluginManager();
+        pluginManager.removePlugin(userPlugin);
+        
+        return bundle;
+    }
 }
