@@ -13,44 +13,136 @@ public class ApplicationProxyPreference {
     public static final String PROXY_PREFERENCE_ID = "com.kms.katalon.execution";
 
     public interface ProxyPreferenceConstants {
-        String PROXY_OPTION = "proxy.option";
+        // Kept for backward compatible
+        public static final String PROXY_OPTION = "proxy.option";
 
-        String PROXY_SERVER_TYPE = "proxy.server.type";
+        public static final String PROXY_SERVER_TYPE = "proxy.server.type";
 
-        String PROXY_SERVER_ADDRESS = "proxy.server.address";
+        public static final String PROXY_SERVER_ADDRESS = "proxy.server.address";
 
-        String PROXY_SERVER_PORT = "proxy.server.port";
+        public static final String PROXY_SERVER_PORT = "proxy.server.port";
 
-        String PROXY_USERNAME = "proxy.username";
+        public static final String PROXY_USERNAME = "proxy.username";
 
-        String PROXY_PASSWORD = "proxy.password";
+        public static final String PROXY_PASSWORD = "proxy.password";
 
-        String PROXY_PREFERENCE_SET = "proxy.preferences.set";
+        public static final String PROXY_EXCEPTION_LIST = "proxy.excludes";
 
-        String DISABLE_MOB_BROWSER_PROXY = "proxy.preferences.disableMobRowserProxy";
+        public static final String PROXY_PREFERENCE_SET = "proxy.preferences.set";
+
+        // Authentication Proxy
+        public static final String AUTH_PROXY_OPTION = "proxy.auth.option";
+
+        public static final String AUTH_PROXY_SERVER_TYPE = "proxy.auth.server.type";
+
+        public static final String AUTH_PROXY_SERVER_ADDRESS = "proxy.auth.server.address";
+
+        public static final String AUTH_PROXY_SERVER_PORT = "proxy.auth.server.port";
+
+        public static final String AUTH_PROXY_USERNAME = "proxy.auth.username";
+
+        public static final String AUTH_PROXY_PASSWORD = "proxy.auth.password";
+
+        public static final String AUTH_PROXY_EXCEPTION_LIST = "proxy.auth.excludes";
+
+        public static final String AUTH_PROXY_PREFERENCE_SET = "proxy.auth.preferences.set";
+
+        // System Proxy
+        public static final String SYSTEM_PROXY_OPTION = "proxy.system.option";
+
+        public static final String SYSTEM_PROXY_SERVER_TYPE = "proxy.system.server.type";
+
+        public static final String SYSTEM_PROXY_SERVER_ADDRESS = "proxy.system.server.address";
+
+        public static final String SYSTEM_PROXY_SERVER_PORT = "proxy.system.server.port";
+
+        public static final String SYSTEM_PROXY_USERNAME = "proxy.system.username";
+
+        public static final String SYSTEM_PROXY_PASSWORD = "proxy.system.password";
+
+        public static final String SYSTEM_PROXY_EXCEPTION_LIST = "proxy.system.excludes";
+
+        public static final String SYSTEM_PROXY_APPLY_TO_DESIRED_CAPABILITIES = "proxy.system.applyToDesiredCapabilities";
+
+        public static final String SYSTEM_PROXY_PREFERENCE_SET = "proxy.system.preferences.set";
     }
 
+    @Deprecated
     public static boolean isProxyPreferencesSet() {
         ApplicationPreference store = getPreferenceStore();
         return store.getBoolean(ProxyPreferenceConstants.PROXY_PREFERENCE_SET, false);
     }
 
-    private static ApplicationPreference getPreferenceStore() {
-        return ApplicationManager.getInstance().getPreferenceManager().getApplicationPreference(PROXY_PREFERENCE_ID);
-    }
-
+    @Deprecated
     public static ProxyInformation getProxyInformation() {
         ApplicationPreference store = getPreferenceStore();
         ProxyInformation proxyInfo = new ProxyInformation();
-        proxyInfo.setProxyOption(store.getString(ProxyPreferenceConstants.PROXY_OPTION, ProxyOption.NO_PROXY.name()));
-        proxyInfo.setProxyServerType(
-                store.getString(ProxyPreferenceConstants.PROXY_SERVER_TYPE, ProxyServerType.HTTP.name()));
-        proxyInfo.setProxyServerAddress(store.getString(ProxyPreferenceConstants.PROXY_SERVER_ADDRESS, ""));
+        proxyInfo.setProxyOption(StringUtils.defaultIfEmpty(store.getString(ProxyPreferenceConstants.PROXY_OPTION, StringUtils.EMPTY),
+                ProxyOption.NO_PROXY.name()));
+        proxyInfo.setProxyServerType(StringUtils.defaultIfEmpty(
+                store.getString(ProxyPreferenceConstants.PROXY_SERVER_TYPE, StringUtils.EMPTY), ProxyServerType.HTTP.name()));
+        proxyInfo.setProxyServerAddress(store.getString(ProxyPreferenceConstants.PROXY_SERVER_ADDRESS, StringUtils.EMPTY));
         proxyInfo.setProxyServerPort(store.getInt(ProxyPreferenceConstants.PROXY_SERVER_PORT, 0));
-        proxyInfo.setUsername(store.getString(ProxyPreferenceConstants.PROXY_USERNAME, ""));
-        proxyInfo.setPassword(store.getString(ProxyPreferenceConstants.PROXY_PASSWORD, ""));
-        proxyInfo.setDisableMobBrowserProxy(store.getBoolean(ProxyPreferenceConstants.DISABLE_MOB_BROWSER_PROXY, false));
+        proxyInfo.setUsername(store.getString(ProxyPreferenceConstants.PROXY_USERNAME, StringUtils.EMPTY));
+        proxyInfo.setPassword(store.getString(ProxyPreferenceConstants.PROXY_PASSWORD, StringUtils.EMPTY));
+        proxyInfo.setExceptionList(store.getString(ProxyPreferenceConstants.PROXY_EXCEPTION_LIST, StringUtils.EMPTY));
         return proxyInfo;
+    }
+
+    public static boolean isAuthProxyPreferencesSet() {
+        ApplicationPreference store = getPreferenceStore();
+        return store.getBoolean(ProxyPreferenceConstants.AUTH_PROXY_PREFERENCE_SET, false);
+    }
+
+    public static ProxyInformation getAuthProxyInformation() {
+        if (!isAuthProxyPreferencesSet()) {
+            return getProxyInformation();
+        }
+
+        ApplicationPreference store = getPreferenceStore();
+        ProxyInformation proxyInfo = new ProxyInformation();
+        proxyInfo.setProxyOption(StringUtils.defaultIfEmpty(store.getString(ProxyPreferenceConstants.AUTH_PROXY_OPTION, StringUtils.EMPTY),
+                ProxyOption.NO_PROXY.name()));
+        proxyInfo.setProxyServerType(StringUtils.defaultIfEmpty(
+                store.getString(ProxyPreferenceConstants.AUTH_PROXY_SERVER_TYPE, StringUtils.EMPTY), ProxyServerType.HTTP.name()));
+        proxyInfo.setProxyServerAddress(store.getString(ProxyPreferenceConstants.AUTH_PROXY_SERVER_ADDRESS, StringUtils.EMPTY));
+        proxyInfo.setProxyServerPort(store.getInt(ProxyPreferenceConstants.AUTH_PROXY_SERVER_PORT, 0));
+        proxyInfo.setUsername(store.getString(ProxyPreferenceConstants.AUTH_PROXY_USERNAME, StringUtils.EMPTY));
+        proxyInfo.setPassword(store.getString(ProxyPreferenceConstants.AUTH_PROXY_PASSWORD, StringUtils.EMPTY));
+        proxyInfo.setExceptionList(store.getString(ProxyPreferenceConstants.AUTH_PROXY_EXCEPTION_LIST, StringUtils.EMPTY));
+        return proxyInfo;
+    }
+
+    public static boolean isSystemProxyPreferencesSet() {
+        ApplicationPreference store = getPreferenceStore();
+        return store.getBoolean(ProxyPreferenceConstants.SYSTEM_PROXY_PREFERENCE_SET, false);
+    }
+
+    public static ProxyInformation getSystemProxyInformation() {
+        if (!isSystemProxyPreferencesSet()) {
+            ProxyInformation proxyInfo = getProxyInformation();
+            proxyInfo.setApplyToDesiredCapabilities(true);
+            return proxyInfo;
+        }
+
+        ApplicationPreference store = getPreferenceStore();
+        ProxyInformation proxyInfo = new ProxyInformation();
+        proxyInfo.setProxyOption(StringUtils.defaultIfEmpty(
+                store.getString(ProxyPreferenceConstants.SYSTEM_PROXY_OPTION, StringUtils.EMPTY), ProxyOption.NO_PROXY.name()));
+        proxyInfo.setProxyServerType(StringUtils.defaultIfEmpty(
+                store.getString(ProxyPreferenceConstants.SYSTEM_PROXY_SERVER_TYPE, StringUtils.EMPTY), ProxyServerType.HTTP.name()));
+        proxyInfo.setProxyServerAddress(store.getString(ProxyPreferenceConstants.SYSTEM_PROXY_SERVER_ADDRESS, StringUtils.EMPTY));
+        proxyInfo.setProxyServerPort(store.getInt(ProxyPreferenceConstants.SYSTEM_PROXY_SERVER_PORT, 0));
+        proxyInfo.setUsername(store.getString(ProxyPreferenceConstants.SYSTEM_PROXY_USERNAME, StringUtils.EMPTY));
+        proxyInfo.setPassword(store.getString(ProxyPreferenceConstants.SYSTEM_PROXY_PASSWORD, StringUtils.EMPTY));
+        proxyInfo.setExceptionList(store.getString(ProxyPreferenceConstants.SYSTEM_PROXY_EXCEPTION_LIST, StringUtils.EMPTY));
+        proxyInfo.setApplyToDesiredCapabilities(
+                store.getBoolean(ProxyPreferenceConstants.SYSTEM_PROXY_APPLY_TO_DESIRED_CAPABILITIES, false));
+        return proxyInfo;
+    }
+
+    private static ApplicationPreference getPreferenceStore() {
+        return ApplicationManager.getInstance().getPreferenceManager().getApplicationPreference(PROXY_PREFERENCE_ID);
     }
 
     public static class ProxyInformation {
@@ -63,10 +155,20 @@ public class ApplicationProxyPreference {
         private String password;
 
         private String proxyServerAddress;
-
-        private boolean disableMobBrowserProxy;
-
+        
         private int proxyServerPort;
+        
+        private String exceptionList;
+        
+        private boolean applyToDesiredCapabilities;
+        
+        public String getExceptionList() {
+            return exceptionList;
+        }
+
+        public void setExceptionList(String exceptionList) {
+            this.exceptionList = StringUtils.isNotEmpty(exceptionList) ? exceptionList : "";
+        }
 
         public String getProxyOption() {
             return proxyOption;
@@ -121,26 +223,32 @@ public class ApplicationProxyPreference {
 
         public void setProxyServerPort(String proxyServerPort) {
             try {
-                this.proxyServerPort = Integer
-                        .parseInt(StringUtils.isNotEmpty(proxyServerPort) ? proxyServerPort : "-1");
+                this.proxyServerPort = Integer.parseInt(StringUtils.isNotEmpty(proxyServerPort) ? proxyServerPort : "-1");
             } catch (NumberFormatException ex) {
                 this.proxyServerPort = -1;
             }
         }
 
+        public boolean isApplyToDesiredCapabilities() {
+            return applyToDesiredCapabilities;
+        }
+
+        public void setApplyToDesiredCapabilities(boolean applyToDesiredCapabilities) {
+            this.applyToDesiredCapabilities = applyToDesiredCapabilities;
+        }
+
         @Override
         public String toString() {
-            return "ProxyInformation{" + "proxyOption=" + proxyOption + ", " + "proxyServerType=" + proxyServerType
-                    + ", " + "password=" + password + ", " + "proxyServerAddress=" + proxyServerAddress + ", "
-                    + "proxyServerPort=" + proxyServerPort + "}";
-        }
-
-        public void setDisableMobBrowserProxy(boolean boolean1) {
-            this.disableMobBrowserProxy = boolean1;
-        }
-
-        public boolean getDisableMobBroserProxy() {
-            return disableMobBrowserProxy;
+            return "ProxyInformation { "
+                    + "proxyOption=" + proxyOption + ", "
+                    + "proxyServerType=" + proxyServerType + ", "
+                    + "username=" + username + ", "
+                    + "password=" + "********" + ", "
+                    + "proxyServerAddress=" + proxyServerAddress + ", "
+                    + "proxyServerPort=" + proxyServerPort + ", "
+                    + "executionList=\"" + exceptionList + "\", "
+                    + "isApplyToDesiredCapabilities=" + applyToDesiredCapabilities
+                    + " }";
         }
     }
 

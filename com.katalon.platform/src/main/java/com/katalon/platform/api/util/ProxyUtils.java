@@ -18,9 +18,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.github.markusbernhardt.proxy.ProxySearch;
+import com.github.markusbernhardt.proxy.ProxySearch.Strategy;
+import com.github.markusbernhardt.proxy.selector.misc.BufferedProxySelector.CacheScope;
+import com.github.markusbernhardt.proxy.util.PlatformUtil;
+import com.github.markusbernhardt.proxy.util.PlatformUtil.Platform;
 import com.katalon.platform.api.network.ApplicationProxyPreference;
 import com.katalon.platform.api.network.ApplicationProxyPreference.ProxyInformation;
 import com.katalon.platform.api.network.ApplicationProxyPreference.ProxyOption;
@@ -45,7 +51,7 @@ public class ProxyUtils {
     }
     
     public static Proxy getApplicationProxy() throws URISyntaxException, IOException {
-        return getProxy(ApplicationProxyPreference.getProxyInformation());
+        return getProxy(ApplicationProxyPreference.getSystemProxyInformation());
     }
 
     public static Proxy getProxy(ProxyInformation proxyInfo) throws URISyntaxException, IOException {
@@ -124,6 +130,29 @@ public class ProxyUtils {
         }
 
         return addresses;
+    }
+
+    public static ProxySelector getAutoProxySelector() {
+        ProxySelector proxySelector = getProxySearch().getProxySelector();
+        if (proxySelector == null) {
+            proxySelector = ProxySelector.getDefault();
+        }
+        return proxySelector;
+    }
+    
+    private static ProxySearch getProxySearch() {
+        ProxySearch proxySearch = ProxySearch.getDefaultProxySearch();
+        if (PlatformUtil.getCurrentPlattform() == Platform.WIN) {
+            proxySearch.addStrategy(Strategy.IE);
+            proxySearch.addStrategy(Strategy.FIREFOX);
+        } else if (PlatformUtil.getCurrentPlattform() == Platform.LINUX) {
+            proxySearch.addStrategy(Strategy.GNOME);
+            proxySearch.addStrategy(Strategy.KDE);
+            proxySearch.addStrategy(Strategy.FIREFOX);
+        }
+        // Cache 50 hosts for up to 30 minutes.
+        proxySearch.setPacCacheSettings(50, TimeUnit.MINUTES.toMillis(30), CacheScope.CACHE_SCOPE_HOST);
+        return proxySearch;
     }
 }
 
