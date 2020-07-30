@@ -45,7 +45,7 @@ public class ProxyUtils {
     }
     
     public static Proxy getApplicationProxy() throws URISyntaxException, IOException {
-        return getProxy(ApplicationProxyPreference.getProxyInformation());
+        return getProxy(ApplicationProxyPreference.getSystemProxyInformation());
     }
 
     public static Proxy getProxy(ProxyInformation proxyInfo) throws URISyntaxException, IOException {
