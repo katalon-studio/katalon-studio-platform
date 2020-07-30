@@ -133,16 +133,6 @@
             <artifactId>httpmime</artifactId>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>ca.juliusdavies</groupId>
-            <artifactId>not-yet-commons-ssl</artifactId>
-            <scope>compile</scope>
-        </dependency>
-		<dependency>
-		    <groupId>com.github.markusbernhardt</groupId>
-		    <artifactId>proxy-vole</artifactId>
-               <scope>compile</scope>
-		</dependency>
     </dependencies>
 
     <build>

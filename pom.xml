@@ -34,8 +34,6 @@
         <org.apache.httpcomponents.httpclient.version>4.5.1</org.apache.httpcomponents.httpclient.version>
         <org.apache.httpcomponents.httpcore.version>4.4.4</org.apache.httpcomponents.httpcore.version>
         <org.apache.httpcomponents.httpmime.version>4.5.1</org.apache.httpcomponents.httpmime.version>
-        <not.yet.commons.ssl.version>0.3.11</not.yet.commons.ssl.version>
-        <com.github.markusbernhardt.proxy.vole.version>1.0.4</com.github.markusbernhardt.proxy.vole.version>
 
         <commons-text.version>1.6</commons-text.version>
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
@@ -233,18 +231,6 @@
                 <version>${org.apache.httpcomponents.httpmime.version}</version>
                 <scope>provided</scope>
             </dependency>
-            <dependency>
-                <groupId>ca.juliusdavies</groupId>
-                <artifactId>not-yet-commons-ssl</artifactId>
-                <version>${not.yet.commons.ssl.version}</version>
-                <scope>provided</scope>
-            </dependency>
-			<dependency>
-			    <groupId>com.github.markusbernhardt</groupId>
-			    <artifactId>proxy-vole</artifactId>
-			    <version>${com.github.markusbernhardt.proxy.vole.version}</version>
-                <scope>provided</scope>
-			</dependency>
         </dependencies>
     </dependencyManagement>
 
