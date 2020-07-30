@@ -1,10 +1,8 @@
 package com.katalon.platform.api.controller;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.security.GeneralSecurityException;
-import java.security.KeyManagementException;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -12,21 +10,19 @@ import org.apache.http.client.methods.HttpUriRequest;
 public interface RequestController extends Controller {
 
     /**
-     * Send an HTTP request to a specific server.
+     * Send a HTTP request to the target server.
      * 
      * @param request The HTTP request to send.
      * @return the response from the server.
      */
-    public HttpResponse send(HttpUriRequest request) throws KeyManagementException, MalformedURLException,
-            URISyntaxException, IOException, GeneralSecurityException;
+    public HttpResponse send(HttpUriRequest request) throws URISyntaxException, IOException, GeneralSecurityException;
 
     /**
-     * Send an HTTP request to a specific server.
+     * Send a HTTP request to the target server.
      * 
      * @param request The HTTP request to send.
      * @return the response from the server.
      */
     public HttpResponse sendWithProxy(HttpUriRequest request)
-            throws KeyManagementException, MalformedURLException, URISyntaxException, IOException,
-            GeneralSecurityException;
+            throws URISyntaxException, IOException, GeneralSecurityException;
 }
