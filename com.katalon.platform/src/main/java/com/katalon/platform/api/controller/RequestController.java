@@ -14,6 +14,8 @@ public interface RequestController extends Controller {
      * 
      * @param request The HTTP request to send.
      * @return the response from the server.
+     * 
+     * @since 1.16.0
      */
     public HttpResponse send(HttpUriRequest request) throws URISyntaxException, IOException, GeneralSecurityException;
 
@@ -22,6 +24,8 @@ public interface RequestController extends Controller {
      * 
      * @param request The HTTP request to send.
      * @return the response from the server.
+     * 
+     * @since 1.16.0
      */
     public HttpResponse sendWithProxy(HttpUriRequest request)
             throws URISyntaxException, IOException, GeneralSecurityException;
