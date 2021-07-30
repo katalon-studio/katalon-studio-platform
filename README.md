@@ -55,7 +55,7 @@ com.katalon.platform.internal.*: Internal packages that **should not** be used d
 
 [Debug your plugin using Eclipse IDE](docs/turorials/how-to-debug-your-plugin/how-to-debug-your-plugin-using-Eclipse.md)
 
-[API list](https://github.com/katalon-studio/katalon-studio-platform/blob/master/docs/turorials/apilist.md)
+[API list](docs/turorials/apilist.md)
 
 ## Build
 
