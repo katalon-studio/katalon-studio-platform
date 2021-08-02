@@ -1,6 +1,10 @@
 # Katalon Studio Platform
 
 This open source platform is for developing Katalon Studio plugins.
+
+### Sample plugins
+[Plugin Platform Test](https://github.com/katalon-studio-samples/plugin-platform-test)
+
 ## Running mode (IDE or KRE)
 ```java
 ExecutionController ctl = ApplicationManager.getInstance()
