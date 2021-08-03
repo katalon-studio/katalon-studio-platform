@@ -9,4 +9,8 @@ public interface TestCaseRecord extends LogRecord, HasStatus {
     List<LogRecord> getChildRecords();
 
     List<String> getAttachments();
+
+    boolean isMainResult();
+
+    int getRecordIndex();
 }
