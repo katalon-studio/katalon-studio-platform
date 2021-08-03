@@ -8,5 +8,7 @@ public interface TestSuiteCollectionExecutionContext extends TestExecutionContex
 
     String getReportLocation();
 
+    String getReportFolderLocation();
+
     List<TestSuiteExecutionContext> getTestSuiteResults();
 }
