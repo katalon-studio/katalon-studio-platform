@@ -23,7 +23,7 @@ ExecutionController ctl = ApplicationManager.getInstance()
 System.out.println("JRE location: " + ctl.getJreLocation());
 ```
 
-## JUnit report location
+## Test Suite JUnit report location
 ```java
 ReportController ctl = ApplicationManager.getInstance()
                         .getControllerManager()
@@ -31,4 +31,14 @@ ReportController ctl = ApplicationManager.getInstance()
                         
 ReportEntity report = ctl.getReport(null, reportId);
 System.out.println("Test execution completed - Junit file path: " + report.getJunitReportLocation());
+```
+## Test Suite Collection JUnit report location
+```java
+ReportCollectionController ctl = ApplicationManager.getInstance()
+                        .getControllerManager()
+                        .getController(ReportCollectionController.class);
+                        
+ReportCollectionEntity report = ctl.getReport(reportFolderPath);
+System.out.println("Test suite collection execution completed - Junit file path: "
+                            + report.getJunitReportLocation());                    
 ```
