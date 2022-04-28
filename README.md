@@ -51,11 +51,12 @@ com.katalon.platform.internal.*: Internal packages that **should not** be used d
 
 [Create your first Katalon Studio plugin](/docs/turorials/create-your-first-plugin.md)
 
+
 [Create Katalon Studio plugin using Gradle](/docs/turorials/create-plugin-using-gradle/create-plugin-using-gradle.md)
 
-[Debug your plugin using Eclipse IDE](docs/turorials/how-to-debug-your-plugin/how-to-debug-your-plugin-using-Eclipse.md)
+[Debug your plugin using Eclipse IDE](/docs/turorials/how-to-debug-your-plugin/how-to-debug-your-plugin-using-Eclipse.md)
 
-[API list](docs/turorials/apilist.md)
+[API list](/docs/turorials/apilist.md)
 
 ## Build
 
