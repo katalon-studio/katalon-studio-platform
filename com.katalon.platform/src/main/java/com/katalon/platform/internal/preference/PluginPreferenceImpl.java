@@ -146,7 +146,8 @@ public class PluginPreferenceImpl implements PluginPreference {
         String decryptedValue = String.valueOf(PropertySettingStoreUtil.getValue(properties.get(key).toString()));
         if (shouldDecrypt) {
             try {
-                decryptedValue = CryptoUtil.decode(CryptoUtil.getDefault(decryptedValue));
+                decryptedValue = String.valueOf(
+                        PropertySettingStoreUtil.getValue(CryptoUtil.decode(CryptoUtil.getDefault(decryptedValue))));
             } catch (GeneralSecurityException | IOException e) {
                 throw new CryptoException(e);
             }

@@ -5,7 +5,7 @@
 
     <groupId>com.katalon</groupId>
     <artifactId>com.katalon.platform.parent</artifactId>
-    <version>1.0.20</version>
+    <version>1.0.21</version>
     <packaging>pom</packaging>
 
     <properties>
@@ -52,7 +52,7 @@
     <inceptionYear>2018</inceptionYear>
 
     <organization>
-        <name>Katalon, LLC.</name>
+        <name>Katalon, Inc.</name>
         <url>https://www.katalon.com</url>
     </organization>
 
@@ -68,7 +68,7 @@
         <developer>
             <name>Katalon Team</name>
             <email>info@katalon.com</email>
-            <organization>Katalon, LLC.</organization>
+            <organization>Katalon, Inc.</organization>
             <organizationUrl>https://www.katalon.com</organizationUrl>
         </developer>
     </developers>
