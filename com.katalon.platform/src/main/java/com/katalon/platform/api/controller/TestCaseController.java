@@ -81,6 +81,21 @@ public interface TestCaseController extends Controller {
             throws ResourceException;
 
     /**
+     * Removes the specified <code>integration</code> into the given <code>testCase</code>
+     *
+     * @param project an instance of working project. The current working project can retrieve by using
+     * {@link ProjectManager#getCurrentProject()}.
+     * @param testCase the test case needs to be updated
+     * @param integrationName the integration name
+     * @return the updated test case
+     * @throws ResourceException if KS could not modify test case.
+     *
+     * @since 1.0.22
+     */
+    TestCaseEntity removeIntegration(ProjectEntity project, TestCaseEntity testCase, String integrationName)
+            throws ResourceException;
+
+    /**
      * Returns an available test case name for the given <code>name</code>
      * <p>
      * Sample of using: We want to create a test case with name <b>New Test Case</b> under root folder <i>Test Cases</i>
