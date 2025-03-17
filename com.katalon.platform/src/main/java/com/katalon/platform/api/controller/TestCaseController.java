@@ -81,7 +81,7 @@ public interface TestCaseController extends Controller {
             throws ResourceException;
 
     /**
-     * Removes the specified <code>integration</code> into the given <code>testCase</code>
+     * Removes the specified <code>integration</code> from the given <code>testCase</code>
      *
      * @param project an instance of working project. The current working project can retrieve by using
      * {@link ProjectManager#getCurrentProject()}.
