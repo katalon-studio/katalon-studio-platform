@@ -5,7 +5,7 @@
 
     <groupId>com.katalon</groupId>
     <artifactId>com.katalon.platform.parent</artifactId>
-    <version>1.0.22.beta1</version>
+    <version>1.0.22</version>
     <packaging>pom</packaging>
 
     <properties>
