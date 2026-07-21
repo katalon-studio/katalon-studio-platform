@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.katalon</groupId>
         <artifactId>com.katalon.platform.parent</artifactId>
-        <version>1.0.23</version>
+        <version>1.0.25</version>
     </parent>
 
     <artifactId>com.katalon.platform</artifactId>
@@ -138,6 +138,18 @@
     		<artifactId>org.eclipse.equinox.common</artifactId>
     		<version>3.12.0</version>
 		</dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -174,4 +186,4 @@
             </plugin>
         </plugins>
     </build>
-</project> 
+</project>

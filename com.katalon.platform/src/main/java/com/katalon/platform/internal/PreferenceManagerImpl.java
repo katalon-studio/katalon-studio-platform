@@ -3,18 +3,15 @@ package com.katalon.platform.internal;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.eclipse.core.runtime.preferences.InstanceScope;
-
 import com.katalon.platform.api.exception.ResourceException;
 import com.katalon.platform.api.model.Entity;
 import com.katalon.platform.api.preference.ApplicationPreference;
 import com.katalon.platform.api.preference.PluginPreference;
 import com.katalon.platform.api.service.ApplicationManager;
 import com.katalon.platform.api.service.PreferenceManager;
-import com.katalon.platform.internal.preference.ApplicationPreferenceImp;
+import com.katalon.platform.internal.preference.CoreApplicationPreference;
 import com.katalon.platform.internal.preference.InternalPluginPreferenceImpl;
 import com.katalon.platform.internal.preference.PluginPreferenceImpl;
-import com.katalon.platform.internal.preference.ScopedPreferenceStore;
 
 public class PreferenceManagerImpl implements PreferenceManager {
 
@@ -54,8 +51,7 @@ public class PreferenceManagerImpl implements PreferenceManager {
         if (applicationPreferences.containsKey(pluginId)) {
             return applicationPreferences.get(pluginId);
         }
-        ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(InstanceScope.INSTANCE, pluginId);
-        ApplicationPreference preference = new ApplicationPreferenceImp(pluginId, scopedPreferenceStore);
+        ApplicationPreference preference = new CoreApplicationPreference(pluginId);
         applicationPreferences.put(pluginId, preference);
         return preference;
     }
