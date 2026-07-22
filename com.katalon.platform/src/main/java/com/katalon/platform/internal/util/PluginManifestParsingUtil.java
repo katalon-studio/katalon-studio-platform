@@ -40,7 +40,8 @@ public class PluginManifestParsingUtil {
                     String pluginId = e.getNamespaceIdentifier();
                     String extensionId = element.getAttribute(ExtensionConstants.ATTR_ID);
                     String extensionPointId = element.getAttribute(ExtensionConstants.ATTR_EXTENSION_POINT_ID);
-                    if (isHeadlessRuntime() && extensionManager.getExtensionPoint(extensionPointId) == null) {
+                    if (!isExtensionContributionAvailable(System.getProperty(RUNTIME_PROPERTY), extensionRegistry,
+                            extensionPointId)) {
                         continue;
                     }
                     Object implementationClass = element
@@ -92,7 +93,17 @@ public class PluginManifestParsingUtil {
         return !HEADLESS_RUNTIME.equalsIgnoreCase(runtime) || !Boolean.parseBoolean(requiresUi);
     }
 
-    private static boolean isHeadlessRuntime() {
-        return HEADLESS_RUNTIME.equalsIgnoreCase(System.getProperty(RUNTIME_PROPERTY));
+    static boolean isExtensionContributionAvailable(String runtime, IExtensionRegistry extensionRegistry,
+            String extensionPointId) {
+        if (!HEADLESS_RUNTIME.equalsIgnoreCase(runtime)) {
+            return true;
+        }
+        for (IConfigurationElement declaration : extensionRegistry
+                .getConfigurationElementsFor(ExtensionConstants.EXTENSION_POINT_ID)) {
+            if (extensionPointId.equals(declaration.getAttribute(ExtensionConstants.ATTR_ID))) {
+                return !Boolean.parseBoolean(declaration.getAttribute(ATTR_REQUIRES_UI));
+            }
+        }
+        return true;
     }
 }
