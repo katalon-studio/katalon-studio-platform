@@ -26,6 +26,10 @@ import com.katalon.platform.internal.ApplicationImpl;
 
 public class PluginManifestParsingUtilTest {
 
+    private static final String UI_EXTENSION_POINT = "com.katalon.platform.api.extension.newToolItem";
+
+    private static final String RUNTIME_EXTENSION_POINT = "runtime.point";
+
     private String previousRuntime;
 
     private Application previousApplication;
@@ -49,14 +53,14 @@ public class PluginManifestParsingUtilTest {
 
     @Test
     public void desktopRuntimeKeepsUiExtensionPoints() {
-        assertTrue(PluginManifestParsingUtil.isExtensionPointAvailable(null, "true"));
-        assertTrue(PluginManifestParsingUtil.isExtensionPointAvailable("desktop", "true"));
+        assertTrue(PluginManifestParsingUtil.isExtensionPointAvailable(null, UI_EXTENSION_POINT));
+        assertTrue(PluginManifestParsingUtil.isExtensionPointAvailable("desktop", UI_EXTENSION_POINT));
     }
 
     @Test
     public void headlessRuntimeKeepsOnlyNonUiExtensionPoints() {
-        assertFalse(PluginManifestParsingUtil.isExtensionPointAvailable("headless", "true"));
-        assertTrue(PluginManifestParsingUtil.isExtensionPointAvailable("headless", "false"));
+        assertFalse(PluginManifestParsingUtil.isExtensionPointAvailable("headless", UI_EXTENSION_POINT));
+        assertTrue(PluginManifestParsingUtil.isExtensionPointAvailable("headless", RUNTIME_EXTENSION_POINT));
         assertTrue(PluginManifestParsingUtil.isExtensionPointAvailable("headless", null));
     }
 
@@ -65,10 +69,9 @@ public class PluginManifestParsingUtilTest {
         System.setProperty(PluginManifestParsingUtil.RUNTIME_PROPERTY, "headless");
         AtomicInteger constructions = new AtomicInteger();
         IConfigurationElement declaration = configuration(attributes(
-                ExtensionConstants.ATTR_ID, "ui.point",
+                ExtensionConstants.ATTR_ID, UI_EXTENSION_POINT,
                 ExtensionConstants.ATTR_INTERFACE_CLASS, "example.UiExtension",
-                ExtensionConstants.ATTR_SERVICE_CLASS, "example.UiListener",
-                "requiresUI", "true"), constructions, new ExtensionListener() { });
+                ExtensionConstants.ATTR_SERVICE_CLASS, "example.UiListener"), constructions, new ExtensionListener() { });
         Plugin plugin = PluginManifestParsingUtil.parsePlugin(bundle(),
                 registry(new IExtension[] { extension(ExtensionConstants.EXTENSION_POINT_ID, declaration) },
                         new IConfigurationElement[] { declaration }));
@@ -82,10 +85,9 @@ public class PluginManifestParsingUtilTest {
         System.clearProperty(PluginManifestParsingUtil.RUNTIME_PROPERTY);
         AtomicInteger constructions = new AtomicInteger();
         IConfigurationElement declaration = configuration(attributes(
-                ExtensionConstants.ATTR_ID, "ui.point",
+                ExtensionConstants.ATTR_ID, UI_EXTENSION_POINT,
                 ExtensionConstants.ATTR_INTERFACE_CLASS, "example.UiExtension",
-                ExtensionConstants.ATTR_SERVICE_CLASS, "example.UiListener",
-                "requiresUI", "true"), constructions, new ExtensionListener() { });
+                ExtensionConstants.ATTR_SERVICE_CLASS, "example.UiListener"), constructions, new ExtensionListener() { });
         Plugin plugin = PluginManifestParsingUtil.parsePlugin(bundle(),
                 registry(new IExtension[] { extension(ExtensionConstants.EXTENSION_POINT_ID, declaration) },
                         new IConfigurationElement[] { declaration }));
@@ -97,18 +99,15 @@ public class PluginManifestParsingUtilTest {
     @Test
     public void headlessRuntimeDoesNotConstructContributionForUiExtensionPoint() {
         System.setProperty(PluginManifestParsingUtil.RUNTIME_PROPERTY, "headless");
-        IConfigurationElement declaration = configuration(attributes(
-                ExtensionConstants.ATTR_ID, "ui.point", "requiresUI", "true"),
-                new AtomicInteger(), null);
         AtomicInteger constructions = new AtomicInteger();
         IConfigurationElement contribution = configuration(attributes(
                 ExtensionConstants.ATTR_ID, "ui.extension",
-                ExtensionConstants.ATTR_EXTENSION_POINT_ID, "ui.point",
+                ExtensionConstants.ATTR_EXTENSION_POINT_ID, UI_EXTENSION_POINT,
                 ExtensionConstants.ATTR_IMPLEMENTATION_CLASS, "example.UiExtension"),
                 constructions, new Object());
         Plugin plugin = PluginManifestParsingUtil.parsePlugin(bundle(),
                 registry(new IExtension[] { extension(ExtensionConstants.EXTENSION_ID, contribution) },
-                        new IConfigurationElement[] { declaration }));
+                        new IConfigurationElement[0]));
 
         assertEquals(0, constructions.get());
         assertTrue(plugin.getExtensions().isEmpty());

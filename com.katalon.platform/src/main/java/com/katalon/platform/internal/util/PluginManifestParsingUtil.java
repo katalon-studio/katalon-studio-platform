@@ -1,5 +1,11 @@
 package com.katalon.platform.internal.util;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Collections;
+import java.util.Properties;
+import java.util.Set;
+
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
@@ -24,7 +30,9 @@ public class PluginManifestParsingUtil {
 
     static final String HEADLESS_RUNTIME = "headless";
 
-    private static final String ATTR_REQUIRES_UI = "requiresUI";
+    private static final String HEADLESS_UI_EXTENSION_POINTS_RESOURCE = "/headless-ui-extension-points.properties";
+
+    private static final Set<String> HEADLESS_UI_EXTENSION_POINTS = loadHeadlessUiExtensionPoints();
 
     public static Plugin parsePlugin(Bundle bundle, IExtensionRegistry extensionRegistry) {
         ExtensionManagerImpl extensionManager = (ExtensionManagerImpl) ApplicationManager.getInstance()
@@ -40,8 +48,7 @@ public class PluginManifestParsingUtil {
                     String pluginId = e.getNamespaceIdentifier();
                     String extensionId = element.getAttribute(ExtensionConstants.ATTR_ID);
                     String extensionPointId = element.getAttribute(ExtensionConstants.ATTR_EXTENSION_POINT_ID);
-                    if (!isExtensionContributionAvailable(System.getProperty(RUNTIME_PROPERTY), extensionRegistry,
-                            extensionPointId)) {
+                    if (!isExtensionPointAvailable(System.getProperty(RUNTIME_PROPERTY), extensionPointId)) {
                         continue;
                     }
                     Object implementationClass = element
@@ -61,12 +68,11 @@ public class PluginManifestParsingUtil {
             if (e.getExtensionPointUniqueIdentifier().equals(ExtensionConstants.EXTENSION_POINT_ID)) {
                 try {
                     IConfigurationElement element = e.getConfigurationElements()[0];
-                    if (!isExtensionPointAvailable(System.getProperty(RUNTIME_PROPERTY),
-                            element.getAttribute(ATTR_REQUIRES_UI))) {
+                    String extensionPointId = element.getAttribute(ExtensionConstants.ATTR_ID);
+                    if (!isExtensionPointAvailable(System.getProperty(RUNTIME_PROPERTY), extensionPointId)) {
                         continue;
                     }
                     String pluginId = e.getNamespaceIdentifier();
-                    String extensionPointId = element.getAttribute(ExtensionConstants.ATTR_ID);
                     String interfaceClassName = element.getAttribute(ExtensionConstants.ATTR_INTERFACE_CLASS);
 
                     ExtensionListener serviceClass = null;
@@ -89,21 +95,29 @@ public class PluginManifestParsingUtil {
         return pluginImpl;
     }
 
-    static boolean isExtensionPointAvailable(String runtime, String requiresUi) {
-        return !HEADLESS_RUNTIME.equalsIgnoreCase(runtime) || !Boolean.parseBoolean(requiresUi);
+    static boolean isExtensionPointAvailable(String runtime, String extensionPointId) {
+        return !HEADLESS_RUNTIME.equalsIgnoreCase(runtime) || !HEADLESS_UI_EXTENSION_POINTS.contains(extensionPointId);
     }
 
-    static boolean isExtensionContributionAvailable(String runtime, IExtensionRegistry extensionRegistry,
-            String extensionPointId) {
-        if (!HEADLESS_RUNTIME.equalsIgnoreCase(runtime)) {
-            return true;
+    private static Set<String> loadHeadlessUiExtensionPoints() {
+        Properties properties = new Properties();
+        try (InputStream input = PluginManifestParsingUtil.class
+                .getResourceAsStream(HEADLESS_UI_EXTENSION_POINTS_RESOURCE)) {
+            if (input == null) {
+                throw new IllegalStateException(
+                        "Missing platform resource " + HEADLESS_UI_EXTENSION_POINTS_RESOURCE);
+            }
+            properties.load(input);
+        } catch (IOException error) {
+            throw new IllegalStateException(
+                    "Cannot load platform resource " + HEADLESS_UI_EXTENSION_POINTS_RESOURCE, error);
         }
-        for (IConfigurationElement declaration : extensionRegistry
-                .getConfigurationElementsFor(ExtensionConstants.EXTENSION_POINT_ID)) {
-            if (extensionPointId.equals(declaration.getAttribute(ExtensionConstants.ATTR_ID))) {
-                return !Boolean.parseBoolean(declaration.getAttribute(ATTR_REQUIRES_UI));
+        for (String extensionPointId : properties.stringPropertyNames()) {
+            if (!Boolean.parseBoolean(properties.getProperty(extensionPointId))) {
+                throw new IllegalStateException(
+                        "Invalid headless UI extension point declaration: " + extensionPointId);
             }
         }
-        return true;
+        return Collections.unmodifiableSet(properties.stringPropertyNames());
     }
 }

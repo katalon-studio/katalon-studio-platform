@@ -30,7 +30,6 @@
       <point
             id="com.katalon.platform.api.extension.newToolItem"
             interfaceClass="com.katalon.platform.api.extension.ToolItemDescription"
-            requiresUI="true"
             serviceClass="com.katalon.platform.internal.ui.toolbar.AddToolItemExtensionListener">
       </point>
    </extension>
@@ -41,7 +40,6 @@
 	  <point
             id="com.katalon.platform.api.extension.newDropdownToolItem"
             interfaceClass="com.katalon.platform.api.extension.ToolItemWithMenuDescription"
-            requiresUI="true"
             serviceClass="com.katalon.platform.internal.ui.toolbar.AddToolItemWithMenuExtensionListener">
       </point>	
    	</extension>
@@ -52,7 +50,6 @@
       <point
             id="com.katalon.platform.api.extension.pluginPreferencePage"
             interfaceClass="com.katalon.platform.api.extension.PluginPreferencePage"
-            requiresUI="true"
             serviceClass="com.katalon.platform.internal.ui.preference.PluginPreferencePageExtensionListener">
       </point>
    </extension>
@@ -62,8 +59,7 @@
          point="com.katalon.platform.extensions_point">
       <point
             id="com.katalon.platform.api.extension.testCaseIntegrationViewDescription"
-            interfaceClass="com.katalon.platform.api.extension.TestCaseIntegrationViewDescription"
-            requiresUI="true">
+            interfaceClass="com.katalon.platform.api.extension.TestCaseIntegrationViewDescription">
       </point>
    </extension>
    
@@ -72,8 +68,7 @@
          point="com.katalon.platform.extensions_point">
       <point
             id="com.katalon.platform.api.extension.testSuiteIntegrationViewDescription"
-            interfaceClass="com.katalon.platform.api.extension.TestSuiteIntegrationViewDescription"
-            requiresUI="true">
+            interfaceClass="com.katalon.platform.api.extension.TestSuiteIntegrationViewDescription">
       </point>
    </extension>
 
@@ -91,8 +86,7 @@
          point="com.katalon.platform.extensions_point">
       <point
             id="com.katalon.platform.api.extension.reportIntegrationViewDescription"
-            interfaceClass="com.katalon.platform.api.extension.ReportIntegrationViewDescription"
-            requiresUI="true">
+            interfaceClass="com.katalon.platform.api.extension.ReportIntegrationViewDescription">
       </point>
    </extension>
    
@@ -110,8 +104,7 @@
    		point="com.katalon.platform.extensions_point">
 	<point
 		id="com.katalon.platform.api.extension.testSuiteUIViewDescription"
-		interfaceClass="com.katalon.platform.api.extension.TestSuiteUIViewDescription"
-		requiresUI="true">
+		interfaceClass="com.katalon.platform.api.extension.TestSuiteUIViewDescription">
 		</point>
 	</extension>
 	
@@ -120,8 +113,7 @@
    		point="com.katalon.platform.extensions_point">
 	<point
 		id="com.katalon.platform.api.extension.testSuiteCollectionUIViewDescription"
-		interfaceClass="com.katalon.platform.api.extension.TestSuiteCollectionUIViewDescription"
-		requiresUI="true">
+		interfaceClass="com.katalon.platform.api.extension.TestSuiteCollectionUIViewDescription">
 		</point>
 	</extension>
 </plugin>
