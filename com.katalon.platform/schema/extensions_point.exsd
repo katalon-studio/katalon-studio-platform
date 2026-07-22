@@ -73,6 +73,13 @@
                </appinfo>
             </annotation>
          </attribute>
+         <attribute name="requiresUI" type="boolean" use="default" value="false">
+            <annotation>
+               <documentation>
+                  Whether this extension point requires the desktop UI runtime.
+               </documentation>
+            </annotation>
+         </attribute>
       </complexType>
    </element>
 
