@@ -159,7 +159,6 @@
                 <includes>
                     <include>schema/</include>
                     <include>plugin.xml</include>
-                    <include>headless-ui-extension-points.properties</include>
                 </includes>
             </resource>
         </resources>

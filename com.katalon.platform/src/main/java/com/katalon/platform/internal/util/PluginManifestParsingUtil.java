@@ -1,9 +1,8 @@
 package com.katalon.platform.internal.util;
 
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.Arrays;
 import java.util.Collections;
-import java.util.Properties;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.core.runtime.CoreException;
@@ -30,9 +29,16 @@ public class PluginManifestParsingUtil {
 
     static final String HEADLESS_RUNTIME = "headless";
 
-    private static final String HEADLESS_UI_EXTENSION_POINTS_RESOURCE = "/headless-ui-extension-points.properties";
-
-    private static final Set<String> HEADLESS_UI_EXTENSION_POINTS = loadHeadlessUiExtensionPoints();
+    private static final Set<String> HEADLESS_UI_EXTENSION_POINTS = Collections.unmodifiableSet(new HashSet<>(
+            Arrays.asList(
+                    "com.katalon.platform.api.extension.newToolItem",
+                    "com.katalon.platform.api.extension.newDropdownToolItem",
+                    "com.katalon.platform.api.extension.pluginPreferencePage",
+                    "com.katalon.platform.api.extension.testCaseIntegrationViewDescription",
+                    "com.katalon.platform.api.extension.testSuiteIntegrationViewDescription",
+                    "com.katalon.platform.api.extension.reportIntegrationViewDescription",
+                    "com.katalon.platform.api.extension.testSuiteUIViewDescription",
+                    "com.katalon.platform.api.extension.testSuiteCollectionUIViewDescription")));
 
     public static Plugin parsePlugin(Bundle bundle, IExtensionRegistry extensionRegistry) {
         ExtensionManagerImpl extensionManager = (ExtensionManagerImpl) ApplicationManager.getInstance()
@@ -99,25 +105,4 @@ public class PluginManifestParsingUtil {
         return !HEADLESS_RUNTIME.equalsIgnoreCase(runtime) || !HEADLESS_UI_EXTENSION_POINTS.contains(extensionPointId);
     }
 
-    private static Set<String> loadHeadlessUiExtensionPoints() {
-        Properties properties = new Properties();
-        try (InputStream input = PluginManifestParsingUtil.class
-                .getResourceAsStream(HEADLESS_UI_EXTENSION_POINTS_RESOURCE)) {
-            if (input == null) {
-                throw new IllegalStateException(
-                        "Missing platform resource " + HEADLESS_UI_EXTENSION_POINTS_RESOURCE);
-            }
-            properties.load(input);
-        } catch (IOException error) {
-            throw new IllegalStateException(
-                    "Cannot load platform resource " + HEADLESS_UI_EXTENSION_POINTS_RESOURCE, error);
-        }
-        for (String extensionPointId : properties.stringPropertyNames()) {
-            if (!Boolean.parseBoolean(properties.getProperty(extensionPointId))) {
-                throw new IllegalStateException(
-                        "Invalid headless UI extension point declaration: " + extensionPointId);
-            }
-        }
-        return Collections.unmodifiableSet(properties.stringPropertyNames());
-    }
 }

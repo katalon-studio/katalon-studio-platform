@@ -5,7 +5,9 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Proxy;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -26,7 +28,17 @@ import com.katalon.platform.internal.ApplicationImpl;
 
 public class PluginManifestParsingUtilTest {
 
-    private static final String UI_EXTENSION_POINT = "com.katalon.platform.api.extension.newToolItem";
+    private static final List<String> UI_EXTENSION_POINTS = Arrays.asList(
+            "com.katalon.platform.api.extension.newToolItem",
+            "com.katalon.platform.api.extension.newDropdownToolItem",
+            "com.katalon.platform.api.extension.pluginPreferencePage",
+            "com.katalon.platform.api.extension.testCaseIntegrationViewDescription",
+            "com.katalon.platform.api.extension.testSuiteIntegrationViewDescription",
+            "com.katalon.platform.api.extension.reportIntegrationViewDescription",
+            "com.katalon.platform.api.extension.testSuiteUIViewDescription",
+            "com.katalon.platform.api.extension.testSuiteCollectionUIViewDescription");
+
+    private static final String UI_EXTENSION_POINT = UI_EXTENSION_POINTS.get(0);
 
     private static final String RUNTIME_EXTENSION_POINT = "runtime.point";
 
@@ -59,7 +71,9 @@ public class PluginManifestParsingUtilTest {
 
     @Test
     public void headlessRuntimeKeepsOnlyNonUiExtensionPoints() {
-        assertFalse(PluginManifestParsingUtil.isExtensionPointAvailable("headless", UI_EXTENSION_POINT));
+        for (String extensionPointId : UI_EXTENSION_POINTS) {
+            assertFalse(PluginManifestParsingUtil.isExtensionPointAvailable("headless", extensionPointId));
+        }
         assertTrue(PluginManifestParsingUtil.isExtensionPointAvailable("headless", RUNTIME_EXTENSION_POINT));
         assertTrue(PluginManifestParsingUtil.isExtensionPointAvailable("headless", null));
     }
@@ -68,16 +82,19 @@ public class PluginManifestParsingUtilTest {
     public void headlessRuntimeDoesNotConstructUiExtensionPointListener() {
         System.setProperty(PluginManifestParsingUtil.RUNTIME_PROPERTY, "headless");
         AtomicInteger constructions = new AtomicInteger();
-        IConfigurationElement declaration = configuration(attributes(
-                ExtensionConstants.ATTR_ID, UI_EXTENSION_POINT,
-                ExtensionConstants.ATTR_INTERFACE_CLASS, "example.UiExtension",
-                ExtensionConstants.ATTR_SERVICE_CLASS, "example.UiListener"), constructions, new ExtensionListener() { });
-        Plugin plugin = PluginManifestParsingUtil.parsePlugin(bundle(),
-                registry(new IExtension[] { extension(ExtensionConstants.EXTENSION_POINT_ID, declaration) },
-                        new IConfigurationElement[] { declaration }));
+        for (String extensionPointId : UI_EXTENSION_POINTS) {
+            IConfigurationElement declaration = configuration(attributes(
+                    ExtensionConstants.ATTR_ID, extensionPointId,
+                    ExtensionConstants.ATTR_INTERFACE_CLASS, "example.UiExtension",
+                    ExtensionConstants.ATTR_SERVICE_CLASS, "example.UiListener"), constructions,
+                    new ExtensionListener() { });
+            Plugin plugin = PluginManifestParsingUtil.parsePlugin(bundle(),
+                    registry(new IExtension[] { extension(ExtensionConstants.EXTENSION_POINT_ID, declaration) },
+                            new IConfigurationElement[] { declaration }));
 
-        assertEquals(0, constructions.get());
-        assertTrue(plugin.getExtensionPoints().isEmpty());
+            assertEquals(0, constructions.get());
+            assertTrue(plugin.getExtensionPoints().isEmpty());
+        }
     }
 
     @Test
@@ -100,6 +117,53 @@ public class PluginManifestParsingUtilTest {
     public void headlessRuntimeDoesNotConstructContributionForUiExtensionPoint() {
         System.setProperty(PluginManifestParsingUtil.RUNTIME_PROPERTY, "headless");
         AtomicInteger constructions = new AtomicInteger();
+        for (String extensionPointId : UI_EXTENSION_POINTS) {
+            IConfigurationElement contribution = configuration(attributes(
+                    ExtensionConstants.ATTR_ID, "ui.extension",
+                    ExtensionConstants.ATTR_EXTENSION_POINT_ID, extensionPointId,
+                    ExtensionConstants.ATTR_IMPLEMENTATION_CLASS, "example.UiExtension"),
+                    constructions, new Object());
+            Plugin plugin = PluginManifestParsingUtil.parsePlugin(bundle(),
+                    registry(new IExtension[] { extension(ExtensionConstants.EXTENSION_ID, contribution) },
+                            new IConfigurationElement[0]));
+
+            assertEquals(0, constructions.get());
+            assertTrue(plugin.getExtensions().isEmpty());
+        }
+    }
+
+    @Test
+    public void headlessRuntimeConstructsKnownRuntimeExtensionPointAndContribution() {
+        System.setProperty(PluginManifestParsingUtil.RUNTIME_PROPERTY, "headless");
+        AtomicInteger listenerConstructions = new AtomicInteger();
+        IConfigurationElement declaration = configuration(attributes(
+                ExtensionConstants.ATTR_ID, RUNTIME_EXTENSION_POINT,
+                ExtensionConstants.ATTR_INTERFACE_CLASS, "example.RuntimeExtension",
+                ExtensionConstants.ATTR_SERVICE_CLASS, "example.RuntimeListener"), listenerConstructions,
+                new ExtensionListener() { });
+        Plugin declaredPlugin = PluginManifestParsingUtil.parsePlugin(bundle(),
+                registry(new IExtension[] { extension(ExtensionConstants.EXTENSION_POINT_ID, declaration) },
+                        new IConfigurationElement[] { declaration }));
+        AtomicInteger implementationConstructions = new AtomicInteger();
+        IConfigurationElement contribution = configuration(attributes(
+                ExtensionConstants.ATTR_ID, "runtime.extension",
+                ExtensionConstants.ATTR_EXTENSION_POINT_ID, RUNTIME_EXTENSION_POINT,
+                ExtensionConstants.ATTR_IMPLEMENTATION_CLASS, "example.RuntimeExtension"),
+                implementationConstructions, new Object());
+        Plugin contributedPlugin = PluginManifestParsingUtil.parsePlugin(bundle(),
+                registry(new IExtension[] { extension(ExtensionConstants.EXTENSION_ID, contribution) },
+                        new IConfigurationElement[] { declaration }));
+
+        assertEquals(1, listenerConstructions.get());
+        assertEquals(1, declaredPlugin.getExtensionPoints().size());
+        assertEquals(1, implementationConstructions.get());
+        assertEquals(1, contributedPlugin.getExtensions().size());
+    }
+
+    @Test
+    public void desktopRuntimeConstructsUiContribution() {
+        System.clearProperty(PluginManifestParsingUtil.RUNTIME_PROPERTY);
+        AtomicInteger constructions = new AtomicInteger();
         IConfigurationElement contribution = configuration(attributes(
                 ExtensionConstants.ATTR_ID, "ui.extension",
                 ExtensionConstants.ATTR_EXTENSION_POINT_ID, UI_EXTENSION_POINT,
@@ -109,8 +173,8 @@ public class PluginManifestParsingUtilTest {
                 registry(new IExtension[] { extension(ExtensionConstants.EXTENSION_ID, contribution) },
                         new IConfigurationElement[0]));
 
-        assertEquals(0, constructions.get());
-        assertTrue(plugin.getExtensions().isEmpty());
+        assertEquals(1, constructions.get());
+        assertEquals(1, plugin.getExtensions().size());
     }
 
     @Test
